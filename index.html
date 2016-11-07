@@ -1,50 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Little System</title>
-  <style>
-    body { background-color: #222; }
-    a:link { color: orange; font-weight: bold; }
-    a:visited { color: orange }
-    a:hover { color: red }
-    div#ls {
-      width: 100%;
-      opacity: 0%;
-      font-family: monospace; 
-      font-weight: bold;
-      text-align: center;
-      position: absolute;
-      top: -200px;
-    }
-    div#asterisk-attack {
-      background-color: #333;
-      position: relative;
-      width: 350px;
-      height: 200px;
-      margin: auto;
-      margin-top: 200px;
-    }
-    div#attack-zone {
-      width: 100%;
-      height: 150px;
-      background-color: #444;
-    }
-    div#defender {
-      color: red;
-      background-color: gray;
-      position: absolute;
-      left: 0;
-    }
-    div#civilians {
-      background-color: #666; 
-      height: 30px;
-    }
-
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
 
+<body>
   <div id="ls">
     <small>
       <pre>   
@@ -66,35 +29,6 @@
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-  $('document').ready(function() {
-    var game = {
-      width: $("#asterisk-attack").width(),
-      offset: $("#asterisk-attack").offset().left
-    };
-
-    var defender = {
-      width: $("#defender").width()
-    };
-
-    function normalizePosition(mouseX) {
-      var min = 0
-        , max = game.width - defender.width
-        , relativeMouseX = mouseX - game.offset;
-      var normalized = (relativeMouseX - min)/(max - min); // Normalized to [0,1]
-      if (normalized > 1) { normalized = 1 }
-      //console.log((normalized * (max - min)) + min); // Scaled to [min,max]
-      return (normalized * (max - min)) + min; // Scaled to [min,max]
-    }
-
-    $("#ls").animate({top:50}, 'medium');
-    
-    $("#asterisk-attack").mouseenter(function() {
-      $("#asterisk-attack").mousemove(function(event) {
-        $("#defender").css({ left: normalizePosition(event.pageX) });
-      });
-    });
-  });
-</script>
+<script src="littlesystem.js"></script>
 </html>
 
