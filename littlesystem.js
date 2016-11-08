@@ -2,7 +2,10 @@ $('document').ready(function() {
 
   var game = {
     speed: 1000,
-    colors: ['yellow', 'gold', 'orange', 'orangered', 'red'],
+    score: 0,
+    missCountdown: 3,
+    missColors: ['red', 'red', 'orange', 'gold'],
+    colors: ['red', 'orangered', 'orange', 'gold', 'yellow'],
     width: $("#asterisk-attack").width(),
     offset: $("#asterisk-attack").offset().left,
     loops: [],
@@ -47,6 +50,12 @@ $('document').ready(function() {
     $(a).animate({top:200}, 3000, "linear");
   }
 
+  function changeGamespeed(speed) {
+    window.clearInterval(game.loops[0]);
+    game.speed = speed;
+    game.loops[0] = setInterval(attack, game.speed);
+  }
+
   function detectCollisions() {
     function getCoordinates(element) {
       var pos = $(element).position();
@@ -70,6 +79,15 @@ $('document').ready(function() {
       if (widthCollision && heightCollision) {
         $("#" + a).remove();
         delete game.attackers[a];
+        $("#score").text("SCORE " + ++game.score);
+        switch (game.score) {
+          case 5: changeGamespeed(game.speed - 100); break;
+          case 10: changeGamespeed(game.speed - 100); break;
+          case 15: changeGamespeed(game.speed - 100); break;
+          case 20: changeGamespeed(game.speed - 100); break;
+          case 25: changeGamespeed(game.speed - 100); break;
+          case 30: changeGamespeed(game.speed - 100); break;
+        }
       } else {
         civiliansPos = getCoordinates($("#civilians")); 
         widthCollision = coordinatesCollide(civiliansPos[0], attackerPos[0]);
@@ -77,6 +95,14 @@ $('document').ready(function() {
         if (widthCollision && heightCollision) {
           $("#" + a).remove(); 
           delete game.attackers[a];
+          if (--game.missCountdown === 0) {
+            $("#miss-countdown").text("GAME OVER");
+            quit();
+            break;
+          } else {
+            $("#miss-countdown").text(game.missCountdown + " MISSES LEFT")
+              .attr("style", "color:" + game.missColors[game.missCountdown]);
+          }
         }
       }
     }
@@ -91,7 +117,15 @@ $('document').ready(function() {
     setTimeout(
       game.loops[1] = setInterval(detectCollisions, 50), game.speed
     );
+    
+    game.speed = 1000;
+    game.score = 0;
+    game.missCountdown = 3;
 
+    $("#score").text("SCORE " + game.score);
+    $("#miss-countdown").text(game.missCountdown + " MISSES LEFT")
+      .attr("style", "color:" + game.colors[4]);
+    $("#defender").show();
     $("#start").hide();
     $("#quit").show();
   }
@@ -99,8 +133,15 @@ $('document').ready(function() {
   function quit() {
     window.clearInterval(game.loops[0]);
     window.clearInterval(game.loops[1]);
+
     $("#asterisk-attack").unbind("mousemove");
 
+    for (a in game.attackers) {
+      $("#" + a).remove(); 
+    }
+    game.attackers = {};
+
+    $("#defender").hide();
     $("#start").show();
     $("#quit").hide();
   }

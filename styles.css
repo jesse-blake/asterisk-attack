@@ -11,19 +11,30 @@ div#ls {
   position: absolute;
   top: -200px;
 }
+div#hud {
+  margin: 200px auto 10px auto;
+  width: 350px;
+}
+div#score {
+  color: yellow;
+  float: left; 
+}
+div#miss-countdown {
+  color: yellow;
+  float: right;
+}
 div#asterisk-attack {
-  background-color: #333;
+  /* background-color: #333; */
   position: relative;
   width: 350px;
   height: 200px;
   margin: auto;
-  margin-top: 200px;
   overflow: hidden;
 }
 div#attack-zone {
   width: 100%;
   height: 150px;
-  background-color: #444;
+  /* background-color: #444; */
 }
 div#defense-zone {
   height: 40px; 
@@ -31,16 +42,16 @@ div#defense-zone {
 div#defender {
   color: red;
   line-height: 3px;
-  background-color: gray;
+  /* background-color: gray; */
   position: absolute;
   left: 0;
 }
 div#civilians {
-  background-color: #666; 
+  /* background-color: #666; */ 
   height: 10px;
 }
 div.asterisk {
-  background-color: pink;
+  /* background-color: pink; */
   line-height: 3px;
 }
 div#start, div#quit {
