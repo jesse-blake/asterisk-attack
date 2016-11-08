@@ -1,4 +1,4 @@
-body { background-color: #222; }
+body { background-color: #222; font-family: monospace; }
 a:link { color: orange; font-weight: bold; }
 a:visited { color: orange }
 a:hover { color: red }
@@ -18,20 +18,32 @@ div#asterisk-attack {
   height: 200px;
   margin: auto;
   margin-top: 200px;
+  overflow: hidden;
 }
 div#attack-zone {
   width: 100%;
   height: 150px;
   background-color: #444;
 }
+div#defense-zone {
+  height: 40px; 
+}
 div#defender {
   color: red;
+  line-height: 3px;
   background-color: gray;
   position: absolute;
   left: 0;
 }
 div#civilians {
   background-color: #666; 
-  height: 30px;
+  height: 10px;
+}
+div.asterisk {
+  background-color: pink;
+  line-height: 3px;
+}
+div#start, div#quit {
+  text-align: center;
 }
 
