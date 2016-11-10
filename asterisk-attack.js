@@ -3,22 +3,20 @@ var game = (function asteriskAttack() {
   var game = {
     score: null,
     misses: null,
-    width: $("#asterisk-attack").width(),
     colors: ['red', 'orangered', 'orange', 'gold', 'yellow'],
-    attackLoop: null,
-    collisionLoop: null,
     attackers: {}, // key: id, value: dom object
     attackerCount: null,
     attackerSpeed: null,
     generationSpeed: null,
-    defenderWidth: $("#defender").width()
+    attackLoop: null,
+    collisionLoop: null
   };
 
   // Normalize defender's position to keep it within the game area boundaries.
   function normalizeDefenderPosition(mousePosX) {
-    var pos = mousePosX - $("#asterisk-attack").offset().left; // Relative mouse position x.
-    var min = 0;
-    var max = game.width - game.defenderWidth;
+    var padding = min = 15; // Padding used on elements in div#asterisk-attack
+    var max = $("#asterisk-attack").width() - $("#defender").width() - padding;
+    var pos = mousePosX - $("#asterisk-attack").offset().left + padding; // Relative mouse x.
 
     pos = (pos - min)/(max - min);
     if (pos > 1) pos = 1;
@@ -35,9 +33,8 @@ var game = (function asteriskAttack() {
       + 'class="asterisk" '
       + 'style="'
       + 'color:' + game.colors[randomInRange(0, game.colors.length - 1)] + '; '
-      + 'position:absolute; '
-      + 'top:-10px; '
-      + 'left:' + randomInRange(10, game.width - 10) + 'px;'
+      + 'font-size:' + randomInRange(12, 36) + 'px; '
+      + 'left:' + randomInRange(10, $("#asterisk-attack").width() - 10) + 'px;'
       + '">*</div>';
   }
 
@@ -47,7 +44,8 @@ var game = (function asteriskAttack() {
 
     game.attackers[game.attackerCount] = attacker;
     $("#asterisk-attack").prepend(attacker);
-    $(attacker).animate({top:200}, speed, "linear");
+
+    $(attacker).animate({ top: "500px" }, speed, "linear");
   }
 
   function completeAttack(attackerId, thwarted) {
@@ -64,8 +62,11 @@ var game = (function asteriskAttack() {
   }
 
   function updateHud() {
-    $("#score").text("SCORE " + game.score);
-    $("#miss-countdown").text((3 - game.misses) + " MISSES LEFT")
+    var hudColors = ['maroon', 'red', 'orange', 'yellow'];
+
+    $("#score").text(game.score);
+    $("#countdown").text(3 - game.misses); // Magic number.
+    $("#countdown").css("color", hudColors[3 - game.misses]);
   }
 
   function increaseAttackSpeed() {
@@ -104,7 +105,7 @@ var game = (function asteriskAttack() {
         completeAttack(id, false); // Attack succeeded.
       }
 
-      if (game.misses === 3) { quit(); break; }
+      if (game.misses === 3) { quit(); break; } // Magic number.
     }
   }
 
@@ -126,7 +127,7 @@ var game = (function asteriskAttack() {
     $("#quit").show();
 
     game.attackLoop = setInterval(attack, game.generationSpeed);
-    setTimeout(game.collisionLoop = setInterval(detectAttackOutcomes, 50), game.generationSpeed);
+    setTimeout(game.collisionLoop = setInterval(detectAttackOutcomes, 5), game.generationSpeed);
 
     $("#asterisk-attack").mousemove(function(event) {
       $("#defender").css({ left: normalizeDefenderPosition(event.pageX) });
@@ -159,7 +160,7 @@ var game = (function asteriskAttack() {
 $('document').ready(function() {
 
   // Animate main logo.
-  $("#ls").animate({top:50}, 'medium');
+  $("#logo").animate({top:43}, 'medium');
 
   $("#start a").click(function() { game.start() });
   $("#quit  a").click(function() { game.quit()  });
