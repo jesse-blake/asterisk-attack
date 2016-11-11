@@ -1,75 +1,99 @@
 body { 
   background-color: #222;
-  font-family: 'Inconsolata', monospace;
-  font-weight: bold;
+  font: normal bold normal 16px 'Inconsolata', monospace;
 }
-a:link { color: orange; }
-a:visited { color: orange }
-a:hover { color: red }
+
 div#game {
   position: relative;
   width: 800px; 
   margin: 0 auto;
   /* border: solid 1px gray; */
 }
+
 div#logo {
   position: absolute;
   top: -200px;
   z-index: 1001;
   width: 800px;
   text-align: center;
+  opacity: 0;
 }
+
 div#asterisk-attack {
   position: relative;
   overflow: hidden;
   /* box-sizing: border-box; */
   /* border: solid 1px blue; */
 }
+
 div#hud {
   color: yellow;
-  font-size: 43px;
   padding: 15px;
 }
+
 div#score {
   position: absolute;
-  top: 150px;
+  top: 145px;
   right: 15px;
 }
+
 div#countdown {
   position: absolute;
-  top: 150px;
+  top: 145px;
 }
+
 div#attack-zone {
   width: 100%;
   height: 400px;
   /* box-sizing: border-box; */
   /* border: 1px solid green; */
 }
+
 div#defender {
   color: red;
-  line-height: 10px;
+  line-height: 15px;
   position: absolute;
   left: 15px;
   /* box-sizing: border-box; */
   /* border: 1px solid brown; */
 }
+
 div#buffer-zone {
   height: 40px;
   /* box-sizing: border-box; */
   /* border: 1px solid white; /1* albacore *1/ */
 }
+
 div#civilians {
-  height: 10px;
+  color: green;
+  height: 100px;
+  text-align: center;
   /* box-sizing: border-box; */
   /* border: 1px solid orange; */
 }
+
 div.asterisk {
-  font-weight: normal;
   line-height: 3px;
   position: absolute;
   top: -10px;
 }
-div#start, div#quit {
+
+div#start-button a, div#another-start-button a, div#quit a {
+  text-decoration: none; 
+}
+
+div#start-button {
+  position: absolute;
+  top: 250px;
+  z-index: 1002;
+  width: 800px;
+  text-align: center;
+}
+
+div#another-start-button {
+  position: absolute;
+  top: 250px;
+  width: 800px;
   text-align: center;
 }
 

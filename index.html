@@ -5,40 +5,51 @@
   <meta charset="utf-8">
   <title>Little System</title>
   <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
   <div id="game">
 
-    <div id="logo-wrapper">
-      <div id="logo">
-        <span style="color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
-        <span style="color:gold">______&nbsp;&nbsp;&nbsp;_____&nbsp;_____&nbsp;/&nbsp;/_&nbsp;&nbsp;_____&nbsp;____&nbsp;__&nbsp;_____&nbsp;/&nbsp;/_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____&nbsp;/&nbsp;/_&nbsp;/&nbsp;/_&nbsp;&nbsp;_____&nbsp;____&nbsp;/&nbsp;/_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___</span><br>
-        <span style="color:orange">_____&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;//&nbsp;___//&nbsp;__/&nbsp;/&nbsp;__&nbsp;//&nbsp;__//&nbsp;//&nbsp;___//&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;//&nbsp;__//&nbsp;__/&nbsp;___&nbsp;&nbsp;//&nbsp;__//&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;____</span><br>
-        <span style="color:orangered">____&nbsp;&nbsp;&nbsp;/&nbsp;_&nbsp;&nbsp;//___&nbsp;//&nbsp;/__&nbsp;/&nbsp;___//&nbsp;/&nbsp;&nbsp;/&nbsp;//___&nbsp;//&nbsp;&nbsp;&nbsp;\_&nbsp;&nbsp;&nbsp;/&nbsp;_&nbsp;&nbsp;//&nbsp;/__/&nbsp;/__&nbsp;/&nbsp;_&nbsp;&nbsp;//&nbsp;/__/&nbsp;&nbsp;&nbsp;\_&nbsp;&nbsp;&nbsp;_____</span><br>
-        <span style="color:red">___&nbsp;&nbsp;&nbsp;/____//____//____//____//_/&nbsp;&nbsp;/_//____//_/\__/&nbsp;&nbsp;/____//_________//____//______/\__/&nbsp;&nbsp;______</span><br>
-        <span style="color:red">________________________________________________________________________________________________</span><br>
-      </div>
+    <div id="logo">
+      <span style="color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+      <span style="color:yellow">______&nbsp;&nbsp;&nbsp;_____&nbsp;_____&nbsp;/&nbsp;/_&nbsp;&nbsp;_____&nbsp;____&nbsp;__&nbsp;_____&nbsp;/&nbsp;/_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____&nbsp;/&nbsp;/_&nbsp;/&nbsp;/_&nbsp;&nbsp;_____&nbsp;____&nbsp;/&nbsp;/_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___</span><br>
+      <span style="color:gold">_____&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;//&nbsp;___//&nbsp;__/&nbsp;/&nbsp;__&nbsp;//&nbsp;__//&nbsp;//&nbsp;___//&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;//&nbsp;__//&nbsp;__/&nbsp;___&nbsp;&nbsp;//&nbsp;__//&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;____</span><br>
+      <span style="color:orange">____&nbsp;&nbsp;&nbsp;/&nbsp;_&nbsp;&nbsp;//___&nbsp;//&nbsp;/__&nbsp;/&nbsp;___//&nbsp;/&nbsp;&nbsp;/&nbsp;//___&nbsp;//&nbsp;&nbsp;&nbsp;\_&nbsp;&nbsp;&nbsp;/&nbsp;_&nbsp;&nbsp;//&nbsp;/__/&nbsp;/__&nbsp;/&nbsp;_&nbsp;&nbsp;//&nbsp;/__/&nbsp;&nbsp;&nbsp;\_&nbsp;&nbsp;&nbsp;_____</span><br>
+      <span style="color:orangered">___&nbsp;&nbsp;&nbsp;/____//____//____//____//_/&nbsp;&nbsp;/_//____//_/\__/&nbsp;&nbsp;/____//_________//____//______/\__/&nbsp;&nbsp;______</span><br>
+      <span style="color:red">________________________________________________________________________________________________</span><br>
     </div>
 
     <div id="asterisk-attack">
       <div id="hud">
-        <div id="countdown">3</div>
-        <div id="score">0</div>
+        <div id="countdown"></div>
+        <div id="score"></div>
       </div>
       <div id="attack-zone"></div>
-      <div id="defender">|=(o)=|</div>
+      <div id="defender">|&nbsp;¯\_(ツ)_/¯&nbsp;|<br>&nbsp;'=========='&nbsp;</div>
       <div id="buffer-zone"></div>
-      <div id="civilians"></div>
+      <div id="civilians">
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;o/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\o/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>&nbsp;&nbsp;&nbsp;/|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v|v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&gt;&lt;\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/(\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>____)\___________/&nbsp;)___________________________)\_____________))((______________(&nbsp;)_____________</span>
+      </div>
     </div>
 
-    <div id="start"><a href="#">start</a></div>
+    <div id="start-button">
+      <a href="#">
+        <span style="color:deeppink">+-------------+<span><br>
+        <span style="color:hotpink">|&nbsp;&nbsp;&nbsp;P&nbsp;L&nbsp;A&nbsp;Y&nbsp;&nbsp;&nbsp;|<span><br>
+        <span style="color:fuchsia">+-------------+<span><br>
+      </a>
+    </div>
     <div id="quit" style="display:none;"><a href="#">quit</a></div>
 
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="asterisk-attack.js"></script>
 </html>
 
