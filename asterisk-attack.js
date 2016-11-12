@@ -178,7 +178,20 @@ var game = (function asteriskAttack() {
   }
 
   function completeAttack(attackerId, thwarted) {
-    game.attackers[attackerId].remove();
+    var a     = game.attackers[attackerId]
+      , pos
+      , clone;
+
+    if (thwarted) {
+      clone = a.clone();
+      clone.insertAfter(a).animate({ 
+        'opacity': '0', 'top': (a.position().top - 50)
+      }, 150, function() {
+        clone.remove(); 
+      })
+    }
+
+    a.remove();
     delete game.attackers[attackerId];
     
     thwarted ? game.score++ : game.missed++;
