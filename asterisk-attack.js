@@ -6,7 +6,7 @@ var game = (function asteriskAttack() {
     defender: $("#defender"),
     padding: 15, // Padding used on elements in div#asterisk-attack
     score: null,
-    colors: ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia'],
+    colors: ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia', 'lightskyblue', 'dodgerblue', 'blue'],
     slugs: {}, // Key: id, value: dom object.
     slugCount: null,
     attackers: {}, // Key: id, value: dom object.
@@ -37,8 +37,12 @@ var game = (function asteriskAttack() {
     $('#score').html(buildScore(game.score));
   }
 
-  function animateEnthusiasm() {
-    var i, j, current, next;
+  function animateCivilians() {
+    var i
+      , j
+      , current
+      , next
+      , colors = ['lightskyblue', 'lightskyblue', 'dodgerblue', 'blue'];
 
     if (game.animations) {
       current = parseInt(($('#civilians > span').attr('class')).split('').pop());
@@ -79,7 +83,7 @@ var game = (function asteriskAttack() {
             .replace(/>/g, '&gt;');
           game.animations[i][j] = '<span class="civilians'
             + (i+1) 
-            + '">' 
+            + '" style="color:' + colors[j] + '">' 
             + game.animations[i][j] 
             + '</span><br>';
         }
@@ -87,6 +91,58 @@ var game = (function asteriskAttack() {
 
       $('#civilians').html(game.animations[0].join(''));
     }
+  }
+
+  function setBackground() {
+    var i
+      , j
+      , numWindows // The number of windows in the string.
+      , chosenWindow; // The window to light up!
+    var background = [ 
+      '                                                                  ___________                   ',
+      '                      ___________                                 |         |                   ',
+      '                      |         |                                 | O O O O |                   ',
+      '                      | O O O O |                                 |         |                   ',
+      '                      |         |______                           | O O O O |                   ',
+      '                      | O O O         |                 __________|         |                   ',
+      '      _____________   |         O O O |                 |           O O O O |                   ',
+      '      |           |   | O O O         |                 | O O O O           |      _____________',
+      '      | O O O O O |   |         O O O |                 |           O O O O |      |           |',
+      '                  |   | O O           |________         | O O O O           |      | O O O O O |',
+      '___________ O O O |   |         O O O         |         |           O O O O        |           |',
+      '|         |       |   | O O             O O O |         | O O O O                  | O O O O O |',
+      '| O O O O |   O O |   |           O O         |         |           O O O  ___________         |',
+      '|         |       |   | O               O O O |         | O O O            |         | O O O O |',
+      '| O O O O |   O O |   | _____________         |         |             O O  | O O O O |         |',
+      '|         |           | |           |       O |         | O O              |         | O O O   |',
+      '        O |   O         | O O O O O |         |         |               O        O O |          ',
+      '          |                         |                   | O                          | O        ',
+      '          |                 O O O O |                   |                            |          ',
+    ];
+
+    for (i = 0; i < background.length; i++) {
+      background[i] = background[i].replace(/ /g, '&nbsp') 
+      //background[i] = background[i].replace(/O/, '<span style="color:#444">O</span>');
+      background[i] = '<span style="color:#333">' + background[i] + '</span><br>';
+
+      if (Math.random() > 0.5) { // 50-50 chance of lighting a window in the string.
+        numWindows = background[i].split('O').length - 1; // Number of windows in the string.
+
+        if (numWindows > 3) { // Avoid corner-case problems.
+          chosenWindow = randomInRange(1, numWindows); // Chosen window to light up.
+
+          for (j = 0; j < background[i].length; j++) {
+            if (background[i][j] === 'O' && !--chosenWindow) {
+              background[i] = background[i].substr(0, j)
+                + '<span style="color:#555">*</span>'
+                + background[i].substr(j+1, background[i].length);
+            }
+          }
+        }
+      }
+    }
+
+    $('#background').html(background);
   }
 
   // Convert game score digits to three-line ascii art representations.
@@ -295,6 +351,7 @@ var game = (function asteriskAttack() {
     game.attackerSpeed = 3000;
     game.generationSpeed = 1000;
     updateScore();
+    setBackground();
   }
 
   function animateStartBtn(show) {
@@ -338,7 +395,7 @@ var game = (function asteriskAttack() {
   function animateDefender(show) {
     if (show) {
       game.defender.css({ 'left': (game.area.width() / 2) - 20, 'top': -500 })
-        .animate({ 'top': 400 }, 300);
+        .animate({ 'top': 350 }, 300);
     }
     else {
       game.defender.animate({ 'top': -500 }, 300);
@@ -349,7 +406,7 @@ var game = (function asteriskAttack() {
     reset();
 
     // 1
-    game.civilianLoop = setInterval(animateEnthusiasm, 300);
+    game.civilianLoop = setInterval(animateCivilians, 300);
     game.attackLoop  = setInterval(attack, game.generationSpeed);
     setTimeout(game.collisionLoop = setInterval(detectCollisions, 5), game.generationSpeed);
 
@@ -408,6 +465,7 @@ var game = (function asteriskAttack() {
       , logoWidth   = $("#logo").width();
 
     updateScore();
+    setBackground();
 
     // Animate in the logo.
     $("#logo").css({ "top": 43, "left": -(logoWidth + buffer) })
