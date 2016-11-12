@@ -26,20 +26,12 @@ div#asterisk-attack {
   /* border: solid 1px blue; */
 }
 
-div#hud {
-  color: yellow;
-  padding: 15px;
-}
-
 div#score {
   position: absolute;
   top: 145px;
-  right: 15px;
-}
-
-div#countdown {
-  position: absolute;
-  top: 145px;
+  right: -1300px;
+  width: 800px;
+  text-align: center;
 }
 
 div#attack-zone {

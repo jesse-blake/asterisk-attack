@@ -6,8 +6,6 @@ var game = (function asteriskAttack() {
     defender: $("#defender"),
     padding: 15, // Padding used on elements in div#asterisk-attack
     score: null,
-    missed: null,
-    xyzzy: 10,
     colors: ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia'],
     slugs: {}, // Key: id, value: dom object.
     slugCount: null,
@@ -35,9 +33,8 @@ var game = (function asteriskAttack() {
     return Math.floor(Math.random() * (max - min + 1)) + min; // Range [min, max]
   }
 
-  function updateHud() {
-    $("#score").html(buildHudNumber(game.score, 'score'));
-    $("#countdown").html(buildHudNumber(game.xyzzy - game.missed, 'missed'));
+  function updateScore() {
+    $('#score').html(buildScore(game.score));
   }
 
   function animateEnthusiasm() {
@@ -92,9 +89,8 @@ var game = (function asteriskAttack() {
     }
   }
 
-  // Convert integer numbers > 0 to three-line ascii art representations.
-  // @type string Either 'score' or 'missed' which will be added to the result.
-  function buildHudNumber(n, type) {
+  // Convert game score digits to three-line ascii art representations.
+  function buildScore(n) {
     var i
       , result
       , started = false
@@ -129,16 +125,10 @@ var game = (function asteriskAttack() {
       }
     }
 
-    if (type === 'score') {
-      number[0] = '  __ __ __ __ __   ' + number[0];
-      number[1] = '  /_ /  / //_//_   ' + number[1];
-      number[2] = '  __//_ /_// \\/__  ' + number[2]; // Backslash is backslash escaped.
-    }
-    else if (type === 'missed') {
-      number[0] += '  ____  __ __ __ _   ';
-      number[1] += '  / / ///_ /_ /_ / \\ '; // Backslash is backslash escaped.
-      number[2] += '  / / //__/__//_ /__/';
-    }
+    // Add 'SCORE'.
+    number[0] = '  __ __ __ __ __   ' + number[0];
+    number[1] = '  /_ /  / //_//_   ' + number[1];
+    number[2] = '  __//_ /_// \\/__  ' + number[2]; // Backslash is backslash escaped.
 
     // Line up the lines correctly.
     number[0] = '  ' + number[0] + '';
@@ -189,6 +179,8 @@ var game = (function asteriskAttack() {
       , clone;
 
     if (thwarted) {
+      game.score++;
+
       clone = a.clone();
       clone.insertAfter(a).animate({ 
         'opacity': '0', 'top': (a.position().top - 50)
@@ -200,8 +192,6 @@ var game = (function asteriskAttack() {
     a.remove();
     delete game.attackers[attackerId];
     
-    thwarted ? game.score++ : game.missed++;
-
     if (thwarted && game.score % 5 === 0) {
       increaseAttackSpeed();
     }
@@ -209,7 +199,7 @@ var game = (function asteriskAttack() {
     //   $("#asterisk-attack").stop(true).effect("bounce", {}, 500);
     // }
 
-    updateHud();
+    updateScore();
   }
 
   function increaseAttackSpeed() {
@@ -266,21 +256,14 @@ var game = (function asteriskAttack() {
       d = getPosition(defender);
       if (positionsCollide(a[0], d[0]) && positionsCollide(a[1], d[1])) {
         completeAttack(aId, true);
-        if (game.missed === game.xyzzy) {
-          quit();
-          break;
-        }
         continue;
       }
 
       // See if the attacker hit the civilians.
       if (positionsCollide(a[0], c[0]) && positionsCollide(a[1], c[1])) {
         completeAttack(aId, false);
-        if (game.missed === game.xyzzy) {
-          quit();
-          break;
-        }
-        continue;
+        quit();
+        break;
       }
     }
   }
@@ -307,12 +290,11 @@ var game = (function asteriskAttack() {
 
   function reset() {
     game.score = 0;
-    game.missed = 0;
     game.slugCount = 0;
     game.attackerCount = 0;
     game.attackerSpeed = 3000;
     game.generationSpeed = 1000;
-    updateHud();
+    updateScore();
   }
 
   function animateStartBtn(show) {
@@ -386,7 +368,6 @@ var game = (function asteriskAttack() {
 
     // 5
     $(document).keyup(function bindGameKeys(e) {
-      console.log(e);
       if (e.key === ' ') {
         pewPewPew();
       } else if (e.key === 'q') {
@@ -426,9 +407,13 @@ var game = (function asteriskAttack() {
       , duration    = 300
       , logoWidth   = $("#logo").width();
 
+    updateScore();
+
     // Animate in the logo.
     $("#logo").css({ "top": 43, "left": -(logoWidth + buffer) })
-      .animate({ "opacity": 1, "left": "" }, duration);
+      .animate({ "opacity": 1, "left": "" }, { duration: duration, queue: false });
+
+    $('#score').animate({ 'right': '' }, { duration: duration, queue: false });
 
     animateStartBtn(true);
   })();
