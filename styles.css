@@ -78,29 +78,34 @@ div.asterisk {
   top: -10px;
 }
 
-div#start-button a, div#another-start-button a, div#quit a {
+div#start-btn a, div#temp-start-btn a {
   text-decoration: none; 
 }
 
-div#start-button {
+div#start-btn {
+  position: absolute;
+  z-index: 1002;
+  width: 800px;
+  top: 250px;
+  text-align: center;
+  /* box-sizing: border-box; */
+  /* border: solid 1px hotpink; */
+}
+
+div#temp-start-btn {
   position: absolute;
   top: 250px;
-  z-index: 1002;
   width: 800px;
   text-align: center;
 }
 
-div#quit {
+div#quit-instruction {
+  font-size: .9em;
   color: yellow;
   position: absolute;
-  top: 0;
-  left: 0;
-}
-
-div#another-start-button {
-  position: absolute;
-  top: 250px;
   width: 800px;
+  top: 15px;
+  left: -1300px;
   text-align: center;
 }
 

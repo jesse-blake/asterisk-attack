@@ -1,10 +1,13 @@
 var game = (function asteriskAttack() {
 
   var game = {
+    windowWidth: $(window).width(),
+    area: $('#asterisk-attack'),
+    defender: $("#defender"),
+    padding: 15, // Padding used on elements in div#asterisk-attack
     score: null,
     missed: null,
     xyzzy: 10,
-    padding: 15, // Padding used on elements in div#asterisk-attack
     colors: ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia'],
     slugs: {}, // Key: id, value: dom object.
     slugCount: null,
@@ -21,12 +24,12 @@ var game = (function asteriskAttack() {
   // Normalize defender's position to keep it within the game area boundaries.
   function normalizeDefenderPosition(mousePosX) {
     var min = game.padding
-      , max = $("#asterisk-attack").width() - $("#defender").width() - game.padding
-      , pos = mousePosX - $("#asterisk-attack").offset().left + game.padding; // Relative mouse x.
+      , max = game.area.width() - game.defender.width() - game.padding
+      , pos = mousePosX / game.windowWidth; // Normalize to [0, 1]
 
-    pos = (pos - min)/(max - min);
-    if (pos > 1) pos = 1;
-    return (pos * (max - min)) + min; // Scaled to [min,max]
+    console.log(game.windowWidth);
+    pos = (pos * (max - min)) + min; // Scale to [min, max]
+    return pos;
   }
 
   function randomInRange(min, max) {
@@ -313,71 +316,111 @@ var game = (function asteriskAttack() {
     updateHud();
   }
 
+  function animateStartBtn(show) {
+    var startBtn = $('#start-btn');
+
+    if (show) { // Animate start button into view.
+      startBtn.css({ 'right': -(800 + 500) })
+        .animate({ 'right': '' }, 300, function() {
+          $('#start-btn a').hover(
+            function() {
+              var newBtn = startBtn.clone();
+
+              newBtn.attr('id', 'temp-start-btn')
+                .insertAfter('#start-btn')
+                .animate({ 'opacity': '0', 'font-size': '35px' }, 300, function() {
+                  newBtn.remove();
+                });
+            },
+            function() {} // So the hover-in function isn't called on hover-out.
+          );
+        })
+    }
+    else { // Animate start button out of view.
+      startBtn.animate({'right': -(800 + 500) }, 500)
+        .unbind('mouseenter mouseleave');
+    }
+  }
+
+  function animateQuitInstruction(show) {
+    var quitInst = $('#quit-instruction');
+
+    if (show) {
+      quitInst.css({ 'left': -(800 + 500) })
+        .animate({'left': '' }, 300);
+    }
+    else {
+      quitInst.animate({ 'left': -(800 + 500) }, 500);
+    }
+  }
+
   function start() {
     reset();
 
-    $("#start-button").hide();
-    $("#quit").show();
-
+    // 1
     game.civilianLoop = setInterval(animateEnthusiasm, 300);
     game.attackLoop  = setInterval(attack, game.generationSpeed);
     setTimeout(game.collisionLoop = setInterval(detectCollisions, 5), game.generationSpeed);
 
-    $("#asterisk-attack").mousemove(function(event) {
-      $("#defender").css({ left: normalizeDefenderPosition(event.pageX) });
+    // 2
+    animateStartBtn(false);
+    animateQuitInstruction(true);
+
+    // 3
+    $('html').css('cursor', 'none');
+
+    // 4
+    $(document).mousemove(function(event) {
+      game.defender.css({ left: normalizeDefenderPosition(event.pageX) });
     });
 
-    $("body").keyup(function(e) {
+    // 5
+    $(document).keyup(function bindGameKeys(e) {
       if (e.key === 'f') {
         pewPewPew();
+      } else if (e.key === 'q') {
+        quit();
       }
     });
   }
 
   function quit() {
+    // 1
     window.clearInterval(game.civilianLoop);
     window.clearInterval(game.attackLoop);
     window.clearInterval(game.collisionLoop);
 
-    $("#asterisk-attack").unbind("mousemove");
+    // 2
+    animateStartBtn(true);
+    animateQuitInstruction(false);
+
+    // 3
+    $('html').css('cursor', 'auto');
+
+    // 4
+    $(document).unbind('mousemove');
+
+    // 5
+    $(document).unbind('keyup');
 
     for (id in game.slugs)     { game.slugs[id].remove();     }
     for (id in game.attackers) { game.attackers[id].remove(); }
     game.slugs     = {};
     game.attackers = {};
 
-    $("#start-button").show();
-    $("#quit").hide();
   }
 
   (function load() {
     var buffer      = 500
       , duration    = 300
-      , windowWidth = $(window).width()
       , logoWidth   = $("#logo").width();
 
     // Animate in the logo.
     $("#logo").css({ "top": 43, "left": -(logoWidth + buffer) })
       .animate({ "opacity": 1, "left": "" }, duration);
 
-    // Animate in the start button...
-    // ...then clone it and zoom/fade it out, after removing the previous clone.
-    $("#start-button").css({ "right": -(logoWidth + buffer) })
-      .animate({ "opacity": 1, "right": "" }, duration, function() {
-        $("#start-button a").hover(
-          function() {
-            var old = $("#another-start-button")
-              , another = $("#start-button").clone();
+    animateStartBtn(true);
 
-            if (old) { old.remove(); }
-
-            another.attr("id", "another-start-button")
-              .insertAfter("#start-button")
-              .animate({ "opacity": "0", "font-size":"35px" }, buffer);
-          },
-          function() {} // So the hover-in function isn't called on hover-out.
-        );
-      });
   })();
 
   return {
@@ -388,9 +431,10 @@ var game = (function asteriskAttack() {
 })();
 
 $('document').ready(function() {
+  console.log($(window).width());
 
-  $("#start-button a").click(function() { game.start() });
-  $("#quit  a").click(function() { game.quit()  });
+  $("#start-btn a").click(function() { game.start() });
+  $("#quit-btn  a").click(function() { game.quit()  });
 
 });
 
