@@ -27,7 +27,6 @@ var game = (function asteriskAttack() {
       , max = game.area.width() - game.defender.width() - game.padding
       , pos = mousePosX / game.windowWidth; // Normalize to [0, 1]
 
-    console.log(game.windowWidth);
     pos = (pos * (max - min)) + min; // Scale to [min, max]
     return pos;
   }
@@ -431,7 +430,6 @@ var game = (function asteriskAttack() {
 })();
 
 $('document').ready(function() {
-  console.log($(window).width());
 
   $("#start-btn a").click(function() { game.start() });
   $("#quit-btn  a").click(function() { game.quit()  });
