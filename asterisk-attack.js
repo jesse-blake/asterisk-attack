@@ -6,7 +6,9 @@ var game = (function asteriskAttack() {
     xyzzy: 10,
     padding: 15, // Padding used on elements in div#asterisk-attack
     colors: ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia'],
-    attackers: {}, // Key: id, value: dom object
+    slugs: {}, // Key: id, value: dom object.
+    slugCount: null,
+    attackers: {}, // Key: id, value: dom object.
     attackerCount: null,
     attackerSpeed: null,
     generationSpeed: null,
@@ -29,6 +31,11 @@ var game = (function asteriskAttack() {
 
   function randomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min; // Range [min, max]
+  }
+
+  function updateHud() {
+    $("#score").html(buildHudNumber(game.score, 'score'));
+    $("#countdown").html(buildHudNumber(game.xyzzy - game.missed, 'missed'));
   }
 
   function animateEnthusiasm() {
@@ -171,24 +178,19 @@ var game = (function asteriskAttack() {
   }
 
   function completeAttack(attackerId, thwarted) {
-    game.attackers[id].remove();
-    delete game.attackers[id];
+    game.attackers[attackerId].remove();
+    delete game.attackers[attackerId];
     
     thwarted ? game.score++ : game.missed++;
 
     if (thwarted && game.score % 5 === 0) {
       increaseAttackSpeed();
     }
-    else if (!thwarted) {
-      $("#asterisk-attack").effect("bounce", {}, 500);
-    }
+    // else if (!thwarted) {
+    //   $("#asterisk-attack").stop(true).effect("bounce", {}, 500);
+    // }
 
     updateHud();
-  }
-
-  function updateHud() {
-    $("#score").html(buildHudNumber(game.score, 'score'));
-    $("#countdown").html(buildHudNumber(game.xyzzy - game.missed, 'missed'));
   }
 
   function increaseAttackSpeed() {
@@ -197,9 +199,16 @@ var game = (function asteriskAttack() {
     game.attackLoop = setInterval(attack, game.generationSpeed);
   }
 
-  function detectAttackOutcomes() {
+  function detectCollisions() {
+    var a // attacker
+      , s // slug
+      , d // defender
+      , c
+      , collision
+      , defender   = $('#defender')
+      , civilians  = $('#civilians')
 
-    var getPosition = function(element) {
+    function getPosition(element) {
       var pos    = $(element).position()
         , width  = $(element).width()
         , height = $(element).height();
@@ -207,34 +216,80 @@ var game = (function asteriskAttack() {
       return [[pos.left, pos.left + width], [pos.top, pos.top + height]];
     }
 
-    var positionsCollide = function(p1, p2) {
+    function positionsCollide(p1, p2) {
       var x = p1[0] < p2[0] ? p1 : p2
         , y = p1[0] < p2[0] ? p2 : p1;
       
       return x[1] > y[0] || x[0] === y[0];
     }
 
-    for (id in game.attackers) {
-      var d, a, c; // defender, attacker, civilians
+    c = getPosition(civilians);
 
-      a = getPosition(game.attackers[id]);
-      d = getPosition($("#defender"));
-      c = getPosition($("#civilians")); 
+    // Check for attacker collisions.
+    for (aId in game.attackers) {
+      a = getPosition(game.attackers[aId]);
+      collision = false;
 
+      // See if the attacker was hit by a slug.
+      for (sId in game.slugs) {
+        s = getPosition(game.slugs[sId]);
+
+        if (positionsCollide(a[0], s[0]) && positionsCollide(a[1], s[1])) {
+          completeAttack(aId, true);
+          collision = true;
+          break;
+        }
+      }
+
+      if (collision) continue;
+
+      // See if the attacker hit the defender.
+      d = getPosition(defender);
       if (positionsCollide(a[0], d[0]) && positionsCollide(a[1], d[1])) {
-        completeAttack(id, true); // Attack thrwarted.
-      }
-      else if (positionsCollide(a[0], c[0]) && positionsCollide(a[1], c[1])) {
-        completeAttack(id, false); // Attack succeeded.
+        completeAttack(aId, true);
+        if (game.missed === game.xyzzy) {
+          quit();
+          break;
+        }
+        continue;
       }
 
-      if (game.missed === game.xyzzy) { quit(); break; } // Magic number.
+      // See if the attacker hit the civilians.
+      if (positionsCollide(a[0], c[0]) && positionsCollide(a[1], c[1])) {
+        completeAttack(aId, false);
+        if (game.missed === game.xyzzy) {
+          quit();
+          break;
+        }
+        continue;
+      }
     }
+  }
+
+  function pewPewPew() {
+    var defender      = $('#defender')
+      , defenderWidth = defender.width()
+      , laserPos      = defender.position();
+
+    var slug = $('<div id="slug' + (++game.slugCount) + '" '
+      + 'style="color:deepskyblue; position:absolute; '
+      + 'top:' + (laserPos.top - 40) + 'px; '
+      + 'left:' + ((laserPos.left * 2 + defenderWidth) / 2 - 3) + 'px;'
+      + '">|<br>|<br>|<br></div>');
+
+    $('#asterisk-attack').prepend(slug);
+    game.slugs[game.slugCount] = slug;
+
+    slug.animate({ top: '-50px' }, 500, 'linear', function() {
+      delete game.slugs[slug.attr('id').split('').pop()];
+      slug.remove();
+    });
   }
 
   function reset() {
     game.score = 0;
     game.missed = 0;
+    game.slugCount = 0;
     game.attackerCount = 0;
     game.attackerSpeed = 3000;
     game.generationSpeed = 1000;
@@ -248,11 +303,17 @@ var game = (function asteriskAttack() {
     $("#quit").show();
 
     game.civilianLoop = setInterval(animateEnthusiasm, 300);
-    game.attackLoop = setInterval(attack, game.generationSpeed);
-    setTimeout(game.collisionLoop = setInterval(detectAttackOutcomes, 5), game.generationSpeed);
+    game.attackLoop  = setInterval(attack, game.generationSpeed);
+    setTimeout(game.collisionLoop = setInterval(detectCollisions, 5), game.generationSpeed);
 
     $("#asterisk-attack").mousemove(function(event) {
       $("#defender").css({ left: normalizeDefenderPosition(event.pageX) });
+    });
+
+    $("body").keyup(function(e) {
+      if (e.key === 'f') {
+        pewPewPew();
+      }
     });
   }
 
@@ -263,7 +324,9 @@ var game = (function asteriskAttack() {
 
     $("#asterisk-attack").unbind("mousemove");
 
+    for (id in game.slugs)     { game.slugs[id].remove();     }
     for (id in game.attackers) { game.attackers[id].remove(); }
+    game.slugs     = {};
     game.attackers = {};
 
     $("#start-button").show();
@@ -271,7 +334,6 @@ var game = (function asteriskAttack() {
   }
 
   (function load() {
-    // Animate main logo.
     var buffer      = 500
       , duration    = 300
       , windowWidth = $(window).width()

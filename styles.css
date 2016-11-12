@@ -90,6 +90,13 @@ div#start-button {
   text-align: center;
 }
 
+div#quit {
+  color: yellow;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 div#another-start-button {
   position: absolute;
   top: 250px;
