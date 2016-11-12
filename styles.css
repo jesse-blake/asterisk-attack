@@ -50,10 +50,10 @@ div#attack-zone {
 }
 
 div#defender {
-  color: red;
-  line-height: 15px;
   position: absolute;
+  top: -500px;
   left: 15px;
+  line-height: 15px;
   /* box-sizing: border-box; */
   /* border: 1px solid brown; */
 }

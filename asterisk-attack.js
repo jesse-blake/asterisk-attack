@@ -353,6 +353,16 @@ var game = (function asteriskAttack() {
     }
   }
 
+  function animateDefender(show) {
+    if (show) {
+      game.defender.css({ 'left': (game.area.width() / 2) - 20, 'top': -500 })
+        .animate({ 'top': 400 }, 300);
+    }
+    else {
+      game.defender.animate({ 'top': -500 }, 300);
+    }
+  }
+
   function start() {
     reset();
 
@@ -364,6 +374,7 @@ var game = (function asteriskAttack() {
     // 2
     animateStartBtn(false);
     animateQuitInstruction(true);
+    animateDefender(true);
 
     // 3
     $('html').css('cursor', 'none');
@@ -375,7 +386,8 @@ var game = (function asteriskAttack() {
 
     // 5
     $(document).keyup(function bindGameKeys(e) {
-      if (e.key === 'f') {
+      console.log(e);
+      if (e.key === ' ') {
         pewPewPew();
       } else if (e.key === 'q') {
         quit();
@@ -392,6 +404,7 @@ var game = (function asteriskAttack() {
     // 2
     animateStartBtn(true);
     animateQuitInstruction(false);
+    animateDefender(false);
 
     // 3
     $('html').css('cursor', 'auto');
@@ -406,7 +419,6 @@ var game = (function asteriskAttack() {
     for (id in game.attackers) { game.attackers[id].remove(); }
     game.slugs     = {};
     game.attackers = {};
-
   }
 
   (function load() {
@@ -419,7 +431,6 @@ var game = (function asteriskAttack() {
       .animate({ "opacity": 1, "left": "" }, duration);
 
     animateStartBtn(true);
-
   })();
 
   return {
