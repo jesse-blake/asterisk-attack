@@ -157,13 +157,17 @@ var game = (function asteriskAttack() {
   }
 
   function buildAttacker() {
+    var smallSize = 12
+      , largeSize = 42;
+
     return '<div '
       + 'id="' + (++game.attackerCount) + '" ' 
       + 'class="asterisk" '
       + 'style="'
       + 'color:' + game.colors[randomInRange(0, game.colors.length - 1)] + '; '
-      + 'font-size:' + randomInRange(12, 36) + 'px; '
-      + 'left:' + randomInRange(game.padding, $("#asterisk-attack").width() - (game.padding * 2)) + 'px;'
+      + 'font-size:' + randomInRange(smallSize, largeSize) + 'px; '
+      // 3 and 4 below moves attackers in from edges of game area evenly.
+      + 'left:' + randomInRange(game.padding * 3, $("#asterisk-attack").width() - (game.padding * 4)) + 'px;'
       + '">*</div>'
   }
 
@@ -285,9 +289,9 @@ var game = (function asteriskAttack() {
       , laserPos      = defender.position();
 
     var slug = $('<div id="slug' + (++game.slugCount) + '" '
-      + 'style="color:deepskyblue; position:absolute; '
+      + 'style="color:deeppink; position:absolute; '
       + 'top:' + (laserPos.top - 40) + 'px; '
-      + 'left:' + ((laserPos.left * 2 + defenderWidth) / 2 - 3) + 'px;'
+      + 'left:' + ((laserPos.left * 2 + defenderWidth) / 2 + 3) + 'px;'
       + '">|<br>|<br>|<br></div>');
 
     $('#asterisk-attack').prepend(slug);
