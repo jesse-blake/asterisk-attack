@@ -37,6 +37,45 @@ var game = (function asteriskAttack() {
     $('#score').html(buildScore(game.score));
   }
 
+  function loadLogo() {
+    var i
+      , colors = ['yellow', 'yellow', 'gold','orange','orangered','red'];
+    var logo = [
+      '                      __                *       __             __   __               __         ',
+      '______   _____ _____ / /_  _____ ____ __ _____ / /_     _____ / /_ / /_  _____ ____ / /_     ___',
+      '_____   ___  // ___// __/ / __ // __// // ___//   /    ___  // __// __/ ___  // __//   /    ____',
+      '____   / _  //___ // /__ / ___// /  / //___ //   \\_   / _  // /__/ /__ / _  // /__/   \\_   _____',
+      '___   /____//____//____//____//_/  /_//____//_/\\__/  /____//_________//____//______/\\__/  ______',
+      '________________________________________________________________________________________________'
+    ];
+
+    for (i = 0; i < logo.length; i++) {
+      logo[i] = logo[i].replace(/ /g, '&nbsp;');
+      logo[i] = '<span style="color:' + colors[i] + '">' + logo[i] + '</span><br>';
+    }
+
+    $('#logo').html(logo)
+      .css({ "top": 43, "left": -(800 + 500) })
+      .animate({ "opacity": 1, "left": "" }, { duration: 300, queue: false });
+  }
+
+  function loadCivilians() {
+    var i, colors = ['lightskyblue', 'lightskyblue', 'dodgerblue', 'blue'];
+    var civilians = [
+      '                                                                                                ',
+      '    o             o                            o              o O                o              ',
+      '   /|\\           /)\\                          /|\\             |\\/\\              /|\\             ',
+      '____)\\___________/ )__________________________( \\____________( \\((_______________)\\_____________'
+    ];
+
+    for (i = 0; i < civilians.length; i++) {
+      civilians[i] = civilians[i].replace(/ /g, '&nbsp;');
+      civilians[i] = '<span style="color:' + colors[i] + '">' + civilians[i] + '</span><br>';
+    }
+
+    $('#civilians').html(civilians);
+  }
+
   function animateCivilians() {
     var i
       , j
@@ -93,7 +132,7 @@ var game = (function asteriskAttack() {
     }
   }
 
-  function setBackground() {
+  function loadBackground() {
     var i
       , j
       , numWindows // The number of windows in the string.
@@ -351,7 +390,7 @@ var game = (function asteriskAttack() {
     game.attackerSpeed = 3000;
     game.generationSpeed = 1000;
     updateScore();
-    setBackground();
+    loadBackground();
   }
 
   function animateStartBtn(show) {
@@ -461,18 +500,14 @@ var game = (function asteriskAttack() {
 
   (function load() {
     var buffer      = 500
-      , duration    = 300
-      , logoWidth   = $("#logo").width();
+      , duration    = 300;
 
     updateScore();
-    setBackground();
-
-    // Animate in the logo.
-    $("#logo").css({ "top": 43, "left": -(logoWidth + buffer) })
-      .animate({ "opacity": 1, "left": "" }, { duration: duration, queue: false });
+    loadBackground();
+    loadLogo();
+    loadCivilians();
 
     $('#score').animate({ 'right': '' }, { duration: duration, queue: false });
-
     animateStartBtn(true);
   })();
 
