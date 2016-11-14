@@ -57,7 +57,6 @@ div#buffer-zone {
 }
 
 div#civilians {
-  color: green;
   height: 100px;
   text-align: center;
   /* box-sizing: border-box; */
