@@ -27,7 +27,6 @@ var asteriskAttack = (function(aa) {
     loadCivilians();
 
     $('#start-btn a').click(function() {
-      console.log('hello');
       asteriskAttack.start();
     });
   };

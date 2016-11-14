@@ -40,10 +40,10 @@ var asteriskAttack = (function (aa) {
     });
 
     // 5
-    $(document).keyup(function bindGameKeys(e) {
-      if (e.key === ' ') {
+    $(document).keydown(function (e) {
+      if (e.keyCode === 32) { // key: space
         aa.pewPewHeatVision();
-      } else if (e.key === 'q') {
+      } else if (e.keyCode === 81) { // key: q
         aa.quit();
       }
     });
