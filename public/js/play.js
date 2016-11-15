@@ -1,19 +1,19 @@
 var asteriskAttack = (function (aa) {
 
   function reset() {
-    aa.game.score = 0;
+    aa.stats.score = 0;
     aa.game.slugCount = 0;
-    aa.game.attackerCount = 0;
-    aa.game.attackerSpeed = 3000;
+    aa.game.asteriskCount = 0;
+    aa.game.asteriskSpeed = 3000;
     aa.game.generationSpeed = 1000;
     aa.updateScore();
   }
 
   aa.start = function() {
     function normalizeDefenderPosition(mousePosX) {
-      var min = aa.game.padding
-        , max = aa.game.area.width() - aa.game.defender.width() - aa.game.padding
-        , pos = mousePosX / aa.game.windowWidth; // Normalize to [0, 1]
+      var min = aa.sizes.padding
+        , max = aa.dom.game.width() - aa.dom.defender.width() - aa.sizes.padding
+        , pos = mousePosX / aa.dom.window.width(); // Normalize to [0, 1]
 
       pos = (pos * (max - min)) + min; // Scale to [min, max]
       return pos;
@@ -22,9 +22,9 @@ var asteriskAttack = (function (aa) {
     reset();
 
     // 1
-    aa.game.civilianLoop = setInterval(aa.animateCivilians, 300);
-    aa.game.attackLoop  = setInterval(aa.attack, aa.game.generationSpeed);
-    setTimeout(aa.game.collisionLoop = setInterval(aa.detectCollisions, 5), aa.game.generationSpeed);
+    aa.loops.civilian = setInterval(aa.animateCivilians, 300);
+    aa.loops.attack  = setInterval(aa.attack, aa.game.generationSpeed);
+    setTimeout(aa.loops.collision = setInterval(aa.detectCollisions, 5), aa.game.generationSpeed);
 
     // 2
     aa.animateStartBtn(false);
@@ -35,12 +35,12 @@ var asteriskAttack = (function (aa) {
     $('html').css('cursor', 'none');
 
     // 4
-    $(document).mousemove(function(event) {
-      aa.game.defender.css({ left: normalizeDefenderPosition(event.pageX) });
+    aa.dom.doc.mousemove(function(event) {
+      aa.dom.defender.css({ left: normalizeDefenderPosition(event.pageX) });
     });
 
     // 5
-    $(document).keydown(function (e) {
+    aa.dom.doc.keydown(function (e) {
       if (e.keyCode === 32) { // key: space
         aa.pewPewHeatVision();
       } else if (e.keyCode === 81) { // key: q
@@ -51,9 +51,9 @@ var asteriskAttack = (function (aa) {
 
   aa.quit = function() {
     // 1
-    window.clearInterval(aa.game.civilianLoop);
-    window.clearInterval(aa.game.attackLoop);
-    window.clearInterval(aa.game.collisionLoop);
+    window.clearInterval(aa.loops.civilian);
+    window.clearInterval(aa.loops.attack);
+    window.clearInterval(aa.loops.collision);
 
     // 2
     aa.animateStartBtn(true);
@@ -64,15 +64,15 @@ var asteriskAttack = (function (aa) {
     $('html').css('cursor', 'auto');
 
     // 4
-    $(document).unbind('mousemove');
+    aa.dom.doc.unbind('mousemove');
 
     // 5
-    $(document).unbind('keyup');
+    aa.dom.doc.unbind('keyup');
 
     for (id in aa.game.slugs)     { aa.game.slugs[id].remove();     }
-    for (id in aa.game.attackers) { aa.game.attackers[id].remove(); }
+    for (id in aa.game.asterisks) { aa.game.asterisks[id].remove(); }
     aa.game.slugs     = {};
-    aa.game.attackers = {};
+    aa.game.asterisks = {};
   }
 
   return aa;

@@ -1,21 +1,35 @@
 var asteriskAttack = (function(aa) {
   
+  aa.dom = {
+    window: $(window),
+    doc: $(document),
+    game: $('#asterisk-attack'),
+    defender: $('#defender'),
+    score: $('#score'),
+    civilians: $('#civilians')
+  };
+
+  aa.stats = {
+    score: null
+  };
+
+  aa.loops = {
+    attack:    null,
+    collision: null,
+    civilian:  null
+  };
+
+  aa.sizes = {
+    padding: 15
+  };
+
   aa.game = {
-    windowWidth: $(window).width(),
-    area: $('#asterisk-attack'),
-    defender: $("#defender"),
-    padding: 15, // Padding used on elements in div#asterisk-attack
-    score: null,
-    colors: ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia', 'lightskyblue', 'dodgerblue', 'blue'],
     slugs: {}, // Key: id, value: dom object.
     slugCount: null,
-    attackers: {}, // Key: id, value: dom object.
-    attackerCount: null,
-    attackerSpeed: null,
+    asterisks: {}, // Key: id, value: dom object.
+    asteriskCount: null,
+    asteriskSpeed: null,
     generationSpeed: null,
-    attackLoop: null,
-    collisionLoop: null,
-    civilianLoop: null,
   };
 
   aa.load = function() {
@@ -101,7 +115,7 @@ var asteriskAttack = (function(aa) {
       if (Math.random() > 0.5) { // 50-50 chance of lighting a window in the string.
         numWindows = background[i].split('O').length - 1; // Number of windows in the string.
 
-        if (numWindows > 3) { // Avoid corner-case problems.
+        if (numWindows > 0) {
           chosenWindow = aa.randomInRange(1, numWindows); // Chosen window to light up.
 
           for (j = 0; j < background[i].length; j++) {
@@ -121,19 +135,19 @@ var asteriskAttack = (function(aa) {
   function loadCivilians() {
     var i
       , colors = ['lightskyblue', 'lightskyblue', 'dodgerblue', 'blue']
-      , civilians = [
+      , civs = [
         '                                                                                                ',
         '    o             o                            o              o O                o              ',
         '   /|\\           /)\\                          /|\\             |\\/\\              /|\\             ',
         '____)\\___________/ )__________________________( \\____________( \\((_______________)\\_____________'
       ];
 
-    for (i = 0; i < civilians.length; i++) {
-      civilians[i] = civilians[i].replace(/ /g, '&nbsp;');
-      civilians[i] = '<span style="color:' + colors[i] + '">' + civilians[i] + '</span><br>';
+    for (i = 0; i < civs.length; i++) {
+      civs[i] = civs[i].replace(/ /g, '&nbsp;');
+      civs[i] = '<span style="color:' + colors[i] + '">' + civs[i] + '</span><br>';
     }
 
-    $('#civilians').html(civilians);
+    aa.dom.civilians.html(civs);
   }
 
   return aa;

@@ -59,7 +59,7 @@ var asteriskAttack = (function(aa) {
       animations.current = 0;
     }
 
-    $('#civilians').html(animations.frames[animations.current].join(''));
+    aa.dom.civilians.html(animations.frames[animations.current].join(''));
   };
 
   aa.animateStartBtn = function(show) {
@@ -102,11 +102,11 @@ var asteriskAttack = (function(aa) {
 
   aa.animateDefender = function(show) {
     if (show) {
-      aa.game.defender.css({ 'left': (aa.game.area.width() / 2) - 20, 'top': -500 })
+      aa.dom.defender.css({ 'left': (aa.dom.game.width() / 2) - 20, 'top': -500 })
         .animate({ 'top': 350 }, 300);
     }
     else {
-      aa.game.defender.animate({ 'top': -500 }, 300);
+      aa.dom.defender.animate({ 'top': -500 }, 300);
     }
   };
 

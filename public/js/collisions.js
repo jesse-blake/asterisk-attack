@@ -1,13 +1,11 @@
 var asteriskAttack = (function(aa) {
 
   aa.detectCollisions = function() {
-    var a // attacker
+    var a // asterisk
       , s // slug
       , d // defender
       , c
-      , collision
-      , defender   = $('#defender')
-      , civilians  = $('#civilians')
+      , collision;
 
     function getPosition(element) {
       var pos    = $(element).position()
@@ -24,14 +22,14 @@ var asteriskAttack = (function(aa) {
       return x[1] > y[0] || x[0] === y[0];
     }
 
-    c = getPosition(civilians);
+    c = getPosition(aa.dom.civilians);
 
-    // Check for attacker collisions.
-    for (aId in aa.game.attackers) {
-      a = getPosition(aa.game.attackers[aId]);
+    // Check for asterisk collisions.
+    for (aId in aa.game.asterisks) {
+      a = getPosition(aa.game.asterisks[aId]);
       collision = false;
 
-      // See if the attacker was hit by a slug.
+      // See if the asterisk was hit by a slug.
       for (sId in aa.game.slugs) {
         s = getPosition(aa.game.slugs[sId]);
 
@@ -44,14 +42,14 @@ var asteriskAttack = (function(aa) {
 
       if (collision) continue;
 
-      // See if the attacker hit the defender.
-      d = getPosition(defender);
+      // See if the asterisk hit the defender.
+      d = getPosition(aa.dom.defender);
       if (positionsCollide(a[0], d[0]) && positionsCollide(a[1], d[1])) {
         aa.completeAttack(aId, true);
         continue;
       }
 
-      // See if the attacker hit the civilians.
+      // See if the asterisk hit the civilians.
       if (positionsCollide(a[0], c[0]) && positionsCollide(a[1], c[1])) {
         aa.completeAttack(aId, false);
         aa.quit();

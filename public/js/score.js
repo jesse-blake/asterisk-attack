@@ -1,7 +1,7 @@
 var asteriskAttack = (function(aa) {
 
   aa.updateScore = function() {
-    $('#score').html(buildScore(aa.game.score));
+    $('#score').html(buildScore(aa.stats.score));
   };
 
   // Convert game score digits to three-line ascii art representations.

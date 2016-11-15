@@ -2,42 +2,43 @@ var asteriskAttack = (function(aa) {
 
   function increaseAttackSpeed() {
     aa.game.generationSpeed -= 50;
-    window.clearInterval(aa.game.attackLoop);
-    aa.game.attackLoop = setInterval(attack, aa.game.generationSpeed);
+    window.clearInterval(aa.loops.attack);
+    aa.loops.attack = setInterval(attack, aa.game.generationSpeed);
   }
 
-  function buildAttacker() {
-    var smallSize = 12
+  function buildAsterisk() {
+    var colors = ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia', 'lightskyblue', 'dodgerblue', 'blue']
+      , smallSize = 12
       , largeSize = 42;
 
     return '<div '
-      + 'id="' + (++aa.game.attackerCount) + '" ' 
+      + 'id="' + (++aa.game.asteriskCount) + '" ' 
       + 'class="asterisk" '
       + 'style="'
-      + 'color:' + aa.game.colors[aa.randomInRange(0, aa.game.colors.length - 1)] + '; '
+      + 'color:' + colors[aa.randomInRange(0, colors.length - 1)] + '; '
       + 'font-size:' + aa.randomInRange(smallSize, largeSize) + 'px; '
-      // 3 and 4 below moves attackers in from edges of game area evenly.
-      + 'left:' + aa.randomInRange(aa.game.padding * 3, $("#asterisk-attack").width() - (aa.game.padding * 4)) + 'px;'
+      // 3 and 4 below moves asterisks in from edges of game area evenly.
+      + 'left:' + aa.randomInRange(aa.sizes.padding * 3, aa.dom.game.width() - (aa.sizes.padding * 4)) + 'px;'
       + '">*</div>'
   }
 
   function attack() {
-    var attacker = $(buildAttacker())
-      , speed    = aa.randomInRange(aa.game.attackerSpeed, aa.game.attackerSpeed + 5000);
+    var asterisk = $(buildAsterisk())
+      , speed    = aa.randomInRange(aa.game.asteriskSpeed, aa.game.asteriskSpeed + 5000);
 
-    aa.game.attackers[aa.game.attackerCount] = attacker;
-    $("#asterisk-attack").prepend(attacker);
+    aa.game.asterisks[aa.game.asteriskCount] = asterisk;
+    $("#asterisk-attack").prepend(asterisk);
 
-    $(attacker).animate({ top: "500px" }, speed, "linear");
+    $(asterisk).animate({ top: "500px" }, speed, "linear");
   }
 
-  function completeAttack(attackerId, thwarted) {
-    var a     = aa.game.attackers[attackerId]
+  function completeAttack(asteriskId, thwarted) {
+    var a     = aa.game.asterisks[asteriskId]
       , pos
       , clone;
 
     if (thwarted) {
-      aa.game.score++;
+      aa.stats.score++;
 
       clone = a.clone();
       clone.insertAfter(a).animate({ 
@@ -48,9 +49,9 @@ var asteriskAttack = (function(aa) {
     }
 
     a.remove();
-    delete aa.game.attackers[attackerId];
+    delete aa.game.asterisks[asteriskId];
     
-    if (thwarted && aa.game.score % 5 === 0) {
+    if (thwarted && aa.stats.score % 5 === 0) {
       increaseAttackSpeed();
     }
     // else if (!thwarted) {

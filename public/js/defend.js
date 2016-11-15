@@ -1,14 +1,12 @@
 var asteriskAttack = (function(aa) {
 
   aa.pewPewHeatVision = function() {
-    var defender      = $('#defender')
-      , defenderWidth = defender.width()
-      , laserPos      = defender.position();
+    var pos = aa.dom.defender.position();
 
     var slug = $('<div id="slug' + (++aa.game.slugCount) + '" '
       + 'style="color:deeppink; position:absolute; '
-      + 'top:' + (laserPos.top - 40) + 'px; '
-      + 'left:' + ((laserPos.left * 2 + defenderWidth) / 2) + 'px;'
+      + 'top:' + (pos.top - 40) + 'px; '
+      + 'left:' + ((pos.left * 2 + aa.dom.defender.width()) / 2) + 'px;'
       + '">|<br>|<br>|<br></div>');
 
     $('#asterisk-attack').prepend(slug);
