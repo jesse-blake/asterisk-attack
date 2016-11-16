@@ -1,24 +1,102 @@
+$offscreenLR: -1300px;
+$offscreenTB: -500px;
+
 body { 
   font-family: 'Inconsolata', monospace;
   font-size: 16px;
   font-weight: bold;
-  background-color: #222;
+  background: #111 url('img/stars.jpg') no-repeat center top;
+  overflow-x: hidden;
 }
 
 div#game {
   position: relative;
-  width: 800px; 
   margin: 0 auto;
+  /* border: solid 1px gray; */
+}
+
+div#candy-wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 1px;
+  /* box-sizing: border-box; */
   /* border: solid 1px gray; */
 }
 
 div#logo {
   position: absolute;
-  top: -200px;
+  top: 75px;
+  width: 800px;
+  margin: 0 0 0 -400px;
+  text-align: center;
+}
+
+div#score {
+  position: absolute;
+  top: 178px;
+  width: 800px;
+  margin: 0 -400px 0 0;
+  text-align: center;
+}
+
+div#background {
+  position: absolute;
+  top: 200px;
+  width: 1800px;
+  margin: 0 0 0 -900px;
+  text-align: center;
+  /* box-sizing: border-box; */
+  /* border: solid 1px lime; */
+}
+
+div#start-btn {
+  position: absolute;
   z-index: 1001;
+  top: 300px;
+  width: 200px;
+  margin: 0 -100px 0 0;
+  text-align: center;
+  /* box-sizing: border-box; */
+  /* border: solid 1px blue; */
+}
+
+div#temp-start-btn {
+  position: absolute;
+  top: 300px;
+  width: 200px;
+  margin: 0 -100px 0 0;
+  text-align: center;
+  /* box-sizing: border-box; */
+  /* border: solid 1px hotpink; */
+}
+
+div#instructions, div#quit-instructions {
+  font-size: .9em;
+  color: #777;
+  position: absolute;
+  top: 600px;
   width: 800px;
   text-align: center;
-  opacity: 0;
+}
+
+div#instructions {
+  left: $offscreenLR;
+  margin: 0 0 0 -400px;
+}
+
+div#quit-instructions {
+  right: $offscreenLR;
+  margin: 0 -400px 0 0;
+  /* box-sizing: border-box; */
+  /* border: 1px solid teal; */
+}
+
+div#defender {
+  position: absolute;
+  top: -500px;
+  line-height: 15px;
+  /* box-sizing: border-box; */
+  /* border: 1px solid brown; */
 }
 
 div#asterisk-attack {
@@ -28,28 +106,11 @@ div#asterisk-attack {
   /* border: solid 1px blue; */
 }
 
-div#score {
-  position: absolute;
-  top: 145px;
-  right: -1300px;
-  width: 800px;
-  text-align: center;
-}
-
 div#attack-zone {
   width: 100%;
   height: 400px;
   /* box-sizing: border-box; */
   /* border: 1px solid green; */
-}
-
-div#defender {
-  position: absolute;
-  top: -500px;
-  left: 15px;
-  line-height: 15px;
-  /* box-sizing: border-box; */
-  /* border: 1px solid brown; */
 }
 
 div#buffer-zone {
@@ -65,48 +126,8 @@ div#civilians {
   /* border: 1px solid orange; */
 }
 
-div#background {
-  position: absolute;
-  z-index: -1001;
-  width: 800px;
-  top: 160px;
-  text-align: center;
-}
-
-div.asterisk {
-  line-height: 3px;
-  position: absolute;
-  top: -10px;
-}
-
 div#start-btn a, div#temp-start-btn a {
   text-decoration: none; 
 }
 
-div#start-btn {
-  position: absolute;
-  z-index: 1002;
-  width: 800px;
-  top: 285px;
-  text-align: center;
-  /* box-sizing: border-box; */
-  /* border: solid 1px hotpink; */
-}
-
-div#temp-start-btn {
-  position: absolute;
-  top: 285px;
-  width: 800px;
-  text-align: center;
-}
-
-div#quit-instruction {
-  font-size: .9em;
-  color: yellow;
-  position: absolute;
-  width: 800px;
-  top: 15px;
-  left: -1300px;
-  text-align: center;
-}
 

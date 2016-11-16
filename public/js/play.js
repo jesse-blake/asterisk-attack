@@ -22,14 +22,12 @@ var asteriskAttack = (function (aa) {
     reset();
 
     // 1
-    aa.loops.civilian = setInterval(aa.animateCivilians, 300);
-    aa.loops.attack  = setInterval(aa.attack, aa.game.generationSpeed);
+    // aa.loops.civilian = setInterval(aa.animateCivilians, 300);
+    aa.loops.attack = setInterval(aa.attack, aa.game.generationSpeed);
     setTimeout(aa.loops.collision = setInterval(aa.detectCollisions, 5), aa.game.generationSpeed);
 
     // 2
-    aa.animateStartBtn(false);
-    aa.animateQuitInstruction(true);
-    aa.animateDefender(true);
+    aa.animateStartGame();
 
     // 3
     $('html').css('cursor', 'none');
@@ -51,14 +49,12 @@ var asteriskAttack = (function (aa) {
 
   aa.quit = function() {
     // 1
-    window.clearInterval(aa.loops.civilian);
+    // window.clearInterval(aa.loops.civilian);
     window.clearInterval(aa.loops.attack);
     window.clearInterval(aa.loops.collision);
 
     // 2
-    aa.animateStartBtn(true);
-    aa.animateQuitInstruction(false);
-    aa.animateDefender(false);
+    aa.animateEndGame();
 
     // 3
     $('html').css('cursor', 'auto');
@@ -67,7 +63,7 @@ var asteriskAttack = (function (aa) {
     aa.dom.doc.unbind('mousemove');
 
     // 5
-    aa.dom.doc.unbind('keyup');
+    aa.dom.doc.unbind('keydown');
 
     for (id in aa.game.slugs)     { aa.game.slugs[id].remove();     }
     for (id in aa.game.asterisks) { aa.game.asterisks[id].remove(); }

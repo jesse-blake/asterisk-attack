@@ -1,80 +1,156 @@
 var asteriskAttack = (function(aa) {
 
-  var animations = null;
+  var civilianAnimations = null
+    , offscreenLR = -1500
+    , offscreenTB = -500
+    , duration = 300;
 
-  function buildAnimations() {
-    var colors = ['lightskyblue', 'lightskyblue', 'dodgerblue', 'blue']
-      , i
-      , j;
-
-    animations = {
-      current: 0,
-      frames: [ // Lots of ugly backspace escapes.
-        [
-          '                                                                                                ',
-          '    o/           \\o/                           o               oO                o              ',
-          '   /|             )                           v|v             /><\\              /(\\             ',
-          '____)\\___________/ )___________________________)\\_____________))((______________( )_____________'
-        ],[
-          '                                                                                \\o/             ',
-          '    o                 \\o/                     \\o/             \\oO/               |              ',
-          '   /|V                 )                       |              /  \\              / \\             ',
-          '____)\\________________/ )______________________)\\_____________))((______________________________'
-        ],[
-          '                                                                                                ',
-          '    o/                \\o/                      o              \\oO/               o              ',
-          '   /|                  (                      v|v             /  \\              /(\\             ',
-          '____)\\________________( \\_____________________/(______________))((______________( )_____________'
-        ],[
-          '                                                                                                ',
-          '    o            \\o/                          \\o/              oO                o              ',
-          '   /|V            (                            |              /><\\              /(\\             ',
-          '____)\\___________( \\__________________________/(______________))((______________( )_____________'
-        ]
-      ]
-    };
-
-    for (i = 0; i < animations.frames.length; i++) {
-      for (j = 0; j < animations.frames[i].length; j++) {
-        animations.frames[i][j] = animations.frames[i][j]
-          .replace(/ /g, '&nbsp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;');
-        animations.frames[i][j] = '<span class="civilians'
-          + (i+1) 
-          + '" style="color:' + colors[j] + '">' 
-          + animations.frames[i][j] 
-          + '</span><br>';
-      }
-    }
-    
-    return animations
-  }
-
-  aa.animateCivilians = function() {
-
-    if (!animations) buildAnimations();
-      
-    if (++animations.current % animations.frames.length === 0) {
-      animations.current = 0;
-    }
-
-    aa.dom.civilians.html(animations.frames[animations.current].join(''));
+  aa.animateLoadGame = function() {
+    animateLogo();
+    animateScore();
+    animateBackground();
+    animateStartBtn(true); 
+    animateInstructions(true);
   };
 
-  aa.animateStartBtn = function(show) {
-    var startBtn = $('#start-btn');
+  aa.animateStartGame = function() {
+    animateStartBtn(false); 
+    animateDefender(true);
+    animateInstructions(false);
+    animateQuitInstructions(true);
+  };
 
+  aa.animateEndGame = function() {
+    animateStartBtn(true); 
+    animateDefender(false);
+    animateInstructions(true);
+    animateQuitInstructions(false);
+  };
+
+  function animateLogo() {
+    var i
+      , colors = ['yellow', 'yellow', 'gold','orange','orangered','red']
+      , logo = [
+
+        '                      __                *       __             __   __               __         ',
+        '______   _____ _____ / /_  _____ ____ __ _____ / /_     _____ / /_ / /_  _____ ____ / /_     ___',
+        '_____   ___  // ___// __/ / __ // __// // ___//   /    ___  // __// __/ ___  // __//   /    ____',
+        '____   / _  //___ // /__ / ___// /  / //___ //   \\_   / _  // /__/ /__ / _  // /__/   \\_   _____',
+        '___   /____//____//____//____//_/  /_//____//_/\\__/  /____//_________//____//______/\\__/  ______',
+        '________________________________________________________________________________________________'
+      ];
+
+    for (i = 0; i < logo.length; i++) {
+      logo[i] = logo[i].replace(/ /g, '&nbsp;');
+      logo[i] = '<span style="color:' + colors[i] + '">' + logo[i] + '</span><br>';
+    }
+
+    aa.dom.logo
+      .html(logo)
+      .css({ 'left': offscreenLR })
+      .animate({ 'opacity': 1, 'left': '' }, { duration: duration, queue: false });
+  }
+
+  function animateScore() {
+    aa.updateScore();
+
+    aa.dom.score
+      .css({ 'right': offscreenLR })
+      .animate({ 'opacity': 1, 'right': '' }, { duration: duration, queue: false });
+  }
+
+  function animateBackground() {
+    var i
+      , j
+      , numWindows // The number of windows in the string.
+      , chosenWindow // The window to light up!
+      , background = [ 
+        '                                                                  ___________                   ',
+        '                      ___________                                 |         |                   ',
+        '                      |         |                                 | O O O O |                   ',
+        '                      | O O O O |                                 |         |                   ',
+        '                      |         |______                           | O O O O |                   ',
+        '                      | O O O         |                 __________|         |                   ',
+        '      _____________   |         O O O |                 |           O O O O |                   ',
+        '      |           |   | O O O         |                 | O O O O           |      _____________',
+        '      | O O O O O |   |         O O O |                 |           O O O O |      |           |',
+        '                  |   | O O           |________         | O O O O           |      | O O O O O |',
+        '___________ O O O |   |         O O O         |         |           O O O O        |           |',
+        '|         |       |   | O O             O O O |         | O O O O                  | O O O O O |',
+        '| O O O O |   O O |   |           O O         |         |           O O O  ___________         |',
+        '|         |       |   | O               O O O |         | O O O            |         | O O O O |',
+        '| O O O O |   O O |   | _____________         |         |             O O  | O O O O |         |',
+        '|         |           | |           |       O |         | O O              |         | O O O   |',
+        '        O |   O         | O O O O O |         |         |               O        O O |          ',
+        '          |                         |                   | O                          | O        ',
+        '          |                 O O O O |                   |                            |          '
+      ];
+
+    function animateWindows() {
+      var i 
+        , windowTypes
+        , randomBgLvl
+        , numWindows
+        , chosenWindow;
+
+      windowTypes = Math.random() > 0.5 ? ['*', 'O', '#222'] : ['O', '*', '#444'];
+      randomBgLvl = aa.randomInRange(0, background.length - 1);
+      numWindows = background[randomBgLvl].split(windowTypes[0]).length - 1; // Number of windows in the string.
+
+      if (numWindows > 0) {
+        chosenWindow = aa.randomInRange(1, numWindows); // Chosen window to change.
+
+        for (i = 0; i < background[randomBgLvl].length; i++) {
+          if (background[randomBgLvl][i] === windowTypes[0] && !--chosenWindow) {
+            background[randomBgLvl] = background[randomBgLvl].substr(0, i)
+              + '<span style="color:' + windowTypes[2] + '">'
+              + windowTypes[1]
+              + '</span>'
+              + background[randomBgLvl].substr(i+1, background[randomBgLvl].length);
+          }
+        }
+        aa.dom.background.html(background);
+      }
+
+      setTimeout(animateWindows, aa.randomInRange(100, 1000));
+    }
+
+    for (i = 0; i < background.length; i++) {
+      background[i] = background[i].replace(/ /g, '&nbsp') 
+      background[i] = '<span style="color:#222">' + background[i] + '</span><br>';
+
+      if (Math.random() > 0.5) { // 50-50 chance of lighting a window in the string.
+        numWindows = background[i].split('O').length - 1; // Number of windows in the string.
+
+        if (numWindows > 0) {
+          chosenWindow = aa.randomInRange(1, numWindows); // Chosen window to light up.
+
+          for (j = 0; j < background[i].length; j++) {
+            if (background[i][j] === 'O' && !--chosenWindow) {
+              background[i] = background[i].substr(0, j)
+                + '<span style="color:#444">*</span>'
+                + background[i].substr(j+1, background[i].length);
+            }
+          }
+        }
+      }
+    }
+
+    aa.dom.background.html(background);
+    setTimeout(animateWindows, aa.randomInRange(200, 1500));
+  }
+
+  function animateStartBtn(show) {
     if (show) { // Animate start button into view.
-      startBtn.css({ 'right': -(800 + 500) })
-        .animate({ 'right': '' }, 300, function() {
+      aa.dom.startBtn.css({ 'right': offscreenLR })
+        .animate({ 'right': '' }, { duration: duration, queue: false }, function() {
           $('#start-btn a').hover(
             function() {
-              var newBtn = startBtn.clone();
+              var newBtn = aa.dom.startBtn.clone();
 
               newBtn.attr('id', 'temp-start-btn')
                 .insertAfter('#start-btn')
-                .animate({ 'opacity': '0', 'font-size': '35px' }, 300, function() {
+                .animate({ 'opacity': '0', 'font-size': '35px' }, { duration: duration, queue: false }, function() {
                   newBtn.remove();
                 });
             },
@@ -83,32 +159,121 @@ var asteriskAttack = (function(aa) {
         })
     }
     else { // Animate start button out of view.
-      startBtn.animate({'right': -(800 + 500) }, 500)
+      aa.dom.startBtn.animate({'right': offscreenLR }, { duration: duration, queue: false })
         .unbind('mouseenter mouseleave');
     }
   };
 
-  aa.animateQuitInstruction = function(show) {
-    var quitInst = $('#quit-instruction');
-
+  function animateInstructions(show) {
     if (show) {
-      quitInst.css({ 'left': -(800 + 500) })
-        .animate({'left': '' }, 300);
+      aa.dom.instructions.css({ 'left': offscreenLR })
+        .animate({'left': '' }, { duration: duration, queue: false });
     }
     else {
-      quitInst.animate({ 'left': -(800 + 500) }, 500);
+      aa.dom.instructions.animate({ 'left': offscreenLR }, { duration: duration, queue: false });
     }
   };
 
-  aa.animateDefender = function(show) {
+  function animateQuitInstructions(show) {
     if (show) {
-      aa.dom.defender.css({ 'left': (aa.dom.game.width() / 2) - 20, 'top': -500 })
-        .animate({ 'top': 350 }, 300);
+      aa.dom.quitInstructions.css({ 'right': offscreenLR })
+        .animate({'right': '' }, { duration: duration, queue: false });
     }
     else {
-      aa.dom.defender.animate({ 'top': -500 }, 300);
+      aa.dom.quitInstructions.animate({ 'right': offscreenLR }, { duration: duration, queue: false });
     }
   };
+
+  function animateDefender(show) {
+    if (show) {
+      aa.dom.defender
+        .css({ 'left': (aa.dom.game.width() / 2) - 20, 'top': -500 })
+        .animate({ 'top': 450 }, { duration: duration, queue: false });
+    }
+    else {
+      aa.dom.defender.animate({ 'top': offscreenTB }, { duration: duration, queue: false });
+    }
+  };
+
+  // function loadCivilians() {
+  //   var i
+  //     , colors = ['lightskyblue', 'lightskyblue', 'dodgerblue', 'blue']
+  //     , civs = [
+  //       '                                                                                                ',
+  //       '    o             o                            o              o O                o              ',
+  //       '   /|\\           /)\\                          /|\\             |\\/\\              /|\\             ',
+  //       '____)\\___________/ )__________________________( \\____________( \\((_______________)\\_____________'
+  //     ];
+
+  //   for (i = 0; i < civs.length; i++) {
+  //     civs[i] = civs[i].replace(/ /g, '&nbsp;');
+  //     civs[i] = '<span style="color:' + colors[i] + '">' + civs[i] + '</span><br>';
+  //   }
+
+  //   aa.dom.civilians.html(civs);
+  // }
+
+  // function buildCivilianAnimations() {
+  //   var colors = ['lightskyblue', 'lightskyblue', 'dodgerblue', 'blue']
+  //     , i
+  //     , j;
+
+  //   animations = {
+  //     current: 0,
+  //     frames: [
+  //       [
+  //         '                                                                                                ',
+  //         '    o/           \\o/                           o               oO                o              ',
+  //         '   /|             )                           v|v             /><\\              /(\\             ',
+  //         '____)\\___________/ )___________________________)\\_____________))((______________( )_____________'
+  //       ],[
+  //         '                                                                                \\o/             ',
+  //         '    o                 \\o/                     \\o/             \\oO/               |              ',
+  //         '   /|V                 )                       |              /  \\              / \\             ',
+  //         '____)\\________________/ )______________________)\\_____________))((______________________________'
+  //       ],[
+  //         '                                                                                                ',
+  //         '    o/                \\o/                      o              \\oO/               o              ',
+  //         '   /|                  (                      v|v             /  \\              /(\\             ',
+  //         '____)\\________________( \\_____________________/(______________))((______________( )_____________'
+  //       ],[
+  //         '                                                                                                ',
+  //         '    o            \\o/                          \\o/              oO                o              ',
+  //         '   /|V            (                            |              /><\\              /(\\             ',
+  //         '____)\\___________( \\__________________________/(______________))((______________( )_____________'
+  //       ]
+  //     ]
+  //   };
+
+  //   for (i = 0; i < animations.frames.length; i++) {
+  //     for (j = 0; j < animations.frames[i].length; j++) {
+  //       animations.frames[i][j] = animations.frames[i][j]
+  //         .replace(/ /g, '&nbsp;')
+  //         .replace(/</g, '&lt;')
+  //         .replace(/>/g, '&gt;');
+  //       animations.frames[i][j] = '<span class="civilians'
+  //         + (i+1) 
+  //         + '" style="color:' + colors[j] + '">' 
+  //         + animations.frames[i][j] 
+  //         + '</span><br>';
+  //     }
+  //   }
+    
+  //   return animations;
+  // }
+
+  // function animateCivilians() {
+  //   if (!animations) { 
+  //     buildCivilianAnimations();
+  //   }
+      
+  //   if (++animations.current % animations.frames.length === 0) {
+  //     animations.current = 0;
+  //   }
+
+  //   aa.dom.civilians.html(animations.frames[animations.current].join(''));
+  // };
+
 
   return aa;
 
