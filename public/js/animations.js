@@ -61,85 +61,100 @@ var asteriskAttack = (function(aa) {
   }
 
   function animateBackground() {
-    var i
-      , j
-      , numWindows // The number of windows in the string.
-      , chosenWindow // The window to light up!
+    var lightsOnColors = ['#444', '#555']
+      , lightsOffColor = '#222'
       , background = [ 
         '                                                                                                 |                                                    ',
         '                                                    |                                        ____|______                                              ',
         '                                                 ___|_|_____                                 |         |                                              ',
-        '                                                 |         |                                 | O O O O |                                              ',
-        '                                                 | O O O O |                                 |         |____                                          ',
-        '                                      |          |         |______                           | O O O O     |                                          ',
-        '                                      |          | O O O         |                 __________|           O |          |                               ',
-        '                                 _____|_______   |         O O O |                 |             O O O     |          |                               ',
-        '                                 |           |   | O O O         |                 | O O O O O           O |  ________|____                           ',
-        '                |                | O O O O O |   |         O O O |                 |             O O O     |  |           |                           ',
-        '             ___|_______                     |   | O O           |________         | O O O O O           O |  | O O O O O |                           ',
-        '             |         |   ___________ O O O |   |         O O O         |         |             O O O     |  |           |           |               ',
-        '             | O O O O |   |         |       |   | O               O O O |         | O O O O                  | O O O O O |    _______|__|____        ',
-        '     ________|         |   | O O O O |   O O |   |           O O         |   _________           O O  ___________         |    |             |        ',
-        '     |           O O O |   |         |       |   |    |            O O O |   |       | O O            |         |   O O O |    | O O O O O O |        ',
-        '     | O O O O         |   | O O O O |   O O |   | ___|_________         |   | O O O |             O  | O O O O |         |    |                      ',
-        '___________        O O |   |         |           | |           |       O |   |       | O              |         |     O O |    | O O   _______________',
-        '|         |  O         |           O |   O         | O O O O O |         |   | O O O |             O  | O O O                  |       |             |',
-        '  O O O O |          O               |                         |             |       |                |                 O        O     | O O O O O O  ',
-        '                                     |                 O O O O |                     |                | O                              |              ',
+        '                                                 |         |                                 | * * * * |                                              ',
+        '                                                 | * * * * |                                 |         |____                                          ',
+        '                                      |          |         |______                           | * * * *     |                                          ',
+        '                                      |          | * * *         |                 __________|           * |          |                               ',
+        '                                 _____|_______   |         * * * |                 |             * * *     |         ||                               ',
+        '                                 |           |   | * * *         |                 | * * * * *           * |  _______||____                           ',
+        '                |                | * * * * * |   |         * * * |                 |             * * *     |  |           |                           ',
+        '             ___|_______                     |   | * *           |________         | * * * * *           * |  | * * * * * |                           ',
+        '             |         |   ___________ * * * |   |         * * *         |         |             * * *     |  |           |           |               ',
+        '             | * * * * |   |         |       |   | *               * * * |         | * * * *                  | * * * * * |    _______|__|____        ',
+        '     ________|         |   | * * * * |   * * |   |           * *         |   _________           * *  ___________         |    |             |        ',
+        '     |           * * * |   |         |       |   |    |            * * * |   |       | * *            |         |   * * * |    | * * * * * * |        ',
+        '     | * * * *         |   | * * * * |   * * |   | ___|_________         |   | * * * |             *  | * * * * |         |    |                      ',
+        '___________        * * |   |         |           | |           |       * |   |       | *              |         |     * * |    | * *   _______________',
+        '|         |  *         |           * |   *         | * * * * * |         |   | * * * |             *  | * * *                  |       |             |',
+        '  * * * * |          *               |                         |             |       |                |                 *        *     | * * * * * *  ',
+        '                                     |                 * * * * |                     |                | *                              |              ',
         '                                                               |                                      |                                               '
       ];
 
+    /*
+     * Changes a random window in a particular level of the background.
+     * @level {Number} An array index representing the level of the background.
+     * @color {String} A CSS color, with a hash sign, 3 digits only.
+     */
+    function changeWindow(level, color) {
+      var i
+        , count
+        , selected;
+
+      count = background[level].split('*').length - 1;
+
+      if (count > 0) {
+        selected = aa.randomInRange(1, count);
+
+        for (i = 0; i < background[level].length; i++) {
+          if (background[level][i] === '*' && !--selected) {
+            background[level] = background[level].substr(0, i-6)
+              + color
+              + '">*'
+              + background[level].substr(i+1, background[level].length);
+          }
+        }
+      }
+    }
+
+    /*
+     * Colors one window with a lights-on color in each level of the background.
+     */
+    function loadBackground() {
+      var i
+        , color; // The window color.
+
+      for (i = 0; i < background.length; i++) {
+        background[i] = background[i].replace(/ /g, '&nbsp') 
+        background[i] = background[i].replace(/\*/g, '<span style="color:' + lightsOffColor + '">*</span>');
+        background[i] = '<span style="color:' + lightsOffColor + '">' + background[i] + '</span><br>';
+
+        color = lightsOnColors[aa.randomInRange(0, lightsOnColors.length - 1)];
+        changeWindow(i, color);
+      }
+
+      aa.dom.background.html(background);
+    }
+
+    /*
+     * Randomly chooses a level, and a window in the level, to recolor.
+     */
     function animateWindows() {
       var i 
-        , windowTypes
-        , randomBgLvl
-        , numWindows
-        , chosenWindow;
+        , level  // Random level of the background.
+        , color; // The window color.
 
-      windowTypes = Math.random() > 0.5 ? ['*', 'O', '#222'] : ['O', '*', '#444'];
-      randomBgLvl = aa.randomInRange(0, background.length - 1);
-      numWindows = background[randomBgLvl].split(windowTypes[0]).length - 1; // Number of windows in the string.
+      level = aa.randomInRange(0, background.length - 1);
 
-      if (numWindows > 0) {
-        chosenWindow = aa.randomInRange(1, numWindows); // Chosen window to change.
+      color = (Math.random() > 0.5) // 50% change of using an on color or the off color.
+        ? lightsOffColor
+        : lightsOnColors[aa.randomInRange(0, lightsOnColors.length - 1)];
 
-        for (i = 0; i < background[randomBgLvl].length; i++) {
-          if (background[randomBgLvl][i] === windowTypes[0] && !--chosenWindow) {
-            background[randomBgLvl] = background[randomBgLvl].substr(0, i)
-              + '<span style="color:' + windowTypes[2] + '">'
-              + windowTypes[1]
-              + '</span>'
-              + background[randomBgLvl].substr(i+1, background[randomBgLvl].length);
-          }
-        }
+      changeWindow(level, color);
 
-        aa.dom.background.html(background);
-      }
+      aa.dom.background.html(background);
 
-      setTimeout(animateWindows, aa.randomInRange(100, 700));
+      setTimeout(animateWindows, aa.randomInRange(100, 500));
     }
 
-    for (i = 0; i < background.length; i++) {
-      background[i] = background[i].replace(/ /g, '&nbsp') 
-      background[i] = '<span style="color:#222">' + background[i] + '</span><br>';
-
-      numWindows = background[i].split('O').length - 1; // Number of windows in the string.
-
-      if (numWindows > 0) {
-        chosenWindow = aa.randomInRange(1, numWindows); // Chosen window to light up.
-
-        for (j = 0; j < background[i].length; j++) {
-          if (background[i][j] === 'O' && !--chosenWindow) {
-            background[i] = background[i].substr(0, j)
-              + '<span style="color:#444">*</span>'
-              + background[i].substr(j+1, background[i].length);
-          }
-        }
-      }
-    }
-    aa.dom.background.html(background);
-
-    setTimeout(animateWindows, aa.randomInRange(200, 1500));
+    loadBackground();
+    setTimeout(animateWindows, aa.randomInRange(200, 500));
   }
 
   function animateBlinkingAntenas() {
