@@ -50,14 +50,6 @@ var asteriskAttack = (function(aa) {
     generationSpeed: null,
   };
 
-  aa.load = function() {
-    aa.animateLoadGame();
-
-    $('#start-btn a').click(function() {
-      asteriskAttack.start();
-    });
-  };
-
   return aa;
 
 })(asteriskAttack); 

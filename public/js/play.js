@@ -77,9 +77,9 @@ var asteriskAttack = (function (aa) {
 
 
 $(document).ready(function() {
-  asteriskAttack.load();
+  asteriskAttack.animateLoadGame();
 
-  $('#start a').click(function() {
+  $('#start-btn a').click(function() {
     asteriskAttack.start();
   });
 });
