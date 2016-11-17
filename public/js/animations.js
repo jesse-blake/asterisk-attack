@@ -5,27 +5,46 @@ var asteriskAttack = (function(aa) {
     , duration = 300;
 
   aa.animateLoadGame = function() {
+    if (!validScreenSize()) return;
     animateLogo();
     animateScore();
     animateBackground();
-    animateStartBtn(true); 
+    animateStartBtn(true);
     animateInstructions(true);
     animateBlinkingAntenas();
   };
 
   aa.animateStartGame = function() {
-    animateStartBtn(false); 
+    animateStartBtn(false);
     animateDefender(true);
     animateInstructions(false);
     animateQuitInstructions(true);
   };
 
   aa.animateEndGame = function() {
-    animateStartBtn(true); 
+    animateStartBtn(true);
     animateDefender(false);
     animateInstructions(true);
     animateQuitInstructions(false);
   };
+
+  function validScreenSize() {
+    if (aa.dom.window.width() < 1000) {
+      aa.dom.game.css({ 'display':'none' });
+      aa.dom.screenSizeError.css({ 'display':'inherit' });
+
+      aa.loops.screenSizeError = setInterval(function() {
+        aa.dom.errorMsg.effect('shake', {}, 200);
+      }, 2000);
+
+      aa.dom.reload.click(function() {
+        location.reload();
+      });
+
+      return false;
+    }
+    return true;
+  }
 
   function animateLogo() {
     var i
@@ -62,7 +81,7 @@ var asteriskAttack = (function(aa) {
   function animateBackground() {
     var lightsOnColors = ['#444', '#555']
       , lightsOffColor = '#222'
-      , background = [ 
+      , background = [
         '                                                                                                 |                                                    ',
         '                                                    |                                        ____|______                                              ',
         '                                                 ___|_|_____                                 |         |                                              ',
@@ -120,7 +139,7 @@ var asteriskAttack = (function(aa) {
         , color; // The window color.
 
       for (i = 0; i < background.length; i++) {
-        background[i] = background[i].replace(/ /g, '&nbsp') 
+        background[i] = background[i].replace(/ /g, '&nbsp')
         background[i] = background[i].replace(/\*/g, '<span style="color:' + lightsOffColor + '">*</span>');
         background[i] = '<span style="color:' + lightsOffColor + '">' + background[i] + '</span><br>';
 
@@ -135,7 +154,7 @@ var asteriskAttack = (function(aa) {
      * Randomly chooses a level, and a window in the level, to recolor.
      */
     function animateWindows() {
-      var i 
+      var i
         , level  // Random level of the background.
         , color; // The window color.
 
