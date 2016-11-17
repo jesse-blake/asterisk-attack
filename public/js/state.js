@@ -2,7 +2,7 @@ var asteriskAttack = (function(aa) {
 
   aa.reset = function() {
     aa.stats.score = 0;
-    aa.game.slugCount = 0;
+    aa.game.heatbeamCount = 0;
     aa.game.asteriskCount = 0;
     aa.game.asteriskSpeed = 3000;
     aa.game.generationSpeed = 1000;
@@ -54,8 +54,8 @@ var asteriskAttack = (function(aa) {
   };
 
   aa.game = {
-    slugs: {}, // Key: id, value: dom object.
-    slugCount: null,
+    heatbeams: {}, // Key: id, value: dom object.
+    heatbeamCount: null,
     asterisks: {}, // Key: id, value: dom object.
     asteriskCount: null,
     asteriskSpeed: null,
