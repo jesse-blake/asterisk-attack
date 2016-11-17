@@ -19,12 +19,12 @@ var asteriskAttack = (function(aa) {
       startBtn: $('#start-btn'),
       instructions: $('#instructions'),
       quitInstructions: $('#quit-instructions'),
-      blinker1: $('#blinker1'),
-      blinker2: $('#blinker2'),
-      blinker3: $('#blinker3'),
-      blinker4: $('#blinker4'),
-      blinker5: $('#blinker5'),
-      blinker6: $('#blinker6'),
+      antena1: $('#antena1'),
+      antena2: $('#antena2'),
+      antena3: $('#antena3'),
+      antena4: $('#antena4'),
+      antena5: $('#antena5'),
+      antena6: $('#antena6'),
     zones: $('#zones'),
       attackZone: $('#attack-zone'),
       gameOverZone: $('#game-over-zone'),
@@ -39,12 +39,12 @@ var asteriskAttack = (function(aa) {
     attack:    null,
     collision: null,
     background: null,
-    blinker1: null,
-    blinker2: null,
-    blinker3: null,
-    blinker4: null,
-    blinker5: null,
-    blinker6: null
+    antena1: null,
+    antena2: null,
+    antena3: null,
+    antena4: null,
+    antena5: null,
+    antena6: null
     // civilian:  null
   };
 

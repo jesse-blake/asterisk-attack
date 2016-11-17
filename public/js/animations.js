@@ -158,37 +158,37 @@ var asteriskAttack = (function(aa) {
   }
 
   function animateBlinkingAntenas() {
-    function blinker1() {
-      aa.dom.blinker1.css({ 'color': 'white' })
+    function antena1() {
+      aa.dom.antena1.css({ 'color': 'white' })
         .animate({ 'color': '#111' }, 250);
     }
-    function blinker2() {
-      aa.dom.blinker2.css({ 'color': 'white' })
+    function antena2() {
+      aa.dom.antena2.css({ 'color': 'white' })
         .animate({ 'color': '#111' }, 250);
     }
-    function blinker3() {
-      aa.dom.blinker3.css({ 'color': 'white' })
+    function antena3() {
+      aa.dom.antena3.css({ 'color': 'white' })
         .animate({ 'color': '#111' }, 500);
     }
-    function blinker4() {
-      aa.dom.blinker4.css({ 'color': 'white' })
+    function antena4() {
+      aa.dom.antena4.css({ 'color': 'white' })
         .animate({ 'color': '#111' }, 750);
     }
-    function blinker5() {
-      aa.dom.blinker5.css({ 'color': 'white' })
+    function antena5() {
+      aa.dom.antena5.css({ 'color': 'white' })
         .animate({ 'color': '#111' }, 143);
     }
-    function blinker6() {
-      aa.dom.blinker6.css({ 'color': 'white' })
+    function antena6() {
+      aa.dom.antena6.css({ 'color': 'white' })
         .animate({ 'color': '#111' }, 200);
     }
 
-    aa.loops.blinker1 = setInterval(blinker1, 1234);
-    aa.loops.blinker2 = setInterval(blinker2, 2300);
-    aa.loops.blinker3 = setInterval(blinker3, 1818);
-    aa.loops.blinker4 = setInterval(blinker4, 2000);
-    aa.loops.blinker5 = setInterval(blinker5, 1143);
-    aa.loops.blinker6 = setInterval(blinker6, 1777);
+    aa.loops.antena1 = setInterval(antena1, 1234);
+    aa.loops.antena2 = setInterval(antena2, 2300);
+    aa.loops.antena3 = setInterval(antena3, 1818);
+    aa.loops.antena4 = setInterval(antena4, 2000);
+    aa.loops.antena5 = setInterval(antena5, 1143);
+    aa.loops.antena6 = setInterval(antena6, 1777);
   }
 
   function animateStartBtn(show) {
