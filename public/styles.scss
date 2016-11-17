@@ -49,9 +49,45 @@ div#background {
   /* border: solid 1px lime; */
 }
 
+div.blinker {
+  position: absolute;
+  font-size: .6em;
+  color: #111;
+}
+
+div#blinker1 {
+  top: 343px;
+  left: -470px;
+}
+
+div#blinker2 {
+  top: 277px;
+  left: -294px;
+}
+
+div#blinker3 {
+  top: 208px;
+  left: -182px;
+}
+
+div#blinker4 {
+  top: 191px;
+  left: 178px;
+}
+
+div#blinker5 {
+  top: 294px;
+  left: 345px;
+}
+
+div#blinker6 {
+  top: 379px;
+  left: 474px;
+}
+
 div#start-btn {
   position: absolute;
-  z-index: 1001;
+  z-index: 1003;
   top: 300px;
   width: 200px;
   margin: 0 -100px 0 0;
@@ -62,6 +98,7 @@ div#start-btn {
 
 div#temp-start-btn {
   position: absolute;
+  z-index: 1002;
   top: 300px;
   width: 200px;
   margin: 0 -100px 0 0;

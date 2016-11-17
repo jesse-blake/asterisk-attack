@@ -11,6 +11,7 @@ var asteriskAttack = (function(aa) {
     animateBackground();
     animateStartBtn(true); 
     animateInstructions(true);
+    animateBlinkingAntenas();
   };
 
   aa.animateStartGame = function() {
@@ -65,25 +66,27 @@ var asteriskAttack = (function(aa) {
       , numWindows // The number of windows in the string.
       , chosenWindow // The window to light up!
       , background = [ 
-        '                                                                  ___________                   ',
-        '                      ___________                                 |         |                   ',
-        '                      |         |                                 | O O O O |                   ',
-        '                      | O O O O |                                 |         |                   ',
-        '                      |         |______                           | O O O O |                   ',
-        '                      | O O O         |                 __________|         |                   ',
-        '      _____________   |         O O O |                 |           O O O O |                   ',
-        '      |           |   | O O O         |                 | O O O O           |      _____________',
-        '      | O O O O O |   |         O O O |                 |           O O O O |      |           |',
-        '                  |   | O O           |________         | O O O O           |      | O O O O O |',
-        '___________ O O O |   |         O O O         |         |           O O O O        |           |',
-        '|         |       |   | O O             O O O |         | O O O O                  | O O O O O |',
-        '| O O O O |   O O |   |           O O         |         |           O O O  ___________         |',
-        '|         |       |   | O               O O O |         | O O O            |         | O O O O |',
-        '| O O O O |   O O |   | _____________         |         |             O O  | O O O O |         |',
-        '|         |           | |           |       O |         | O O              |         | O O O   |',
-        '        O |   O         | O O O O O |         |         |               O        O O |          ',
-        '          |                         |                   | O                          | O        ',
-        '          |                 O O O O |                   |                            |          '
+        '                                                                                                 |                                                    ',
+        '                                                    |                                        ____|______                                              ',
+        '                                                 ___|_|_____                                 |         |                                              ',
+        '                                                 |         |                                 | O O O O |                                              ',
+        '                                                 | O O O O |                                 |         |____                                          ',
+        '                                      |          |         |______                           | O O O O     |                                          ',
+        '                                      |          | O O O         |                 __________|           O |          |                               ',
+        '                                 _____|_______   |         O O O |                 |             O O O     |          |                               ',
+        '                                 |           |   | O O O         |                 | O O O O O           O |  ________|____                           ',
+        '                |                | O O O O O |   |         O O O |                 |             O O O     |  |           |                           ',
+        '             ___|_______                     |   | O O           |________         | O O O O O           O |  | O O O O O |                           ',
+        '             |         |   ___________ O O O |   |         O O O         |         |             O O O     |  |           |           |               ',
+        '             | O O O O |   |         |       |   | O               O O O |         | O O O O                  | O O O O O |    _______|__|____        ',
+        '     ________|         |   | O O O O |   O O |   |           O O         |   _________           O O  ___________         |    |             |        ',
+        '     |           O O O |   |         |       |   |    |            O O O |   |       | O O            |         |   O O O |    | O O O O O O |        ',
+        '     | O O O O         |   | O O O O |   O O |   | ___|_________         |   | O O O |             O  | O O O O |         |    |                      ',
+        '___________        O O |   |         |           | |           |       O |   |       | O              |         |     O O |    | O O   _______________',
+        '|         |  O         |           O |   O         | O O O O O |         |   | O O O |             O  | O O O                  |       |             |',
+        '  O O O O |          O               |                         |             |       |                |                 O        O     | O O O O O O  ',
+        '                                     |                 O O O O |                     |                | O                              |              ',
+        '                                                               |                                      |                                               '
       ];
 
     function animateWindows() {
@@ -109,64 +112,86 @@ var asteriskAttack = (function(aa) {
               + background[randomBgLvl].substr(i+1, background[randomBgLvl].length);
           }
         }
+
         aa.dom.background.html(background);
       }
 
-      setTimeout(animateWindows, aa.randomInRange(100, 1000));
+      setTimeout(animateWindows, aa.randomInRange(100, 700));
     }
 
     for (i = 0; i < background.length; i++) {
       background[i] = background[i].replace(/ /g, '&nbsp') 
       background[i] = '<span style="color:#222">' + background[i] + '</span><br>';
 
-      if (Math.random() > 0.5) { // 50-50 chance of lighting a window in the string.
-        numWindows = background[i].split('O').length - 1; // Number of windows in the string.
+      numWindows = background[i].split('O').length - 1; // Number of windows in the string.
 
-        if (numWindows > 0) {
-          chosenWindow = aa.randomInRange(1, numWindows); // Chosen window to light up.
+      if (numWindows > 0) {
+        chosenWindow = aa.randomInRange(1, numWindows); // Chosen window to light up.
 
-          for (j = 0; j < background[i].length; j++) {
-            if (background[i][j] === 'O' && !--chosenWindow) {
-              background[i] = background[i].substr(0, j)
-                + '<span style="color:#444">*</span>'
-                + background[i].substr(j+1, background[i].length);
-            }
+        for (j = 0; j < background[i].length; j++) {
+          if (background[i][j] === 'O' && !--chosenWindow) {
+            background[i] = background[i].substr(0, j)
+              + '<span style="color:#444">*</span>'
+              + background[i].substr(j+1, background[i].length);
           }
         }
       }
     }
-
     aa.dom.background.html(background);
+
     setTimeout(animateWindows, aa.randomInRange(200, 1500));
+  }
+
+  function animateBlinkingAntenas() {
+    function blinker1() {
+      aa.dom.blinker1.css({ 'color': 'white' })
+        .animate({ 'color': '#111' }, 250);
+    }
+    function blinker2() {
+      aa.dom.blinker2.css({ 'color': 'white' })
+        .animate({ 'color': '#111' }, 250);
+    }
+    function blinker3() {
+      aa.dom.blinker3.css({ 'color': 'white' })
+        .animate({ 'color': '#111' }, 500);
+    }
+    function blinker4() {
+      aa.dom.blinker4.css({ 'color': 'white' })
+        .animate({ 'color': '#111' }, 750);
+    }
+    function blinker5() {
+      aa.dom.blinker5.css({ 'color': 'white' })
+        .animate({ 'color': '#111' }, 143);
+    }
+    function blinker6() {
+      aa.dom.blinker6.css({ 'color': 'white' })
+        .animate({ 'color': '#111' }, 200);
+    }
+
+    aa.loops.blinker1 = setInterval(blinker1, 1234);
+    aa.loops.blinker2 = setInterval(blinker2, 2300);
+    aa.loops.blinker3 = setInterval(blinker3, 1818);
+    aa.loops.blinker4 = setInterval(blinker4, 2000);
+    aa.loops.blinker5 = setInterval(blinker5, 1143);
+    aa.loops.blinker6 = setInterval(blinker6, 1777);
   }
 
   function animateStartBtn(show) {
     if (show) { // Animate start button into view.
-      aa.dom.startBtn.css({ 'right': offscreenLR })
-        .animate({ 'right': '' }, { duration: duration, queue: false }, function() {
-          $('#start-btn a').hover(
-            function() {
-              var newBtn = aa.dom.startBtn.clone();
-
-              newBtn.attr('id', 'temp-start-btn')
-                .insertAfter('#start-btn')
-                .animate({ 'opacity': '0', 'font-size': '35px' }, { duration: duration, queue: false }, function() {
-                  newBtn.remove();
-                });
-            },
-            function() {} // So the hover-in function isn't called on hover-out.
-          );
-        })
+      aa.dom.startBtn
+        .css({ 'right': offscreenLR })
+        .animate({ 'right': '' }, { duration: duration, queue: false });
     }
     else { // Animate start button out of view.
-      aa.dom.startBtn.animate({'right': offscreenLR }, { duration: duration, queue: false })
-        .unbind('mouseenter mouseleave');
+      aa.dom.startBtn
+        .animate({'right': offscreenLR }, { duration: duration, queue: false });
     }
   };
 
   function animateInstructions(show) {
     if (show) {
-      aa.dom.instructions.css({ 'left': offscreenLR })
+      aa.dom.instructions
+        .css({ 'left': offscreenLR })
         .animate({'left': '' }, { duration: duration, queue: false });
     }
     else {
@@ -176,11 +201,13 @@ var asteriskAttack = (function(aa) {
 
   function animateQuitInstructions(show) {
     if (show) {
-      aa.dom.quitInstructions.css({ 'right': offscreenLR })
+      aa.dom.quitInstructions
+        .css({ 'right': offscreenLR })
         .animate({'right': '' }, { duration: duration, queue: false });
     }
     else {
-      aa.dom.quitInstructions.animate({ 'right': offscreenLR }, { duration: duration, queue: false });
+      aa.dom.quitInstructions
+        .animate({ 'right': offscreenLR }, { duration: duration, queue: false });
     }
   };
 
@@ -191,7 +218,8 @@ var asteriskAttack = (function(aa) {
         .animate({ 'top': 450 }, { duration: duration, queue: false });
     }
     else {
-      aa.dom.defender.animate({ 'top': offscreenTB }, { duration: duration, queue: false });
+      aa.dom.defender
+        .animate({ 'top': offscreenTB }, { duration: duration, queue: false });
     }
   };
 

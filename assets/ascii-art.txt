@@ -102,3 +102,26 @@ ___________ O O O |     |         O O O         |       |         O O O O O     
 | O O O O |     O |       | O O O O O |         |                       O  | O O O O |          
 |         |               |           |                   O                |         | O        
 | O O O O |               | O O O O O |                                    | O O O O |          
+
+
+                                                          •                                   ___________                                              
+                                                  ________|__                                 |         |                                              
+                                                  |         |                                 | O O O O |  •                                           
+                                                  | O O O O |                                 |         |__|_                                          
+                                       •          |         |______                           | O O O O     |          •                               
+                                       |          | O O O         |                 __________|           O |          |                               
+                 •                _____|_______   |         O O O |                 |             O O O     |          |                               
+                 |                |           |   | O O O         |                 | O O O O O           O |  ________|____                           
+                 |                | O O O O O |   |         O O O |    •            |             O O O     |  |           |                           
+              ___|_______                     |   | O O           |____|___         | O O O O O           O |  | O O O O O |                           
+              |         |   ___________ O O O |   |         O O O         |         |             O O O     |  |           |              •            
+              | O O O O |   |         |       |   | O               O O O |         | O O O O                  | O O O O O |    __________|____        
+      ________|         |   | O O O O |   O O |   |           O O         |   _________           O O  ___________         |    |             |        
+      |           O O O |   |         |       |   |                 O O O |   |       | O O            |         |   O O O |    | O O O O O O |        
+      | O O O O         |   | O O O O |   O O |   | _____________         |   | O O O |             O  | O O O O |         |    |                      
+ ___________        O O |   |         |           | |           |       O |   |       | O              |         |     O O |    | O O   _______________
+ |         |  O         |           O |   O         | O O O O O |         |   | O O O |             O  | O O O                  |       |             |
+   O O O O            O               |                         |             |       |                |                 O        O     | O O O O O O  
+                                      |                 O O O O |                     |                | O                              |              
+                                                                |                                      |                                               
+
