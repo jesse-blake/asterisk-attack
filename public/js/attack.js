@@ -53,7 +53,7 @@ var asteriskAttack = (function(aa) {
       increaseAttackSpeed();
     }
     else if (!thwarted) {
-      aa.dom.background.effect("bounce", {}, 500);
+      aa.dom.background.effect("bounce", {}, 750);
     }
 
     a.remove();
