@@ -11,6 +11,7 @@ var asteriskAttack = (function (aa) {
     }
 
     aa.reset();
+    ++aa.stats.plays;
 
     // 1
     // aa.loops.civilian = setInterval(aa.animateCivilians, 300);

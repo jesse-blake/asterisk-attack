@@ -69,9 +69,9 @@ var asteriskAttack = (function(aa) {
         '                                                 ___|_|_____                                 |         |                                              ',
         '                                                 |         |                                 | * * * * |                                              ',
         '                                                 | * * * * |                                 |         |____                                          ',
-        '                                      |          |         |______                           | * * * *     |                                          ',
-        '                                      |          | * * *         |                 __________|           * |          |                               ',
-        '                                 _____|_______   |         * * * |                 |             * * *     |         ||                               ',
+        '                                      |          |         |                                 | * * * *     |                                          ',
+        '                                      |          | * * *   |                       __________|           * |          |                               ',
+        '                                 _____|_______   |         |______                 |             * * *     |         ||                               ',
         '                                 |           |   | * * *         |                 | * * * * *           * |  _______||____                           ',
         '                |                | * * * * * |   |         * * * |                 |             * * *     |  |           |                           ',
         '             ___|_______                     |   | * *           |________         | * * * * *           * |  | * * * * * |                           ',
@@ -193,6 +193,14 @@ var asteriskAttack = (function(aa) {
 
   function animateStartBtn(show) {
     if (show) { // Animate start button into view.
+      if (aa.stats.plays === 1) {
+        aa.dom.startBtn.html('<a href="#" style="color:white">P L A Y&nbsp;&nbsp;&nbsp;A G A I N</a><br>');
+
+        $('#start-btn a').click(function() {
+          asteriskAttack.start();
+        });
+      }
+
       aa.dom.startBtn
         .css({ 'right': offscreenLR })
         .animate({ 'right': '' }, { duration: duration, queue: false });

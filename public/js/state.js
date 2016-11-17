@@ -32,7 +32,8 @@ var asteriskAttack = (function(aa) {
   };
 
   aa.stats = {
-    score: null
+    score: null,
+    plays: 0
   };
 
   aa.loops = {
