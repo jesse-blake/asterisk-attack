@@ -1,7 +1,7 @@
 var asteriskAttack = (function(aa) {
 
   var offscreenLR = -1500
-    , offscreenTB = -500
+    , offscreenTB = -50
     , duration = 300;
 
   aa.animateLoadGame = function() {
