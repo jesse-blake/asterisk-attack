@@ -9,123 +9,135 @@ body {
   overflow-x: hidden;
 }
 
-div#game {
-  position: relative;
-  margin: 0 auto;
-  /* border: solid 1px gray; */
-}
-
-div#candy-wrapper {
+div#effects {
   position: relative;
   margin: 0 auto;
   width: 1px;
   /* box-sizing: border-box; */
   /* border: solid 1px gray; */
+
+  > div#logo {
+    position: absolute;
+    top: 75px;
+    width: 800px;
+    margin: 0 0 0 -400px;
+    text-align: center;
+  }
+
+  > div#score {
+    position: absolute;
+    top: 184px;
+    width: 800px;
+    margin: 0 -400px 0 0;
+    text-align: center;
+  }
+
+  > div#background {
+    position: absolute;
+    top: 200px;
+    width: 1800px;
+    margin: 0 0 0 -900px;
+    text-align: center;
+    /* box-sizing: border-box; */
+    /* border: solid 1px lime; */
+  }
+
+  > div.blinker {
+    position: absolute;
+    font-size: .6em;
+    color: #111;
+  }
+
+  > div#blinker1 {
+    top: 343px;
+    left: -470px;
+  }
+
+  > div#blinker2 {
+    top: 277px;
+    left: -294px;
+  }
+
+  > div#blinker3 {
+    top: 208px;
+    left: -182px;
+  }
+
+  > div#blinker4 {
+    top: 191px;
+    left: 178px;
+  }
+
+  > div#blinker5 {
+    top: 294px;
+    left: 345px;
+  }
+
+  > div#blinker6 {
+    top: 379px;
+    left: 474px;
+  }
+
+  > div#start-btn {
+    position: absolute;
+    z-index: 1003;
+    top: 300px;
+    width: 200px;
+    margin: 0 -100px 0 0;
+    text-align: center;
+    /* box-sizing: border-box; */
+    /* border: solid 1px blue; */
+  }
+
+  > div#start-btn a {
+    text-decoration: none;
+  }
+
+  > div#instructions, > div#quit-instructions {
+    font-size: .9em;
+    color: #777;
+    position: absolute;
+    top: 600px;
+    width: 800px;
+    text-align: center;
+  }
+
+  > div#instructions {
+    left: $offscreenLR;
+    margin: 0 0 0 -400px;
+  }
+
+  > div#quit-instructions {
+    display: none;
+    right: $offscreenLR;
+    margin: 0 -400px 0 0;
+    /* box-sizing: border-box; */
+    /* border: 1px solid teal; */
+  }
 }
 
-div#logo {
-  position: absolute;
-  top: 75px;
-  width: 800px;
-  margin: 0 0 0 -400px;
-  text-align: center;
-}
-
-div#score {
-  position: absolute;
-  top: 178px;
-  width: 800px;
-  margin: 0 -400px 0 0;
-  text-align: center;
-}
-
-div#background {
-  position: absolute;
-  top: 200px;
-  width: 1800px;
-  margin: 0 0 0 -900px;
-  text-align: center;
-  /* box-sizing: border-box; */
-  /* border: solid 1px lime; */
-}
-
-div.blinker {
-  position: absolute;
-  font-size: .6em;
-  color: #111;
-}
-
-div#blinker1 {
-  top: 343px;
-  left: -470px;
-}
-
-div#blinker2 {
-  top: 277px;
-  left: -294px;
-}
-
-div#blinker3 {
-  top: 208px;
-  left: -182px;
-}
-
-div#blinker4 {
-  top: 191px;
-  left: 178px;
-}
-
-div#blinker5 {
-  top: 294px;
-  left: 345px;
-}
-
-div#blinker6 {
-  top: 379px;
-  left: 474px;
-}
-
-div#start-btn {
-  position: absolute;
-  z-index: 1003;
-  top: 300px;
-  width: 200px;
-  margin: 0 -100px 0 0;
-  text-align: center;
+div#zones {
+  position: relative;
+  overflow: hidden;
   /* box-sizing: border-box; */
   /* border: solid 1px blue; */
-}
 
-div#temp-start-btn {
-  position: absolute;
-  z-index: 1002;
-  top: 300px;
-  width: 200px;
-  margin: 0 -100px 0 0;
-  text-align: center;
-  /* box-sizing: border-box; */
-  /* border: solid 1px hotpink; */
-}
+  > div#attack-zone {
+    position: relative;
+    width: 900px;
+    height: 600px;
+    margin: 0 auto;
+    /* box-sizing: border-box; */
+    /* border: 1px solid lime; */
+  }
 
-div#instructions, div#quit-instructions {
-  font-size: .9em;
-  color: #777;
-  position: absolute;
-  top: 600px;
-  width: 800px;
-  text-align: center;
-}
-
-div#instructions {
-  left: $offscreenLR;
-  margin: 0 0 0 -400px;
-}
-
-div#quit-instructions {
-  right: $offscreenLR;
-  margin: 0 -400px 0 0;
-  /* box-sizing: border-box; */
-  /* border: 1px solid teal; */
+  > div#game-over-zone {
+    width: 900px;
+    height: 100px;
+    margin: 0 auto;
+    /* box-sizing: border-box; */
+    /* border: 1px solid white; /1* albacore *1/ */
+  }
 }
 
 div#defender {
@@ -135,36 +147,4 @@ div#defender {
   /* box-sizing: border-box; */
   /* border: 1px solid brown; */
 }
-
-div#asterisk-attack {
-  position: relative;
-  overflow: hidden;
-  /* box-sizing: border-box; */
-  /* border: solid 1px blue; */
-}
-
-div#attack-zone {
-  width: 100%;
-  height: 400px;
-  /* box-sizing: border-box; */
-  /* border: 1px solid green; */
-}
-
-div#buffer-zone {
-  height: 40px;
-  /* box-sizing: border-box; */
-  /* border: 1px solid white; /1* albacore *1/ */
-}
-
-div#civilians {
-  height: 100px;
-  text-align: center;
-  /* box-sizing: border-box; */
-  /* border: 1px solid orange; */
-}
-
-div#start-btn a, div#temp-start-btn a {
-  text-decoration: none; 
-}
-
 

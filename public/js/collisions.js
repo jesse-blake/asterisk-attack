@@ -4,11 +4,11 @@ var asteriskAttack = (function(aa) {
     var a // asterisk
       , s // slug
       , d // defender
-      , c
+      , goz // game over zone
       , collision;
 
     function getPosition(element) {
-      var pos    = $(element).position()
+      var pos    = $(element).offset()
         , width  = $(element).width()
         , height = $(element).height();
 
@@ -21,8 +21,6 @@ var asteriskAttack = (function(aa) {
       
       return x[1] > y[0] || x[0] === y[0];
     }
-
-    c = getPosition(aa.dom.civilians);
 
     // Check for asterisk collisions.
     for (aId in aa.game.asterisks) {
@@ -49,8 +47,9 @@ var asteriskAttack = (function(aa) {
         continue;
       }
 
-      // See if the asterisk hit the civilians.
-      if (positionsCollide(a[0], c[0]) && positionsCollide(a[1], c[1])) {
+      // See if the asterisk hit the game over zone.
+      goz = getPosition(aa.dom.gameOverZone);
+      if (positionsCollide(a[0], goz[0]) && positionsCollide(a[1], goz[1])) {
         aa.completeAttack(aId, false);
         aa.quit();
         break;

@@ -12,7 +12,7 @@ var asteriskAttack = (function (aa) {
   aa.start = function() {
     function normalizeDefenderPosition(mousePosX) {
       var min = aa.sizes.padding
-        , max = aa.dom.game.width() - aa.dom.defender.width() - aa.sizes.padding
+        , max = aa.dom.window.width() - aa.dom.defender.width() - aa.sizes.padding
         , pos = mousePosX / aa.dom.window.width(); // Normalize to [0, 1]
 
       pos = (pos * (max - min)) + min; // Scale to [min, max]

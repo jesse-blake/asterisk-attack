@@ -3,21 +3,24 @@ var asteriskAttack = (function(aa) {
   aa.dom = {
     window: $(window),
     doc: $(document),
-    game: $('#asterisk-attack'),
     logo: $('#logo'),
     score: $('#score'),
     background: $('#background'),
-    startBtn: $('#start-btn'),
-    defender: $('#defender'),
-    civilians: $('#civilians'),
-    instructions: $('#instructions'),
     quitInstructions: $('#quit-instructions'),
+    startBtn: $('#start-btn'),
+    instructions: $('#instructions'),
     blinker1: $('#blinker1'),
     blinker2: $('#blinker2'),
     blinker3: $('#blinker3'),
     blinker4: $('#blinker4'),
     blinker5: $('#blinker5'),
-    blinker6: $('#blinker6')
+    blinker6: $('#blinker6'),
+
+    zones: $('#zones'),
+    attackZone: $('#attack-zone'),
+    gameOverZone: $('#game-over-zone'),
+
+    defender: $('#defender')
   };
 
   aa.stats = {

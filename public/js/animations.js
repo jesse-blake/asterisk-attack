@@ -229,7 +229,7 @@ var asteriskAttack = (function(aa) {
   function animateDefender(show) {
     if (show) {
       aa.dom.defender
-        .css({ 'left': (aa.dom.game.width() / 2) - 20, 'top': -500 })
+        .css({ 'left': (aa.dom.window.width() / 2) - 20, 'top': -500 })
         .animate({ 'top': 450 }, { duration: duration, queue: false });
     }
     else {
