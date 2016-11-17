@@ -1,14 +1,5 @@
 var asteriskAttack = (function (aa) {
 
-  function reset() {
-    aa.stats.score = 0;
-    aa.game.slugCount = 0;
-    aa.game.asteriskCount = 0;
-    aa.game.asteriskSpeed = 3000;
-    aa.game.generationSpeed = 1000;
-    aa.updateScore();
-  }
-
   aa.start = function() {
     function normalizeDefenderPosition(mousePosX) {
       var min = aa.sizes.padding
@@ -19,7 +10,7 @@ var asteriskAttack = (function (aa) {
       return pos;
     }
 
-    reset();
+    aa.reset();
 
     // 1
     // aa.loops.civilian = setInterval(aa.animateCivilians, 300);

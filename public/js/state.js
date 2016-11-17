@@ -1,4 +1,13 @@
 var asteriskAttack = (function(aa) {
+
+  aa.reset = function() {
+    aa.stats.score = 0;
+    aa.game.slugCount = 0;
+    aa.game.asteriskCount = 0;
+    aa.game.asteriskSpeed = 3000;
+    aa.game.generationSpeed = 1000;
+    aa.updateScore();
+  };
   
   aa.dom = {
     window: $(window),
