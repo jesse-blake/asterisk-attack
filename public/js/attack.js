@@ -52,9 +52,9 @@ var asteriskAttack = (function(aa) {
     if (thwarted && aa.stats.score % 5 === 0) {
       increaseAttackSpeed();
     }
-    // else if (!thwarted) {
-    //   $("#asterisk-attack").stop(true).effect("bounce", {}, 500);
-    // }
+    else if (!thwarted) {
+      aa.dom.background.effect("bounce", {}, 500);
+    }
 
     a.remove();
     delete aa.game.asterisks[asteriskId];

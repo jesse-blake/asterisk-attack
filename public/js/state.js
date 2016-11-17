@@ -12,23 +12,22 @@ var asteriskAttack = (function(aa) {
   aa.dom = {
     window: $(window),
     doc: $(document),
-    logo: $('#logo'),
-    score: $('#score'),
-    background: $('#background'),
-    quitInstructions: $('#quit-instructions'),
-    startBtn: $('#start-btn'),
-    instructions: $('#instructions'),
-    blinker1: $('#blinker1'),
-    blinker2: $('#blinker2'),
-    blinker3: $('#blinker3'),
-    blinker4: $('#blinker4'),
-    blinker5: $('#blinker5'),
-    blinker6: $('#blinker6'),
-
+    effects: $('#effects'),
+      logo: $('#logo'),
+      score: $('#score'),
+      background: $('#background'),
+      startBtn: $('#start-btn'),
+      instructions: $('#instructions'),
+      quitInstructions: $('#quit-instructions'),
+      blinker1: $('#blinker1'),
+      blinker2: $('#blinker2'),
+      blinker3: $('#blinker3'),
+      blinker4: $('#blinker4'),
+      blinker5: $('#blinker5'),
+      blinker6: $('#blinker6'),
     zones: $('#zones'),
-    attackZone: $('#attack-zone'),
-    gameOverZone: $('#game-over-zone'),
-
+      attackZone: $('#attack-zone'),
+      gameOverZone: $('#game-over-zone'),
     defender: $('#defender')
   };
 
