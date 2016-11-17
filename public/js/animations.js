@@ -1,7 +1,6 @@
 var asteriskAttack = (function(aa) {
 
-  var civilianAnimations = null
-    , offscreenLR = -1500
+  var offscreenLR = -1500
     , offscreenTB = -500
     , duration = 300;
 
@@ -245,86 +244,6 @@ var asteriskAttack = (function(aa) {
         .animate({ 'top': offscreenTB }, { duration: duration, queue: false });
     }
   };
-
-  // function loadCivilians() {
-  //   var i
-  //     , colors = ['lightskyblue', 'lightskyblue', 'dodgerblue', 'blue']
-  //     , civs = [
-  //       '                                                                                                ',
-  //       '    o             o                            o              o O                o              ',
-  //       '   /|\\           /)\\                          /|\\             |\\/\\              /|\\             ',
-  //       '____)\\___________/ )__________________________( \\____________( \\((_______________)\\_____________'
-  //     ];
-
-  //   for (i = 0; i < civs.length; i++) {
-  //     civs[i] = civs[i].replace(/ /g, '&nbsp;');
-  //     civs[i] = '<span style="color:' + colors[i] + '">' + civs[i] + '</span><br>';
-  //   }
-
-  //   aa.dom.civilians.html(civs);
-  // }
-
-  // function buildCivilianAnimations() {
-  //   var colors = ['lightskyblue', 'lightskyblue', 'dodgerblue', 'blue']
-  //     , i
-  //     , j;
-
-  //   animations = {
-  //     current: 0,
-  //     frames: [
-  //       [
-  //         '                                                                                                ',
-  //         '    o/           \\o/                           o               oO                o              ',
-  //         '   /|             )                           v|v             /><\\              /(\\             ',
-  //         '____)\\___________/ )___________________________)\\_____________))((______________( )_____________'
-  //       ],[
-  //         '                                                                                \\o/             ',
-  //         '    o                 \\o/                     \\o/             \\oO/               |              ',
-  //         '   /|V                 )                       |              /  \\              / \\             ',
-  //         '____)\\________________/ )______________________)\\_____________))((______________________________'
-  //       ],[
-  //         '                                                                                                ',
-  //         '    o/                \\o/                      o              \\oO/               o              ',
-  //         '   /|                  (                      v|v             /  \\              /(\\             ',
-  //         '____)\\________________( \\_____________________/(______________))((______________( )_____________'
-  //       ],[
-  //         '                                                                                                ',
-  //         '    o            \\o/                          \\o/              oO                o              ',
-  //         '   /|V            (                            |              /><\\              /(\\             ',
-  //         '____)\\___________( \\__________________________/(______________))((______________( )_____________'
-  //       ]
-  //     ]
-  //   };
-
-  //   for (i = 0; i < animations.frames.length; i++) {
-  //     for (j = 0; j < animations.frames[i].length; j++) {
-  //       animations.frames[i][j] = animations.frames[i][j]
-  //         .replace(/ /g, '&nbsp;')
-  //         .replace(/</g, '&lt;')
-  //         .replace(/>/g, '&gt;');
-  //       animations.frames[i][j] = '<span class="civilians'
-  //         + (i+1) 
-  //         + '" style="color:' + colors[j] + '">' 
-  //         + animations.frames[i][j] 
-  //         + '</span><br>';
-  //     }
-  //   }
-    
-  //   return animations;
-  // }
-
-  // function animateCivilians() {
-  //   if (!animations) { 
-  //     buildCivilianAnimations();
-  //   }
-      
-  //   if (++animations.current % animations.frames.length === 0) {
-  //     animations.current = 0;
-  //   }
-
-  //   aa.dom.civilians.html(animations.frames[animations.current].join(''));
-  // };
-
 
   return aa;
 

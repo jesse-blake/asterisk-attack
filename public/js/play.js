@@ -14,7 +14,6 @@ var asteriskAttack = (function (aa) {
     ++aa.stats.plays;
 
     // 1
-    // aa.loops.civilian = setInterval(aa.animateCivilians, 300);
     aa.loops.attack = setInterval(aa.attack, aa.game.generationSpeed);
     setTimeout(aa.loops.collision = setInterval(aa.detectCollisions, 5), aa.game.generationSpeed);
 
@@ -41,7 +40,6 @@ var asteriskAttack = (function (aa) {
 
   aa.quit = function() {
     // 1
-    // window.clearInterval(aa.loops.civilian);
     window.clearInterval(aa.loops.attack);
     window.clearInterval(aa.loops.collision);
 

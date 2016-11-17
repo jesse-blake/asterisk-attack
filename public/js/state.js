@@ -46,7 +46,6 @@ var asteriskAttack = (function(aa) {
     antena4: null,
     antena5: null,
     antena6: null
-    // civilian:  null
   };
 
   aa.sizes = {
