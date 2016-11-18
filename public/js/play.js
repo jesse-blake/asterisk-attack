@@ -55,9 +55,11 @@ var asteriskAttack = (function (aa) {
     // 5
     aa.dom.doc.unbind('keydown');
 
+    aa.updateScores();
+
     for (id in aa.game.heatbeams)     { aa.game.heatbeams[id].remove();     }
     for (id in aa.game.asterisks) { aa.game.asterisks[id].remove(); }
-    aa.game.heatbeams     = {};
+    aa.game.heatbeams = {};
     aa.game.asterisks = {};
   }
 
