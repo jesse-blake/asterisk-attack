@@ -1,6 +1,7 @@
 var asteriskAttack = (function(aa) {
 
   aa.reset = function() {
+    aa.stats.prevScore = aa.stats.score;
     aa.stats.score = 0;
     aa.game.heatbeamCount = 0;
     aa.game.asteriskCount = 0;
@@ -50,6 +51,7 @@ var asteriskAttack = (function(aa) {
 
   aa.stats = {
     score: null,
+    prevScore: null,
     plays: 0
   };
 

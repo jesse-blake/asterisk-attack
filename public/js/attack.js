@@ -13,7 +13,7 @@ var asteriskAttack = (function(aa) {
 
     return '<div '
       + 'id="' + (++aa.game.asteriskCount) + '" ' 
-      + 'style="position:absolute; top:-10px; '
+      + 'style="display:none; position:absolute; top:-10px; '
       + 'color:' + colors[aa.randomInRange(0, colors.length - 1)] + '; '
       + 'font-size:' + aa.randomInRange(smallestSize, largestSize) + 'px; '
       // 20 pulls asterisks in from overhanging right of div:
@@ -28,7 +28,9 @@ var asteriskAttack = (function(aa) {
     aa.game.asterisks[aa.game.asteriskCount] = asterisk;
     aa.dom.attackZone.prepend(asterisk);
 
-    asterisk.animate({ top: "700px" }, speed, "linear");
+    asterisk
+      .fadeIn({ queue: false, duration: 'slow' })
+      .animate({ top: '700px' }, speed, 'linear');
   }
 
   function completeAttack(asteriskId, thwarted) {

@@ -16,6 +16,7 @@ var asteriskAttack = (function(aa) {
 
   aa.animateStartGame = function() {
     animateStartBtn(false);
+    animateScore();
     animateDefender(true);
     animateGameOver(false);
     animateInstructions(false);
@@ -69,15 +70,23 @@ var asteriskAttack = (function(aa) {
     aa.dom.logo
       .html(logo)
       .css({ 'left': offscreenLR })
-      .animate({ 'opacity': 1, 'left': '' }, { duration: duration, queue: false });
+      .animate({ 'left': '' }, { duration: duration, queue: false });
   }
 
   function animateScore() {
-    aa.updateScore();
-
-    aa.dom.score
-      .css({ 'right': offscreenLR })
-      .animate({ 'opacity': 1, 'right': '' }, { duration: duration, queue: false });
+    if (aa.stats.plays > 0) {
+      if (aa.stats.prevScore > 0) {
+        aa.dom.score.effect('shake', duration, function() {
+          aa.updateScore();
+        });
+      }
+    }
+    else {
+      aa.updateScore();
+      aa.dom.score
+        .css({ 'right': offscreenLR })
+        .animate({ 'right': '' }, { duration: duration, queue: false });
+    }
   }
 
   function animateBackground() {
@@ -223,19 +232,22 @@ var asteriskAttack = (function(aa) {
 
       aa.dom.startBtn
         .css({ 'right': offscreenLR })
+        .show()
         .animate({ 'right': '' }, { duration: duration, queue: false });
     }
     else { // Animate start button out of view.
       aa.dom.startBtn
-        .animate({'right': offscreenLR }, { duration: duration, queue: false });
+        .animate({'right': offscreenLR }, { duration: duration, queue: false }, function() {
+          aa.dom.startBtn.hide();
+        });
     }
   }
 
   function animateGameOver(show) {
     var i
-      , colors = ['#444', '#888', '#ccc']
-      //, colors = ['#FFFF00','#FFD700','#FFA500','#FF4500','#FF0000']
-      , loops = ['gg','ga','gm','ge', 'oo','ov','oe','or'];
+      , colors = ['#444', '#888', '#ccc'] // Gray tones.
+      //, colors = ['#ffff00','#ffd700','#ffa500','#ff4500','#ff0000'] // Red to yellow.
+      , loops = ['gg','ga','gm','ge','oo','ov','oe','or'];
 
     if (show) {
       aa.dom.gameOver
@@ -269,11 +281,14 @@ var asteriskAttack = (function(aa) {
     if (show) {
       aa.dom.instructions
         .css({ 'left': offscreenLR })
+        .show()
         .animate({ 'left': '' }, { duration: duration, queue: false });
     }
     else {
       aa.dom.instructions
-        .animate({ 'left': offscreenLR }, { duration: duration, queue: false });
+        .animate({ 'left': offscreenLR }, { duration: duration, queue: false }, function() {
+          aa.dom.instructions.hide();
+        });
     }
   }
 
@@ -281,18 +296,21 @@ var asteriskAttack = (function(aa) {
     if (show) {
       aa.dom.quitInstructions
         .css({ 'right': offscreenLR })
+        .show()
         .animate({ 'right': '' }, { duration: duration, queue: false });
     }
     else {
       aa.dom.quitInstructions
-        .animate({ 'right': offscreenLR }, { duration: duration, queue: false });
+        .animate({ 'right': offscreenLR }, { duration: duration, queue: false }, function() {
+          aa.dom.quitInstructions.hide();
+        });
     }
   }
 
   function animateDefender(show) {
     if (show) {
       aa.dom.defender
-        .css({ 'left': (aa.dom.window.width() / 2) - 20, 'top': -500 })
+        .css({ 'left': (aa.dom.window.width() / 2) - 20, 'top': offscreenTB })
         .animate({ 'top': 450 }, { duration: duration, queue: false });
     }
     else {

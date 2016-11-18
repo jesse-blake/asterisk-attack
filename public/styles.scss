@@ -97,6 +97,7 @@ div#effects {
   }
 
   > div#start-btn {
+    display: none;
     position: absolute;
     z-index: 1043;
     top: 275px;
@@ -122,6 +123,7 @@ div#effects {
   }
 
   > div#instructions, > div#quit-instructions {
+    display: none;
     font-size: .9em;
     color: #777;
     position: absolute;
