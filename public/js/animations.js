@@ -17,6 +17,7 @@ var asteriskAttack = (function(aa) {
   aa.animateStartGame = function() {
     animateStartBtn(false);
     animateDefender(true);
+    animateGameOver(false);
     animateInstructions(false);
     animateQuitInstructions(true);
   };
@@ -24,6 +25,7 @@ var asteriskAttack = (function(aa) {
   aa.animateEndGame = function() {
     animateStartBtn(true);
     animateDefender(false);
+    animateGameOver(true);
     animateInstructions(true);
     animateQuitInstructions(false);
   };
@@ -87,21 +89,21 @@ var asteriskAttack = (function(aa) {
         '                                                 ___|_|_____                                 |         |                                              ',
         '                                                 |         |                                 | * * * * |                                              ',
         '                                                 | * * * * |                                 |         |____                                          ',
-        '                                      |          |         |                                 | * * * *     |                                          ',
-        '                                      |          | * * *   |                       __________|           * |          |                               ',
-        '                                 _____|_______   |         |______                 |             * * *     |         ||                               ',
-        '                                 |           |   | * * *         |                 | * * * * *           * |  _______||____                           ',
-        '                |                | * * * * * |   |         * * * |                 |             * * *     |  |           |                           ',
-        '             ___|_______                     |   | * *           |________         | * * * * *           * |  | * * * * * |                           ',
-        '             |         |   ___________ * * * |   |         * * *         |         |             * * *     |  |           |           |               ',
-        '             | * * * * |   |         |       |   | *               * * * |         | * * * *                  | * * * * * |    _______|__|____        ',
-        '     ________|         |   | * * * * |   * * |   |           * *         |   _________           * *  ___________         |    |             |        ',
-        '     |           * * * |   |         |       |   |    |            * * * |   |       | * *            |         |   * * * |    | * * * * * * |        ',
+        '                                      |          |         |                                 | * * * * |   |                                          ',
+        '                                      |          | * * * * |                        _________|         | * |          |                               ',
+        '                                 _____|_______   |       _________                  |          * * * * |   |         ||                               ',
+        '                                 |           |   | * * * |       |                  | * * * *          | * |  _______||____                           ',
+        '                |                | * * * * * |   |       | * * * |                  |          * * * *     |  |           |                           ',
+        '             ___|_______                     |   | * * *         |________          | * * * *            * |  | * * * * * |                           ',
+        '             |         |   ___________ * * * |   |         * *           |          |          * * * *     |  |           |           |               ',
+        '             | * * * * |   |         |       |   | * *           * * * * |            * * * *                 | * * * * * |    _______|__|____        ',
+        '     ________|         |   | * * * * |   * * |   |         * *           |   _________           * *  ___________         |    |             |        ',
+        '     |           * * * |   |         |       |   | *  |          * * * * |   |       |  * * *         |         |   * * * |    | * * * * * * |        ',
         '     | * * * *         |   | * * * * |   * * |   | ___|_________         |   | * * * |             *  | * * * * |         |    |                      ',
-        '___________        * * |   |         |           | |           |       * |   |       | *              |         |     * * |    | * *   _______________',
-        '|         |  *         |           * |   *         | * * * * * |         |   | * * * |             *  | * * *                  |       |             |',
-        '  * * * * |          *               |                         |             |       |                |                 *        *     | * * * * * *  ',
-        '                                     |                 * * * * |                     |                | *                              |              ',
+        '___________        * * |   |         |           | |           |   * * * |   |       |  * *           |         |     * * |    | * *   _______________',
+        '|         |  *         |       * * * |   *         | * * * * * |         |   | * * * |                | * * * *                |       |             |',
+        '  * * * * |          *               |                         |     * *     |       |  *             |                 *        *     | * * * * * *  ',
+        '                                   * |                 * * * * |                     |                | * *                            |              ',
         '                                                               |                                      |                                               '
       ];
 
@@ -227,30 +229,65 @@ var asteriskAttack = (function(aa) {
       aa.dom.startBtn
         .animate({'right': offscreenLR }, { duration: duration, queue: false });
     }
-  };
+  }
+
+  function animateGameOver(show) {
+    var i
+      , colors = ['#444', '#888', '#ccc']
+      //, colors = ['#FFFF00','#FFD700','#FFA500','#FF4500','#FF0000']
+      , loops = ['gg','ga','gm','ge', 'oo','ov','oe','or'];
+
+    if (show) {
+      aa.dom.gameOver
+        .show(function() {
+          for (i = 0; i < loops.length; i++) {
+            (function() {
+              var j = i
+                , dur = aa.randomInRange(700, 1000);
+
+              aa.loops[loops[j]] = setInterval(function() {
+                var color = colors[aa.randomInRange(0, colors.length-1)];
+                aa.dom[loops[j]]
+                  .animate({ 'color':color }, dur) 
+                  .animate({ 'color':'#111' }, dur);
+              }, dur*2);
+            })();
+          }
+        });
+    }
+    else if (aa.stats.plays > 1) { // Game over isn't shown until a game has been played.
+      aa.dom.gameOver
+        .fadeOut(200, function() {
+          for (i = 0; i < loops.length; i++) {
+            window.clearInterval(aa.loops[loops[i]])
+          }
+        });
+    }
+  }
 
   function animateInstructions(show) {
     if (show) {
       aa.dom.instructions
         .css({ 'left': offscreenLR })
-        .animate({'left': '' }, { duration: duration, queue: false });
+        .animate({ 'left': '' }, { duration: duration, queue: false });
     }
     else {
-      aa.dom.instructions.animate({ 'left': offscreenLR }, { duration: duration, queue: false });
+      aa.dom.instructions
+        .animate({ 'left': offscreenLR }, { duration: duration, queue: false });
     }
-  };
+  }
 
   function animateQuitInstructions(show) {
     if (show) {
       aa.dom.quitInstructions
         .css({ 'right': offscreenLR })
-        .animate({'right': '' }, { duration: duration, queue: false });
+        .animate({ 'right': '' }, { duration: duration, queue: false });
     }
     else {
       aa.dom.quitInstructions
         .animate({ 'right': offscreenLR }, { duration: duration, queue: false });
     }
-  };
+  }
 
   function animateDefender(show) {
     if (show) {
@@ -262,7 +299,7 @@ var asteriskAttack = (function(aa) {
       aa.dom.defender
         .animate({ 'top': offscreenTB }, { duration: duration, queue: false });
     }
-  };
+  }
 
   return aa;
 

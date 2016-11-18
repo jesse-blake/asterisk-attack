@@ -98,8 +98,8 @@ div#effects {
 
   > div#start-btn {
     position: absolute;
-    z-index: 1003;
-    top: 280px;
+    z-index: 1043;
+    top: 275px;
     width: 200px;
     margin: 0 -100px 0 0;
     text-align: center;
@@ -111,11 +111,21 @@ div#effects {
     text-decoration: none;
   }
 
+  > div#game-over {
+    display: none;
+    color: #111;
+    position: absolute;
+    top: 325px;
+    width: 200px;
+    margin: 0 0 0 -100px;
+    text-align: center;
+  }
+
   > div#instructions, > div#quit-instructions {
     font-size: .9em;
     color: #777;
     position: absolute;
-    top: 600px;
+    top: 625px;
     width: 800px;
     text-align: center;
   }
