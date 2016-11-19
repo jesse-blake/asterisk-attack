@@ -1,5 +1,7 @@
 $offscreenLR: -1300px;
 $offscreenTB: -500px;
+$game-width: 900px;
+$game-width-centering: -450px;
 
 body { 
   font-family: 'Inconsolata', monospace;
@@ -37,16 +39,16 @@ div#effects {
   > div#logo {
     position: absolute;
     top: 75px;
-    width: 800px;
-    margin: 0 0 0 -400px;
+    width: $game-width;
+    margin: 0 0 0 $game-width-centering;
     text-align: center;
   }
 
   > div#score {
     position: absolute;
     top: 184px;
-    width: 800px;
-    margin: 0 -400px 0 0;
+    width: $game-width;
+    margin: 0 $game-width-centering 0 0;
     text-align: center;
   }
 
@@ -128,18 +130,33 @@ div#effects {
     color: #777;
     position: absolute;
     top: 625px;
-    width: 800px;
+    width: $game-width;
     text-align: center;
+  }
+
+  > div#scoreboard-link-wrapper {
+    display: none;
+    position: absolute;
+    z-index: 1005;
+    top: 650px;
+    width: $game-width;
+    margin: 0 0 0 $game-width-centering;
+    text-align: center;
+  }
+
+  > div#scoreboard-link-wrapper a#scoreboard-link {
+    color: white; 
+    text-decoration: none;
   }
 
   > div#instructions {
     left: $offscreenLR;
-    margin: 0 0 0 -400px;
+    margin: 0 0 0 $game-width-centering;
   }
 
   > div#quit-instructions {
     right: $offscreenLR;
-    margin: 0 -400px 0 0;
+    margin: 0 $game-width-centering 0 0;
     /* box-sizing: border-box; */
     /* border: 1px solid teal; */
   }
@@ -153,7 +170,7 @@ div#zones {
 
   > div#attack-zone {
     position: relative;
-    width: 900px;
+    width: $game-width;
     height: 600px;
     margin: 0 auto;
     /* box-sizing: border-box; */
@@ -161,7 +178,7 @@ div#zones {
   }
 
   > div#game-over-zone {
-    width: 900px;
+    width: $game-width;
     height: 100px;
     margin: 0 auto;
     /* box-sizing: border-box; */

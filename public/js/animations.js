@@ -10,6 +10,7 @@ var asteriskAttack = (function(aa) {
     animateScore();
     animateBackground();
     animateStartBtn(true);
+    animateScoreboardLink(true);
     animateInstructions(true);
     animateBlinkingAntenas();
   };
@@ -19,6 +20,7 @@ var asteriskAttack = (function(aa) {
     animateScore();
     animateDefender(true);
     animateGameOver(false);
+    animateScoreboardLink(false);
     animateInstructions(false);
     animateQuitInstructions(true);
   };
@@ -27,6 +29,7 @@ var asteriskAttack = (function(aa) {
     animateStartBtn(true);
     animateDefender(false);
     animateGameOver(true);
+    animateScoreboardLink(true);
     animateInstructions(true);
     animateQuitInstructions(false);
   };
@@ -240,6 +243,23 @@ var asteriskAttack = (function(aa) {
         .animate({'right': offscreenLR }, { duration: duration, queue: false }, function() {
           aa.dom.startBtn.hide();
         });
+    }
+  }
+
+  function animateScoreboardLink(show) {
+    if (aa.retrieveScores()) {
+      if (show) {
+        aa.dom.scoreboardLinkWrapper
+          .css({ 'left': offscreenLR })
+          .show()
+          .animate({ 'left': '' }, { duration: duration, queue: false });
+      }
+      else {
+        aa.dom.scoreboardLinkWrapper
+          .animate({ 'left': offscreenLR }, { duration: duration, queue: false }, function() {
+            aa.dom.scoreboardLinkWrapper.hide();
+          });
+      }
     }
   }
 
