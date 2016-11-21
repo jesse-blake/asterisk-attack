@@ -69,9 +69,26 @@ var asteriskAttack = (function (aa) {
 
 
 $(document).ready(function() {
-  asteriskAttack.animateLoadGame();
 
-  $('#start-btn a').click(function() {
-    asteriskAttack.start();
-  });
+  (function validateScreenSize() {
+    if (asteriskAttack.dom.window.width() < 1000) {
+      asteriskAttack.dom.game.css({ 'display':'none' });
+      asteriskAttack.dom.screenSizeError.css({ 'display':'inherit' });
+
+      asteriskAttack.loops.screenSizeError = setInterval(function() {
+        asteriskAttack.dom.errorMsg.effect('shake', {}, 200);
+      }, 2000);
+
+      asteriskAttack.dom.reload.click(function() {
+        location.reload();
+      });
+    }
+    else {
+      asteriskAttack.animateLoadGame();
+      $('#start-btn a').click(function() {
+        asteriskAttack.start();
+      });
+    }
+  })();
+
 });

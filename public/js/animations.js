@@ -5,7 +5,6 @@ var asteriskAttack = (function(aa) {
     , duration = 300;
 
   aa.animateLoadGame = function() {
-    if (!validScreenSize()) return;
     animateScore();
     animateStartBtn(true);
     animateScoreboardLink(true);
@@ -30,24 +29,6 @@ var asteriskAttack = (function(aa) {
     animateInstructions(true);
     animateQuitInstructions(false);
   };
-
-  function validScreenSize() {
-    if (aa.dom.window.width() < 1000) {
-      aa.dom.game.css({ 'display':'none' });
-      aa.dom.screenSizeError.css({ 'display':'inherit' });
-
-      aa.loops.screenSizeError = setInterval(function() {
-        aa.dom.errorMsg.effect('shake', {}, 200);
-      }, 2000);
-
-      aa.dom.reload.click(function() {
-        location.reload();
-      });
-
-      return false;
-    }
-    return true;
-  }
 
   function animateScore() {
     if (aa.stats.plays > 0) {
