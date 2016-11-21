@@ -85,9 +85,6 @@ $(document).ready(function() {
     }
     else {
       asteriskAttack.animateLoadGame();
-      $('#start-btn a').click(function() {
-        asteriskAttack.start();
-      });
     }
   })();
 
