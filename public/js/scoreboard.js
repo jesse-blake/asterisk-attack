@@ -73,26 +73,41 @@ var asteriskAttack = (function(aa) {
 
   aa.updateScoreboard = function() {
     var i
+      , maxNumScores = 10
       , data = ''
       , line = ''
+      , scoreData
+      , timestamp
       , scores = aa.retrieveScores()
       , colors = ['#ddd','#ccc','#bbb','#aaa','#999','#888','#777','#666','#555','#444'];
 
-
-    for (i = 0; i < scores.length; i++) {
+    for (i = 0; i < maxNumScores; i++) {
       // Start with a line of dots.
       line = '................................................................................................';
 
-      // Replace some leading spaces with the current score, colored.
-      line = '<span style="color:' + colors[i] + ';">'
-        + scores[i][0] 
-        + '</span>' 
-        + line.slice(('' + scores[i][0]).length, line.length);
+      if (typeof scores[i] !== 'undefined') {
+        scoreData = scores[i][0] + '';
+        timestamp = getScoreTimestamp(scores[i][1]);
+      }
+      else {
+        scoreData = '*';
+        timestamp = '*';
+      }
 
-      // Replace some ending spaces with the score's time stamp, colored.
-      line = line.slice(0, line.length - getScoreTimestamp(scores[i][1]).length)
-        +'<span style="color:' + colors[i] + ';">'
-        + getScoreTimestamp(scores[i][1]).replace(/ /g, '&nbsp;')
+      // Add rank and score (or and asterisk) to line.
+      line = '<span style="color:' + colors[i] + ';">'
+        + '' + (i + 1)
+        + '</span>' 
+        + line.slice(('' + (i+1)).length, 20)
+        + '<span style="color:' + colors[i] + ';">'
+        + scoreData
+        + '</span>'
+        + line.slice(20 + scoreData.length, line.length);
+
+      // Add timestamp (or an asterisk) to line.
+      line = line.slice(0, (line.length - timestamp.length - 1))
+        + '<span style="color:' + colors[i] + ';">'
+        + timestamp.replace(/ /g, '&nbsp;')
         + '</span>';
 
       data += line + '<br><br>';
