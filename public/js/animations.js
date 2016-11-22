@@ -60,7 +60,9 @@ var asteriskAttack = (function(aa) {
   function hideScoreboard() {
     showFromRight(aa.dom.score);
     showFromRight(aa.dom.startBtn);
-    showFromRight(aa.dom.gameOver);
+    if (aa.stats.plays >= 1) {
+      showFromRight(aa.dom.gameOver);
+    }
     showFromRight(aa.dom.scoreboardLink);
     showFromRight(aa.dom.instructions);
     showFromRight(aa.dom.background);
