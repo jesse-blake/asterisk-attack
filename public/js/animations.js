@@ -25,18 +25,18 @@ var asteriskAttack = (function(aa) {
     }
     hideToRight(aa.dom.startBtn);
     if (aa.retrieveScores()) {
-      hideToLeft(aa.dom.scoreboardLink);
+      hideToRight(aa.dom.scoreboardLink);
     }
-    hideToLeft(aa.dom.instructions);
-    showFromRight(aa.dom.quitInstructions);
+    hideToRight(aa.dom.instructions);
+    showFromLeft(aa.dom.quitInstructions);
   };
 
   aa.animateEndGame = function() {
     updateStartBtn();
 
     animateDefender(false);
-    showFromRight(aa.dom.startBtn);
-    showFromRight(aa.dom.gameOver);
+    showFromLeft(aa.dom.startBtn);
+    showFromLeft(aa.dom.gameOver);
     if (aa.retrieveScores()) {
       showFromLeft(aa.dom.scoreboardLink);
     }
@@ -58,21 +58,21 @@ var asteriskAttack = (function(aa) {
   }
 
   function hideScoreboard() {
-    showFromRight(aa.dom.score);
-    showFromRight(aa.dom.startBtn);
+    showFromLeft(aa.dom.score);
+    showFromLeft(aa.dom.startBtn);
     if (aa.stats.plays >= 1) {
-      showFromRight(aa.dom.gameOver);
+      showFromLeft(aa.dom.gameOver);
     }
-    showFromRight(aa.dom.scoreboardLink);
-    showFromRight(aa.dom.instructions);
-    showFromRight(aa.dom.background);
-    hideToLeft(aa.dom.scoreboardHeader);
-    hideToLeft(aa.dom.scoreboard);
-    hideToLeft(aa.dom.scoreboardDone);
+    showFromLeft(aa.dom.scoreboardLink);
+    showFromLeft(aa.dom.instructions);
+    showFromLeft(aa.dom.background);
+    hideToRight(aa.dom.scoreboardHeader);
+    hideToRight(aa.dom.scoreboard);
+    hideToRight(aa.dom.scoreboardDone);
   }
 
   function showFromLeft(element) {
-    var startPos = -(element.width() + 50);
+    var startPos = -(element.width() * 2);
 
     element.stop()
       .css({ 'left': startPos, 'right': 'auto', 'margin': '0 0 0 ' + (-(element.width()/2)) + 'px' })
@@ -81,7 +81,7 @@ var asteriskAttack = (function(aa) {
   }
 
   function showFromRight(element) {
-    var startPos = -(element.width() + 50);
+    var startPos = -(element.width() * 2);
 
     element.stop()
       .css({'right': startPos, 'left': 'auto', 'margin': '0 ' + (-(element.width()/2)) + 'px 0 0' })
@@ -90,11 +90,11 @@ var asteriskAttack = (function(aa) {
   }
 
   function hideToLeft(element) {
-    var endPos = -(element.width() + 50);
+    var endPos = -(element.width() * 2);
 
-    element.animate({
+    element.css({ 'right': 'auto' })
+    .animate({
       'left': endPos,
-      'right': 'auto',
       'margin': '0 0 0 ' + (-(element.width()/2)) + 'px'
     },{
       duration: duration,
@@ -106,12 +106,13 @@ var asteriskAttack = (function(aa) {
   }
 
   function hideToRight(element) {
-    var endPos = -(element.width() + 50)
+    var endPos = -(element.width() * 2)
       , margin
 
-    element.animate({
+    element
+    .css({ 'left': 'auto' })
+    .animate({
       'right': endPos,
-      'left': 'auto',
       'margin': '0 ' + (-(element.width()/2)) + 'px 0 0'
     },{
       duration: duration,
