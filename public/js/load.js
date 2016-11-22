@@ -41,7 +41,7 @@ var asteriskAttack = (function(aa) {
   (function loadCityscape() {
     var lightsOnColors = ['#444', '#555']
       , lightsOffColor = '#222'
-      , background = [
+      , cityscape = [
         '                                                                                                 |                                                    ',
         '                                                    |                                        ____|______                                              ',
         '                                                 ___|_|_____                                 |         |                                              ',
@@ -66,8 +66,8 @@ var asteriskAttack = (function(aa) {
       ];
 
     /*
-     * Changes a random window in a particular level of the background.
-     * @level {Number} An array index representing the level of the background.
+     * Changes a random window in a particular level of the cityscape.
+     * @level {Number} An array index representing the level of the cityscape.
      * @color {String} A CSS color, with a hash sign, 3 digits only.
      */
     function changeWindow(level, color) {
@@ -75,39 +75,39 @@ var asteriskAttack = (function(aa) {
         , count
         , selected;
 
-      count = background[level].split('*').length - 1;
+      count = cityscape[level].split('*').length - 1;
 
       if (count > 0) {
         selected = aa.randomInRange(1, count);
 
-        for (i = 0; i < background[level].length; i++) {
-          if (background[level][i] === '*' && !--selected) {
-            background[level] = background[level].substr(0, i-6)
+        for (i = 0; i < cityscape[level].length; i++) {
+          if (cityscape[level][i] === '*' && !--selected) {
+            cityscape[level] = cityscape[level].substr(0, i-6)
               + color
               + '">*'
-              + background[level].substr(i+1, background[level].length);
+              + cityscape[level].substr(i+1, cityscape[level].length);
           }
         }
       }
     }
 
     /*
-     * Colors one window with a lights-on color in each level of the background.
+     * Colors one window with a lights-on color in each level of the cityscape.
      */
     function setCityscape() {
       var i
         , color; // The window color.
 
-      for (i = 0; i < background.length; i++) {
-        background[i] = background[i].replace(/ /g, '&nbsp')
-        background[i] = background[i].replace(/\*/g, '<span style="color:' + lightsOffColor + '">*</span>');
-        background[i] = '<span style="color:' + lightsOffColor + '">' + background[i] + '</span><br>';
+      for (i = 0; i < cityscape.length; i++) {
+        cityscape[i] = cityscape[i].replace(/ /g, '&nbsp')
+        cityscape[i] = cityscape[i].replace(/\*/g, '<span style="color:' + lightsOffColor + '">*</span>');
+        cityscape[i] = '<span style="color:' + lightsOffColor + '">' + cityscape[i] + '</span><br>';
 
         color = lightsOnColors[aa.randomInRange(0, lightsOnColors.length - 1)];
         changeWindow(i, color);
       }
 
-      aa.dom.background.html(background);
+      aa.dom.cityscape.html(cityscape);
     }
 
     /*
@@ -115,10 +115,10 @@ var asteriskAttack = (function(aa) {
      */
     function animateCityscapeWindows() {
       var i
-        , level  // Random level of the background.
+        , level  // Random level of the cityscape.
         , color; // The window color.
 
-      level = aa.randomInRange(0, background.length - 1);
+      level = aa.randomInRange(0, cityscape.length - 1);
 
       color = (Math.random() > 0.5) // 50% change of using an on color or the off color.
         ? lightsOffColor
@@ -126,7 +126,7 @@ var asteriskAttack = (function(aa) {
 
       changeWindow(level, color);
 
-      aa.dom.background.html(background);
+      aa.dom.cityscape.html(cityscape);
 
       setTimeout(animateCityscapeWindows, aa.randomInRange(100, 500));
     }

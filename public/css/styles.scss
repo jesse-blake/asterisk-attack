@@ -96,44 +96,43 @@ div#effects {
     text-align: center;
     /* box-sizing: border-box; */
     /* border: solid 1px teal; */
-  }
 
-  > div.antena {
-    position: absolute;
-    font-size: .6em;
-    color: #111;
-  }
+    > div.antena {
+      position: absolute;
+      font-size: .6em;
+      color: #111;
+    }
 
-  > div#antena1 {
-    top: 355px;
-    left: -470px;
-  }
+    > div#antena1 {
+      top: 153px;
+      left: 430px;
+    }
 
-  > div#antena2 {
-    top: 283px;
-    left: -294px;
-  }
+    > div#antena2 {
+      top: 82px;
+      left: 606px;
+    }
 
-  > div#antena3 {
-    top: 211px;
-    left: -182px;
-  }
+    > div#antena3 {
+      top: 9px;
+      left: 718px;
+    }
 
-  > div#antena4 {
-    top: 192px;
-    left: 178px;
-  }
+    > div#antena4 {
+      top: -8px;
+      left: 1078px;
+    }
 
-  > div#antena5 {
-    top: 301px;
-    left: 345px;
-  }
+    > div#antena5 {
+      top: 100px;
+      left: 1246px;
+    }
 
-  > div#antena6 {
-    top: 391px;
-    left: 474px;
+    > div#antena6 {
+      top: 190px;
+      left: 1373px;
+    }
   }
-
 }
 
 div#zones {
