@@ -11,7 +11,7 @@ var asteriskAttack = (function(aa) {
     showFromRight(aa.dom.startBtn);
     showFromLeft(aa.dom.instructions);
     if (aa.retrieveScores()) {
-      showFromRight(aa.dom.scoreboardLinkWrapper);
+      showFromRight(aa.dom.scoreboardLink);
     }
   };
 
@@ -25,7 +25,7 @@ var asteriskAttack = (function(aa) {
     }
     hideToRight(aa.dom.startBtn);
     if (aa.retrieveScores()) {
-      hideToLeft(aa.dom.scoreboardLinkWrapper);
+      hideToLeft(aa.dom.scoreboardLink);
     }
     hideToLeft(aa.dom.instructions);
     showFromRight(aa.dom.quitInstructions);
@@ -38,30 +38,33 @@ var asteriskAttack = (function(aa) {
     showFromRight(aa.dom.startBtn);
     showFromRight(aa.dom.gameOver);
     if (aa.retrieveScores()) {
-      showFromLeft(aa.dom.scoreboardLinkWrapper);
+      showFromLeft(aa.dom.scoreboardLink);
     }
     showFromLeft(aa.dom.instructions);
     hideToRight(aa.dom.quitInstructions);
   };
 
   function showScoreboard() {
+    aa.updateScoreboard();
     hideToRight(aa.dom.score);
     hideToRight(aa.dom.startBtn);
     hideToRight(aa.dom.gameOver);
-    hideToRight(aa.dom.scoreboardLinkWrapper);
+    hideToRight(aa.dom.scoreboardLink);
     hideToRight(aa.dom.instructions);
     hideToRight(aa.dom.background);
     showFromLeft(aa.dom.scoreboard);
+    showFromLeft(aa.dom.scoreboardDone);
   }
 
   function hideScoreboard() {
     showFromRight(aa.dom.score);
     showFromRight(aa.dom.startBtn);
     showFromRight(aa.dom.gameOver);
-    showFromRight(aa.dom.scoreboardLinkWrapper);
+    showFromRight(aa.dom.scoreboardLink);
     showFromRight(aa.dom.instructions);
     showFromRight(aa.dom.background);
     hideToLeft(aa.dom.scoreboard);
+    hideToLeft(aa.dom.scoreboardDone);
   }
 
   function showFromLeft(element) {
@@ -120,7 +123,7 @@ var asteriskAttack = (function(aa) {
       aa.start();
     });
 
-    aa.dom.scoreboardLink.click(function() {
+    aa.dom.scoreboardLinkBtn.click(function() {
       showScoreboard(); 
     });
 

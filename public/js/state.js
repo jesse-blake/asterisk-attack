@@ -40,9 +40,10 @@ var asteriskAttack = (function(aa) {
     antena5: $('#antena5'),
     antena6: $('#antena6'),
     scoreboard: $('#scoreboard'),
+    scoreboardDone: $('#scoreboard-done'),
     scoreboardDoneBtn: $('#scoreboard-done-btn'),
-    scoreboardLinkWrapper: $('#scoreboard-link-wrapper'),
     scoreboardLink: $('#scoreboard-link'),
+    scoreboardLinkBtn: $('#scoreboard-link-btn'),
     instructions: $('#instructions'),
     quitInstructions: $('#quit-instructions'),
 
