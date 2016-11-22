@@ -33,7 +33,7 @@ div#effects {
   /* box-sizing: border-box; */
   /* border: solid 1px gray; */
 
-  > div#logo, div#score, div#start-btn, div#game-over, div#instructions, div#quit-instructions, div#scoreboard, div#scoreboard-link, div#scoreboard-done {
+  > div#logo, div#score, div#start-btn, div#game-over, div#instructions, div#quit-instructions, div#scoreboard-header, div#scoreboard, div#scoreboard-link, div#scoreboard-done {
     display: none;
     position: absolute;
     top: 75px;
@@ -43,7 +43,7 @@ div#effects {
     /* border: solid 1px lime; */
   }
 
-  > div#score {
+  > div#score, div#scoreboard-header {
     top: 184px;
   }
 
@@ -72,7 +72,7 @@ div#effects {
   }
 
   > div#scoreboard {
-    color: #444;
+    color: #333;
     z-index: 1007;
     top: 275px;
     width: $game-width;
@@ -84,7 +84,7 @@ div#effects {
   }
 
   a#scoreboard-link-btn, a#scoreboard-done-btn  {
-    color: white;
+    color: #ccc;
     text-decoration: none;
   }
 

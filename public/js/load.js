@@ -24,6 +24,19 @@ var asteriskAttack = (function(aa) {
     aa.dom.logo.html(logo)
   })();
 
+  (function loadScoreboardHeader() {
+    var header = [
+      ' __ __ __    __   __ __ __ __ __ __',
+      ' / / //_/  // /  /_ /  / //_//_ /_ ',
+      '/ /_//    //_/  __//_ /_// \\/_ __/ '
+    ];
+
+    aa.dom.scoreboardHeader.html(''
+      + '<span style="color:deeppink;">' + header[0].replace(/ /g, '&nbsp;') + '</span><br>'
+      + '<span style="color:hotpink;">' + header[1].replace(/ /g, '&nbsp;') + '</span><br>'
+      + '<span style="color:fuchsia;">' + header[2].replace(/ /g, '&nbsp;') + '</span><br>'
+    );
+  })();
 
   (function loadCityscape() {
     var lightsOnColors = ['#444', '#555']

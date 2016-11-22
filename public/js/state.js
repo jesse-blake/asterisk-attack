@@ -39,6 +39,7 @@ var asteriskAttack = (function(aa) {
     antena4: $('#antena4'),
     antena5: $('#antena5'),
     antena6: $('#antena6'),
+    scoreboardHeader: $('#scoreboard-header'),
     scoreboard: $('#scoreboard'),
     scoreboardDone: $('#scoreboard-done'),
     scoreboardDoneBtn: $('#scoreboard-done-btn'),

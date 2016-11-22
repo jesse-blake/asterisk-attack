@@ -52,6 +52,7 @@ var asteriskAttack = (function(aa) {
     hideToRight(aa.dom.scoreboardLink);
     hideToRight(aa.dom.instructions);
     hideToRight(aa.dom.background);
+    showFromLeft(aa.dom.scoreboardHeader);
     showFromLeft(aa.dom.scoreboard);
     showFromLeft(aa.dom.scoreboardDone);
   }
@@ -63,6 +64,7 @@ var asteriskAttack = (function(aa) {
     showFromRight(aa.dom.scoreboardLink);
     showFromRight(aa.dom.instructions);
     showFromRight(aa.dom.background);
+    hideToLeft(aa.dom.scoreboardHeader);
     hideToLeft(aa.dom.scoreboard);
     hideToLeft(aa.dom.scoreboardDone);
   }

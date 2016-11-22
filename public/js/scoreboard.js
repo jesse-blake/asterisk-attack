@@ -76,7 +76,7 @@ var asteriskAttack = (function(aa) {
       , data = ''
       , line = ''
       , scores = aa.retrieveScores()
-      , colors = ['red','white','blue','chartreuse','greenyellow','orange','lime','steelblue','deeppink','rebeccapurple'];
+      , colors = ['#ddd','#ccc','#bbb','#aaa','#999','#888','#777','#666','#555','#444'];
 
 
     for (i = 0; i < scores.length; i++) {
