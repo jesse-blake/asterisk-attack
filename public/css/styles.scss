@@ -83,17 +83,15 @@ div#effects {
     }
   }
 
-  > div#scoreboard, div#instructions {
+  > div#scoreboard {
+    color: #333;
     z-index: 1007;
     top: 300px;
   }
 
-  > div#scoreboard { 
-    color: #333;
-  }
-
   > div#instructions {
-    color: white;
+    color: #777;
+    top: 350px;
   }
 
   > div#background {

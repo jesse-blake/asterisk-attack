@@ -79,7 +79,7 @@ var asteriskAttack = (function(aa) {
       , scoreData
       , timestamp
       , scores = aa.retrieveScores()
-      , colors = ['#ddd','#ccc','#bbb','#aaa','#999','#888','#777','#666','#555','#444'];
+      , colors = ['magenta','#de71de','#ca84ca','#b58ab5','#9f899f','#8d828d','#787578','#646464','#4e4e4e','#393939'];
 
     for (i = 0; i < maxNumScores; i++) {
       // Start with a line of dots.
@@ -96,9 +96,9 @@ var asteriskAttack = (function(aa) {
 
       // Add rank and score (or and asterisk) to line.
       line = '<span style="color:' + colors[i] + ';">'
-        + '' + (i + 1)
+        + '#' + (i + 1)
         + '</span>' 
-        + line.slice(('' + (i+1)).length, 20)
+        + line.slice(('#' + (i+1)).length, 20)
         + '<span style="color:' + colors[i] + ';">'
         + scoreData
         + '</span>'

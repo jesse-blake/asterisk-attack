@@ -63,6 +63,8 @@ var asteriskAttack = (function(aa) {
   }
 
   function showInstructions() {
+    animateDefender(true);
+
     hideToRight(aa.dom.startBtn);
     hideToRight(aa.dom.menu);
     hideToRight(aa.dom.background);
@@ -72,6 +74,8 @@ var asteriskAttack = (function(aa) {
   }
 
   function hideInstructions() {
+    animateDefender(false);
+
     hideToRight(aa.dom.instructions);
     hideToRight(aa.dom.instructionsDone);
 
