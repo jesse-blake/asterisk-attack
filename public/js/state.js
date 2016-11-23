@@ -40,13 +40,20 @@ var asteriskAttack = (function(aa) {
     ov: $('#ov'),
     oe: $('#oe'),
     or: $('#or'),
+
+    menu: $('#menu'),
+    scoreboardLink: $('#scoreboard-link'),
+    instructionsLink: $('#instructions-link'),
+
     scoreboardHeader: $('#scoreboard-header'),
     scoreboard: $('#scoreboard'),
     scoreboardDone: $('#scoreboard-done'),
     scoreboardDoneBtn: $('#scoreboard-done-btn'),
-    scoreboardLink: $('#scoreboard-link'),
-    scoreboardLinkBtn: $('#scoreboard-link-btn'),
+
     instructions: $('#instructions'),
+    instructionsDone: $('#instructions-done'),
+    instructionsDoneBtn: $('#instructions-done-btn'),
+
     quitInstructions: $('#quit-instructions'),
 
     zones: $('#zones'),

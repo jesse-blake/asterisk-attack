@@ -9,10 +9,7 @@ var asteriskAttack = (function(aa) {
     showFromRight(aa.dom.logo);
     showFromLeft(aa.dom.score);
     showFromRight(aa.dom.startBtn);
-    showFromLeft(aa.dom.instructions);
-    if (aa.retrieveScores()) {
-      showFromRight(aa.dom.scoreboardLink);
-    }
+    showFromLeft(aa.dom.menu);
   };
 
   aa.animateStartGame = function() {
@@ -20,14 +17,9 @@ var asteriskAttack = (function(aa) {
     updateStartBtn();
 
     animateDefender(true);
-    if (aa.stats.plays > 1) {
-      hideToRight(aa.dom.gameOver);
-    }
     hideToRight(aa.dom.startBtn);
-    if (aa.retrieveScores()) {
-      hideToRight(aa.dom.scoreboardLink);
-    }
-    hideToRight(aa.dom.instructions);
+    hideToRight(aa.dom.menu);
+
     showFromLeft(aa.dom.quitInstructions);
   };
 
@@ -41,34 +33,51 @@ var asteriskAttack = (function(aa) {
     setTimeout(function() {
       hideToRight(aa.dom.gameOver);
       showFromLeft(aa.dom.startBtn);
-      showFromLeft(aa.dom.instructions);
-      if (aa.retrieveScores()) {
-        showFromLeft(aa.dom.scoreboardLink);
-      }
+      showFromLeft(aa.dom.menu);
     }, 1500);
   };
 
   function showScoreboard() {
     aa.updateScoreboard();
+
     hideToRight(aa.dom.score);
     hideToRight(aa.dom.startBtn);
-    hideToRight(aa.dom.scoreboardLink);
-    hideToRight(aa.dom.instructions);
+    hideToRight(aa.dom.menu);
     hideToRight(aa.dom.background);
+
     showFromLeft(aa.dom.scoreboardHeader);
     showFromLeft(aa.dom.scoreboard);
     showFromLeft(aa.dom.scoreboardDone);
   }
 
   function hideScoreboard() {
-    showFromLeft(aa.dom.score);
-    showFromLeft(aa.dom.startBtn);
-    showFromLeft(aa.dom.scoreboardLink);
-    showFromLeft(aa.dom.instructions);
-    showFromLeft(aa.dom.background);
     hideToRight(aa.dom.scoreboardHeader);
     hideToRight(aa.dom.scoreboard);
     hideToRight(aa.dom.scoreboardDone);
+
+    showFromLeft(aa.dom.score);
+    showFromLeft(aa.dom.startBtn);
+    showFromLeft(aa.dom.menu);
+    showFromLeft(aa.dom.background);
+  }
+
+  function showInstructions() {
+    hideToRight(aa.dom.startBtn);
+    hideToRight(aa.dom.menu);
+    hideToRight(aa.dom.background);
+
+    showFromLeft(aa.dom.instructions);
+    showFromLeft(aa.dom.instructionsDone);
+  }
+
+  function hideInstructions() {
+    hideToRight(aa.dom.instructions);
+    hideToRight(aa.dom.instructionsDone);
+
+    showFromLeft(aa.dom.score);
+    showFromLeft(aa.dom.startBtn);
+    showFromLeft(aa.dom.menu);
+    showFromLeft(aa.dom.background);
   }
 
   function showFromLeft(element) {
@@ -129,12 +138,20 @@ var asteriskAttack = (function(aa) {
       aa.start();
     });
 
-    aa.dom.scoreboardLinkBtn.click(function() {
+    aa.dom.scoreboardLink.click(function() {
       showScoreboard(); 
     });
 
-    aa.dom.scoreboardDoneBtn.click(function() {
+    aa.dom.scoreboardDone.click(function() {
       hideScoreboard();
+    });
+
+    aa.dom.instructionsLink.click(function() {
+      showInstructions(); 
+    });
+
+    aa.dom.instructionsDone.click(function() {
+      hideInstructions();
     });
   }
 
