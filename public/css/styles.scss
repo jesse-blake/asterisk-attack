@@ -47,22 +47,17 @@ div#effects {
     top: 184px;
   }
 
-  > div#start-btn {
+  > div#start-btn, div#game-over {
+    color: white;
     z-index: 1043;
     top: 275px;
     /* box-sizing: border-box; */
     /* border: solid 1px blue; */
-  }
 
-  > div#start-btn a {
-    text-decoration: none;
-  }
-
-  > div#game-over {
-    color: #555;
-    top: 325px;
-    /* box-sizing: border-box; */
-    /* border: solid 1px redorange; */
+    a {
+      color: white;
+      text-decoration: none;
+    }
   }
 
   > div#instructions, > div#quit-instructions {

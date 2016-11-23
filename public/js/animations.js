@@ -35,20 +35,23 @@ var asteriskAttack = (function(aa) {
     updateStartBtn();
 
     animateDefender(false);
-    showFromLeft(aa.dom.startBtn);
     showFromLeft(aa.dom.gameOver);
-    if (aa.retrieveScores()) {
-      showFromLeft(aa.dom.scoreboardLink);
-    }
-    showFromLeft(aa.dom.instructions);
     hideToRight(aa.dom.quitInstructions);
+
+    setTimeout(function() {
+      hideToRight(aa.dom.gameOver);
+      showFromLeft(aa.dom.startBtn);
+      showFromLeft(aa.dom.instructions);
+      if (aa.retrieveScores()) {
+        showFromLeft(aa.dom.scoreboardLink);
+      }
+    }, 1500);
   };
 
   function showScoreboard() {
     aa.updateScoreboard();
     hideToRight(aa.dom.score);
     hideToRight(aa.dom.startBtn);
-    hideToRight(aa.dom.gameOver);
     hideToRight(aa.dom.scoreboardLink);
     hideToRight(aa.dom.instructions);
     hideToRight(aa.dom.background);
@@ -60,9 +63,6 @@ var asteriskAttack = (function(aa) {
   function hideScoreboard() {
     showFromLeft(aa.dom.score);
     showFromLeft(aa.dom.startBtn);
-    if (aa.stats.plays >= 1) {
-      showFromLeft(aa.dom.gameOver);
-    }
     showFromLeft(aa.dom.scoreboardLink);
     showFromLeft(aa.dom.instructions);
     showFromLeft(aa.dom.background);
