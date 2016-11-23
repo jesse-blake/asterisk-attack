@@ -92,17 +92,18 @@ var asteriskAttack = (function(aa) {
   function hideToLeft(element) {
     var endPos = -(element.width() * 2);
 
-    element.css({ 'right': 'auto' })
-    .animate({
-      'left': endPos,
-      'margin': '0 0 0 ' + (-(element.width()/2)) + 'px'
-    },{
-      duration: duration,
-      queue: false,
-      complete: function() {
-        element.hide();
-      }
-    });
+    element
+      .css({ 'right': 'auto' })
+      .animate({
+        'left': endPos,
+        'margin': '0 0 0 ' + (-(element.width()/2)) + 'px'
+      },{
+        duration: duration,
+        queue: false,
+        complete: function() {
+          element.hide();
+        }
+      });
   }
 
   function hideToRight(element) {
@@ -110,17 +111,17 @@ var asteriskAttack = (function(aa) {
       , margin
 
     element
-    .css({ 'left': 'auto' })
-    .animate({
-      'right': endPos,
-      'margin': '0 ' + (-(element.width()/2)) + 'px 0 0'
-    },{
-      duration: duration,
-      queue: false, 
-      complete: function() {
-        element.hide();
-      }
-    });
+      .css({ 'left': 'auto' })
+      .animate({
+        'right': endPos,
+        'margin': '0 ' + (-(element.width()/2)) + 'px 0 0'
+      },{
+        duration: duration,
+        queue: false, 
+        complete: function() {
+          element.hide();
+        }
+      });
   }
 
   function setClickHandlers() {
