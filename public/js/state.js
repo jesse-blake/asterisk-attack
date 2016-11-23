@@ -20,6 +20,7 @@ var asteriskAttack = (function(aa) {
 
     game: $('#game'),
     effects: $('#effects'),
+    menubar: $('#menubar'),
     logo: $('#logo'),
     score: $('#score'),
     background: $('#background'),

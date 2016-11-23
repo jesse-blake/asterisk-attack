@@ -6,6 +6,7 @@ var asteriskAttack = (function(aa) {
     aa.updateScore();
     setClickHandlers();
 
+    showFromLeft(aa.dom.menubar);
     showFromRight(aa.dom.logo);
     showFromLeft(aa.dom.score);
     showFromRight(aa.dom.startBtn);
@@ -173,45 +174,11 @@ var asteriskAttack = (function(aa) {
     }
   }
 
-  // function animateGameOver(show) {
-  //   var i
-  //     , colors = ['#444', '#888', '#ccc'] // Gray tones.
-  //     //, colors = ['#ffff00','#ffd700','#ffa500','#ff4500','#ff0000'] // Red to yellow.
-  //     , loops = ['gg','ga','gm','ge','oo','ov','oe','or'];
-
-  //   if (show) {
-  //     aa.dom.gameOver
-  //       .show(function() {
-  //         for (i = 0; i < loops.length; i++) {
-  //           (function() {
-  //             var j = i
-  //               , dur = aa.randomInRange(700, 1000);
-
-  //             aa.loops[loops[j]] = setInterval(function() {
-  //               var color = colors[aa.randomInRange(0, colors.length-1)];
-  //               aa.dom[loops[j]]
-  //                 .animate({ 'color':color }, dur) 
-  //                 .animate({ 'color':'#111' }, dur);
-  //             }, dur*2);
-  //           })();
-  //         }
-  //       });
-  //   }
-  //   else if (aa.stats.plays > 1) { // Game over isn't shown until a game has been played.
-  //     aa.dom.gameOver
-  //       .fadeOut(200, function() {
-  //         for (i = 0; i < loops.length; i++) {
-  //           window.clearInterval(aa.loops[loops[i]])
-  //         }
-  //       });
-  //   }
-  // }
-
   function animateDefender(show) {
     if (show) {
       aa.dom.defender
         .css({ 'left': (aa.dom.window.width() / 2) - 20, 'top': -50 })
-        .animate({ 'top': 450 }, { duration: duration, queue: false });
+        .animate({ 'top': 475 }, { duration: duration, queue: false });
     }
     else {
       aa.dom.defender

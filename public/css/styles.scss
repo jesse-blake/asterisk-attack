@@ -33,24 +33,37 @@ div#effects {
   /* box-sizing: border-box; */
   /* border: solid 1px gray; */
 
+  > div#menubar {
+    width: $game-width * 10;
+    height: 65px;
+    background-color: #101010;
+    background-color: rgba(0, 0, 0, .6);
+    border-bottom: solid 1px #555
+    /* box-sizing: border-box; */
+    /* border: solid 1px tomato; */
+  }
+
   > div#logo, div#score, div#start-btn, div#game-over, div#instructions, div#instructions-done, div#menu, div#quit-instructions, div#scoreboard-header, div#scoreboard, div#scoreboard-done {
     display: none;
     position: absolute;
-    top: 75px;
     width: $game-width;
     text-align: center;
     /* box-sizing: border-box; */
     /* border: solid 1px lime; */
   }
 
+  > div#logo {
+    top: 100px;
+  }
+
   > div#score, div#scoreboard-header {
-    top: 184px;
+    top: 209px;
   }
 
   > div#start-btn, div#game-over {
     color: white;
     z-index: 1043;
-    top: 275px;
+    top: 310px;
     /* box-sizing: border-box; */
     /* border: solid 1px blue; */
 
@@ -63,7 +76,7 @@ div#effects {
   > div#menu, div#scoreboard-done, div#instructions-done, div#quit-instructions {
     color: white;
     z-index: 1005;
-    top: 700px; 
+    top: 22px; 
 
     a {
       color: white;    
@@ -86,7 +99,7 @@ div#effects {
 
   > div#background {
     position: absolute;
-    top: 200px;
+    top: 250px;
     width: $game-width * 2;
     margin: 0 0 0 (-$game-width);
     text-align: center;
@@ -140,7 +153,7 @@ div#zones {
   > div#attack-zone {
     position: relative;
     width: $game-width;
-    height: 600px;
+    height: 525px;
     margin: 0 auto;
     /* box-sizing: border-box; */
     /* border: 1px solid lime; */
