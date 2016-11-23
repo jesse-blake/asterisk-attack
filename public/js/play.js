@@ -30,7 +30,6 @@ var asteriskAttack = (function (aa) {
 
     // 5
     aa.dom.doc.keyup(function (e) {
-      console.log(e);
       if (e.keyCode === 32) { // key: space
         aa.pewPewHeatVision();
       } else if (e.keyCode === 27) { // key: esc
