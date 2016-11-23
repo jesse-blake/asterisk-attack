@@ -29,7 +29,7 @@ var asteriskAttack = (function (aa) {
     });
 
     // 5
-    aa.dom.doc.keydown(function (e) {
+    aa.dom.doc.keyup(function (e) {
       if (e.keyCode === 32) { // key: space
         aa.pewPewHeatVision();
       } else if (e.keyCode === 81) { // key: q
@@ -55,7 +55,7 @@ var asteriskAttack = (function (aa) {
     aa.dom.doc.unbind('mousemove');
 
     // 5
-    aa.dom.doc.unbind('keydown');
+    aa.dom.doc.unbind('keyup');
 
     for (id in aa.game.heatbeams)     { aa.game.heatbeams[id].remove();     }
     for (id in aa.game.asterisks) { aa.game.asterisks[id].remove(); }
