@@ -3,7 +3,7 @@ $game-width: 900px;
 body { 
   font-family: 'Inconsolata', monospace;
   font-size: 16px;
-  background: #101010; // url('../img/stars.jpg') no-repeat center top;
+  background: #101010;
   overflow-x: hidden;
 }
 
@@ -41,7 +41,17 @@ div#effects {
     border-bottom: solid 1px #444;
   }
 
-  > div#logo, div#score, div#start-btn, div#game-over, div#instructions, div#instructions-done, div#menu, div#quit-instructions, div#scoreboard-header, div#scoreboard, div#scoreboard-done {
+  > div#logo,
+  > div#score,
+  > div#start-btn,
+  > div#game-over,
+  > div#instructions,
+  > div#instructions-done,
+  > div#menu,
+  > div#quit-instructions,
+  > div#scoreboard-header,
+  > div#scoreboard,
+  > div#scoreboard-done {
     display: none;
     position: absolute;
     width: $game-width;
@@ -54,7 +64,8 @@ div#effects {
     top: 100px;
   }
 
-  > div#score, div#scoreboard-header {
+  > div#score,
+  > div#scoreboard-header {
     top: 209px;
   }
 
@@ -71,7 +82,10 @@ div#effects {
     }
   }
   
-  > div#menu, div#scoreboard-done, div#instructions-done, div#quit-instructions {
+  > div#menu,
+  > div#scoreboard-done,
+  > div#instructions-done,
+  > div#quit-instructions {
     color: yellowgreen;
     z-index: 1005;
     top: 23px; 
@@ -95,47 +109,22 @@ div#effects {
 
   > div#background {
     position: absolute;
-    top: 250px;
+    top: 235px;
     width: $game-width * 2;
     margin: 0 0 0 (-$game-width);
     text-align: center;
     /* box-sizing: border-box; */
     /* border: solid 1px teal; */
 
-    > div.antena {
+    > div#antenas {
+      color: #101010;
       position: absolute;
-      font-size: .6em;
-      color: #111;
-    }
-
-    > div#antena1 {
-      top: 153px;
-      left: 430px;
-    }
-
-    > div#antena2 {
-      top: 82px;
-      left: 606px;
-    }
-
-    > div#antena3 {
-      top: 9px;
-      left: 718px;
-    }
-
-    > div#antena4 {
-      top: -8px;
-      left: 1078px;
-    }
-
-    > div#antena5 {
-      top: 100px;
-      left: 1246px;
-    }
-
-    > div#antena6 {
-      top: 190px;
-      left: 1373px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      /* box-sizing: border-box; */
+      /* border: solid 1px coral; */
     }
   }
 }

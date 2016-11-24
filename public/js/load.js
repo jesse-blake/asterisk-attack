@@ -38,11 +38,56 @@ var asteriskAttack = (function(aa) {
     );
   })();
 
+  (function loadAntenas() {
+    var i 
+      , count = 0
+      , antenas = [
+        '                                                                                                 •                                                    ',
+        '                                                    •                                                                                                 ',
+        '                                                                                                                                                      ',
+        '                                                                                                                                                      ',
+        '                                                                                                                                                      ',
+        '                                      •                                                                                                               ',
+        '                                                                                                                      •                               ',
+        '                                                                                                                                                      ',
+        '                                                                                                                                                      ',
+        '                •                                                                                                                                     ',
+        '                                                                                                                                                      ',
+        '                                                                                                                                      •               '
+      ];
+
+    function flashAntenas() {
+      var i
+        , flashIntervals = [1234,2300,1818,2000,1143,1777]
+        , flashDurations = [250,250,500,750,143,200];
+
+      for (i = 0; i < flashIntervals.length; i++) {
+        (function(j) {
+          aa.loops.antenas[j] = setInterval(function() {
+            $('#antena' + (j+1)).css({ 'color': 'white' })
+              .animate({ 'color': '#101010' }, flashDurations[j]);
+          }, flashIntervals[j]);
+        })(i);
+      }
+    }
+
+    for (i = 0; i < antenas.length; i++) {
+      antenas[i] = antenas[i].replace(/ /g, '&nbsp;')
+      if (/•/.test(antenas[i])) {
+        antenas[i] = antenas[i].replace(/•/, '<span id="antena' + (++count) + '" style="font-size:0.6em;">•</span>');
+      }
+    }
+
+    aa.dom.antenas.html(antenas.join('<br>'));
+    flashAntenas();
+  })();
+
   (function loadCityscape() {
     var lightsOnColors = ['#444', '#555']
       , lightsOffColor = '#222'
       , silhouetteColor = '#333'
       , cityscape = [
+        '                                                                                                                                                      ',
         '                                                                                                 |                                                    ',
         '                                                    |                                      ______|______                                              ',
         '                                                 ___|_|_____                               |           |                                              ',
@@ -108,7 +153,7 @@ var asteriskAttack = (function(aa) {
         changeWindow(i, color);
       }
 
-      aa.dom.cityscape.html(cityscape);
+      aa.dom.cityscape.html(cityscape.join(''));
     }
 
     /*
@@ -127,47 +172,12 @@ var asteriskAttack = (function(aa) {
 
       changeWindow(level, color);
 
-      aa.dom.cityscape.html(cityscape);
+      aa.dom.cityscape.html(cityscape.join(''));
 
       setTimeout(animateCityscapeWindows, aa.randomInRange(100, 500));
     }
 
-    function loadAntenas() {
-      function antena1() {
-        aa.dom.antena1.css({ 'color': 'white' })
-          .animate({ 'color': '#111' }, 250);
-      }
-      function antena2() {
-        aa.dom.antena2.css({ 'color': 'white' })
-          .animate({ 'color': '#111' }, 250);
-      }
-      function antena3() {
-        aa.dom.antena3.css({ 'color': 'white' })
-          .animate({ 'color': '#111' }, 500);
-      }
-      function antena4() {
-        aa.dom.antena4.css({ 'color': 'white' })
-          .animate({ 'color': '#111' }, 750);
-      }
-      function antena5() {
-        aa.dom.antena5.css({ 'color': 'white' })
-          .animate({ 'color': '#111' }, 143);
-      }
-      function antena6() {
-        aa.dom.antena6.css({ 'color': 'white' })
-          .animate({ 'color': '#111' }, 200);
-      }
-
-      aa.loops.antena1 = setInterval(antena1, 1234);
-      aa.loops.antena2 = setInterval(antena2, 2300);
-      aa.loops.antena3 = setInterval(antena3, 1818);
-      aa.loops.antena4 = setInterval(antena4, 2000);
-      aa.loops.antena5 = setInterval(antena5, 1143);
-      aa.loops.antena6 = setInterval(antena6, 1777);
-    }
-
     setCityscape();
-    loadAntenas();
     setTimeout(animateCityscapeWindows, aa.randomInRange(200, 500));
   })();
 
