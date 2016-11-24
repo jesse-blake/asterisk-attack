@@ -18,6 +18,8 @@ var asteriskAttack = (function(aa) {
     errorMsg: $('#error-msg'),
     reload: $('#reload-page'),
 
+    stars: $('#stars'),
+
     game: $('#game'),
     effects: $('#effects'),
     menubar: $('#menubar'),

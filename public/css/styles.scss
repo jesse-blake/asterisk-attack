@@ -25,6 +25,79 @@ div#screen-size-error {
   }
 }
 
+div#stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 440px;
+  /* box-sizing: border-box; */
+  /* border: solid 1px tomato; */
+
+  > div.star {
+    z-index: -123;
+  }
+
+  > div#starless-spaces {
+    position: relative;
+    width: 1000px;
+    height: 439px;
+    margin: auto;
+    /* box-sizing: border-box; */
+    /* border: solid 1px seagreen; */
+
+    > div.starless {
+      position: absolute; 
+      bottom: 0;
+      background-color: #101010;
+      /* box-sizing: border-box; */
+      /* border: solid 1px seagreen; */
+    }
+
+    > div#starless1 {
+      left: 160px;
+      width: 110px;
+      height: 50px;
+    }
+
+    > div#starless2 {
+      left: 290px;
+      width: 90px;
+      height: 140px;
+    }
+
+    > div#starless3 {
+      left: 370px;
+      width: 60px;
+      height: 50px;
+    }
+
+    > div#starless4 {
+      left: 565px;
+      width: 110px;
+      height: 70px;
+    }
+
+    > div#starless5 {
+      left: 620px;
+      width: 115px;
+      height: 160px;
+    }
+
+    > div#starless6 {
+      left: 720px;
+      width: 45px;
+      height: 105px;
+    }
+
+    > div#starless7 {
+      left: 775px;
+      width: 110px;
+      height: 32px;
+    }
+  }
+}
+
 div#effects {
   position: relative;
   margin: 0 auto;
@@ -36,9 +109,9 @@ div#effects {
     width: $game-width * 10;
     height: 65px;
     background-color: #101010;
-    background-color: rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, .3);
     box-sizing: border-box;
-    border-bottom: solid 1px #444;
+    border-bottom: solid 1px #333;
   }
 
   > div#logo,

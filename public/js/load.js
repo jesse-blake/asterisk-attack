@@ -1,5 +1,42 @@
 var asteriskAttack = (function(aa) {
 
+  (function() {
+    var i
+      , width = aa.dom.stars.width()
+      , height = aa.dom.stars.height()
+      , h
+      , sizes = [.2, .3, .4, .5, .6, .7]
+      , colors = ['#222', '#333', '#444', '#555']
+      , stars = ''
+      , starlessSpaces = 7;
+
+    function biasedTowardZero(min, max) {
+      return Math.floor(Math.abs(Math.random() - Math.random()) * (1 + max - min) + min);
+    }
+
+    for (i = 0; i < 2000; i++) {
+      h = (Math.random() > 0.5) ? height : height * 0.5;
+      stars += '<span '
+        + 'class="star" '
+        + 'style="position:absolute; '
+        + 'top:' + biasedTowardZero(0, h) + 'px; '
+        + 'left:' + aa.randomInRange(0, width) + 'px; '
+        + 'font-size:' + sizes[aa.randomInRange(0, sizes.length - 1)] + 'em; '
+        + 'color:' + colors[aa.randomInRange(0, colors.length - 1)] + '; '
+        + '">'
+        + '•'
+        + '</span>';
+    }
+
+    stars += '<div id="starless-spaces">'
+    for (i = 0; i < starlessSpaces; i++) {
+      stars += '<div id="starless' + (i+1) + '" class="starless"></div>';
+    }
+    stars += '</div>';
+
+    aa.dom.stars.html(stars);
+  })();
+
   (function loadLogo() {
     var i
       , colors = ['yellow', 'yellow', 'gold','orange','orangered','red']
@@ -74,7 +111,7 @@ var asteriskAttack = (function(aa) {
     for (i = 0; i < antenas.length; i++) {
       antenas[i] = antenas[i].replace(/ /g, '&nbsp;')
       if (/•/.test(antenas[i])) {
-        antenas[i] = antenas[i].replace(/•/, '<span id="antena' + (++count) + '" style="font-size:0.6em;">•</span>');
+        antenas[i] = antenas[i].replace(/•/, '<span id="antena' + (++count) + '" style="font-size:0.7em;">•</span>');
       }
     }
 
