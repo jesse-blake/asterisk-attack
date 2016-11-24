@@ -3,7 +3,7 @@ $game-width: 900px;
 body { 
   font-family: 'Inconsolata', monospace;
   font-size: 16px;
-  background: #101010 url('../img/stars.jpg') no-repeat center top;
+  background: #101010; // url('../img/stars.jpg') no-repeat center top;
   overflow-x: hidden;
 }
 
@@ -37,9 +37,8 @@ div#effects {
     height: 65px;
     background-color: #101010;
     background-color: rgba(0, 0, 0, .6);
+    box-sizing: border-box;
     border-bottom: solid 1px #444;
-    /* box-sizing: border-box; */
-    /* border: solid 1px tomato; */
   }
 
   > div#logo, div#score, div#start-btn, div#game-over, div#instructions, div#instructions-done, div#menu, div#quit-instructions, div#scoreboard-header, div#scoreboard, div#scoreboard-done {
@@ -75,7 +74,7 @@ div#effects {
   > div#menu, div#scoreboard-done, div#instructions-done, div#quit-instructions {
     color: yellowgreen;
     z-index: 1005;
-    top: 22px; 
+    top: 23px; 
 
     a {
       color: yellowgreen;
