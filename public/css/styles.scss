@@ -4,7 +4,6 @@ body {
   font-family: 'Inconsolata', monospace;
   font-size: 16px;
   background: #101010;
-  overflow-x: hidden;
 }
 
 div#screen-size-error {
@@ -35,7 +34,7 @@ div#stars {
   /* border: solid 1px tomato; */
 
   > div.star {
-    z-index: -123;
+    z-index: -1;
   }
 
   > div#starless-spaces {
@@ -106,6 +105,10 @@ div#effects {
   /* border: solid 1px gray; */
 
   > div#menubar {
+    position: absolute;
+    z-index: 33;
+    top: 0;
+    left: 0;
     width: $game-width * 10;
     height: 65px;
     background-color: #101010;
@@ -204,7 +207,6 @@ div#effects {
 
 div#zones {
   position: relative;
-  overflow: hidden;
   /* box-sizing: border-box; */
   /* border: solid 1px blue; */
 
@@ -228,6 +230,7 @@ div#zones {
 
 div#defender {
   position: absolute;
+  z-index: -1;
   top: -50px;
   line-height: 15px;
   /* box-sizing: border-box; */
