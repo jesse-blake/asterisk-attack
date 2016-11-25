@@ -217,11 +217,17 @@ div#zones {
     margin: 0 auto;
     /* box-sizing: border-box; */
     /* border: 1px solid lime; */
+
+    > div.asterisk {
+      position: absolute;
+      /* box-sizing: border-box; */
+      /* border:solid 1px slategray; */ 
+    }
   }
 
   > div#game-over-zone {
     width: $game-width;
-    height: 100px;
+    height: 50px;
     margin: 0 auto;
     /* box-sizing: border-box; */
     /* border: 1px solid white; /1* albacore *1/ */
