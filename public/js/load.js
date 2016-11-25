@@ -1,14 +1,13 @@
 var asteriskAttack = (function(aa) {
 
-  (function() {
+  (function loadStars() {
     var i
       , width = aa.dom.stars.width()
       , height = aa.dom.stars.height()
       , h
       , sizes = [.2, .3, .4, .5, .6, .7]
       , colors = ['#222', '#333', '#444', '#555']
-      , stars = ''
-      , starlessSpaces = 7;
+      , stars = '';
 
     function biasedTowardZero(min, max) {
       return Math.floor(Math.abs(Math.random() - Math.random()) * (1 + max - min) + min);
@@ -28,13 +27,19 @@ var asteriskAttack = (function(aa) {
         + '</span>';
     }
 
-    stars += '<div id="starless-spaces">'
-    for (i = 0; i < starlessSpaces; i++) {
-      stars += '<div id="starless' + (i+1) + '" class="starless"></div>';
-    }
-    stars += '</div>';
-
     aa.dom.stars.html(stars);
+  })();
+
+  (function loadStarlessAreas() {
+    var i
+      , numAreas = 7
+      , areas = '';
+
+    for (i = 0; i < numAreas; i++) {
+      areas += '<div id="starless' + (i+1) + '" class="starless"></div>';
+    }
+
+    aa.dom.starlessAreas.html(areas);
   })();
 
   (function loadLogo() {

@@ -19,6 +19,7 @@ var asteriskAttack = (function(aa) {
     reload: $('#reload-page'),
 
     stars: $('#stars'),
+    starlessAreas: $('#starless-areas'),
 
     game: $('#game'),
     effects: $('#effects'),
