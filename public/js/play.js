@@ -57,10 +57,19 @@ var asteriskAttack = (function (aa) {
     // 5
     aa.dom.doc.unbind('keyup');
 
-    for (id in aa.game.heatbeams)     { aa.game.heatbeams[id].remove();     }
-    for (id in aa.game.asterisks) { aa.game.asterisks[id].remove(); }
+    for (id in aa.game.heatbeams) {
+      aa.game.heatbeams[id].remove();
+    }
+
+    for (aIdx in aa.dom.attacking) { 
+      aa.dom.attacking[aIdx]
+        .stop()
+        .css({ 'top':'-50px', 'display':'none' });
+      aa.dom.asterisks.push(aa.dom.attacking[aIdx]);
+    }
+
     aa.game.heatbeams = {};
-    aa.game.asterisks = {};
+    aa.dom.attacking = {};
   }
 
   return aa;

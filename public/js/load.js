@@ -223,6 +223,27 @@ var asteriskAttack = (function(aa) {
     setTimeout(animateCityscapeWindows, aa.randomInRange(200, 500));
   })();
 
+  (function loadAsterisks() {
+    var i
+      , asterisk
+      , quantity = 100
+      , colors = ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia', 'lightskyblue', 'dodgerblue', 'blue'];
+
+    for (i = 0; i < quantity; i++) {
+      asterisk = '<div '
+        + 'class="asterisk" '
+        + 'style="'
+        + 'color:' + colors[aa.randomInRange(0, colors.length - 1)] + '; '
+        + 'font-size:' + aa.randomInRange(12, 42) + 'px; '
+        + 'left:' + aa.randomInRange(0, aa.dom.attackZone.width() - 20) + 'px; '
+        + '">*</div>'; 
+
+      asterisk = $(asterisk);
+      aa.dom.asterisks.push(asterisk);
+      aa.dom.attackZone.prepend(asterisk);
+    }
+  })();
+
   return aa;
 
 })(asteriskAttack);

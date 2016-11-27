@@ -6,61 +6,37 @@ var asteriskAttack = (function(aa) {
     aa.loops.attack = setInterval(attack, aa.game.generationSpeed);
   }
 
-  function buildAsterisk() {
-    var colors = ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia', 'lightskyblue', 'dodgerblue', 'blue']
-      , smallestSize = 12
-      , largestSize = 42;
-
-    return '<div '
-      + 'id="' + (++aa.game.asteriskCount) + '" ' 
-      + 'class="asterisk"'
-      + 'style="top:-10px; '
-      + 'color:' + colors[aa.randomInRange(0, colors.length - 1)] + '; '
-      + 'font-size:' + aa.randomInRange(smallestSize, largestSize) + 'px; '
-      // 20 pulls asterisks in from overhanging right of div:
-      + 'left:' + aa.randomInRange(0, aa.dom.attackZone.width() - 20) + 'px;'
-      + '">*</div>'
-  }
-
   function attack() {
-    var asterisk = $(buildAsterisk())
+    var asterisk = aa.dom.asterisks.shift()
       , speed    = aa.randomInRange(aa.game.asteriskSpeed, aa.game.asteriskSpeed + 5000);
 
-    aa.game.asterisks[aa.game.asteriskCount] = asterisk;
-    aa.dom.attackZone.prepend(asterisk);
+    aa.dom.attacking[++aa.game.asteriskCount] = asterisk;
 
     asterisk
       .fadeIn({ queue: false, duration: 'slow' })
       .animate({ top: '585px' }, speed, 'linear');
   }
 
-  function completeAttack(asteriskId, thwarted) {
-    var a
-      , pos
-      , clone;
+  function completeAttack(asteriskIdx, attackThwarted) {
+    var a = aa.dom.attacking[asteriskIdx];
 
-    a = aa.game.asterisks[asteriskId];
-
-    if (thwarted) {
+    if (attackThwarted) {
       aa.stats.score++;
-
-      clone = a.clone();
-      clone.insertAfter(a).animate({ 
-        'opacity': '0', 'top': (a.position().top - 50)
-      }, 150, function() {
-        clone.remove(); 
-      })
     }
 
-    if (thwarted && aa.stats.score % 5 === 0) {
+    if (attackThwarted && aa.stats.score % 5 === 0) {
       increaseAttackSpeed();
     }
-    else if (!thwarted) {
+    else if (!attackThwarted) {
+      // Game over.
       aa.dom.background.effect("bounce", {}, 750);
     }
 
-    a.remove();
-    delete aa.game.asterisks[asteriskId];
+    a.stop()
+      .css({ 'top':'50px', 'display':'none' });
+
+    aa.dom.asterisks.push(a);
+    delete aa.dom.attacking[asteriskIdx];
 
     aa.updateScore();
   }

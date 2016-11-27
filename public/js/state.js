@@ -51,7 +51,11 @@ var asteriskAttack = (function(aa) {
     attackZone: $('#attack-zone'),
     gameOverZone: $('#game-over-zone'),
 
-    defender: $('#defender')
+    defender: $('#defender'),
+
+    asterisks: [],
+    attacking: {},
+    heatbeams: []
   };
 
   aa.stats = {

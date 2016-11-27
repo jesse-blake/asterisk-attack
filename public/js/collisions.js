@@ -5,12 +5,14 @@ var asteriskAttack = (function(aa) {
       , s // heatbeam
       , d // defender
       , goz // game over zone
-      , collision;
+      , collision
+      , aIdx
+      , hIdx;
 
     function getPosition(element) {
-      var pos    = $(element).offset()
-        , width  = $(element).width()
-        , height = $(element).height();
+      var pos    = element.offset()
+        , width  = element.width()
+        , height = element.height();
 
       return [[pos.left, pos.left + width], [pos.top, pos.top + height]];
     }
@@ -23,16 +25,16 @@ var asteriskAttack = (function(aa) {
     }
 
     // Check for asterisk collisions.
-    for (aId in aa.game.asterisks) {
-      a = getPosition(aa.game.asterisks[aId]);
+    for (aIdx in aa.dom.attacking) {
+      a = getPosition(aa.dom.attacking[aIdx]);
       collision = false;
 
       // See if the asterisk was hit by a heatbeam.
-      for (sId in aa.game.heatbeams) {
-        s = getPosition(aa.game.heatbeams[sId]);
+      for (hIdx in aa.game.heatbeams) {
+        h = getPosition(aa.game.heatbeams[hIdx]);
 
-        if (positionsCollide(a[0], s[0]) && positionsCollide(a[1], s[1])) {
-          aa.completeAttack(aId, true);
+        if (positionsCollide(a[0], h[0]) && positionsCollide(a[1], h[1])) {
+          aa.completeAttack(aIdx, true);
           collision = true;
           break;
         }
@@ -43,14 +45,14 @@ var asteriskAttack = (function(aa) {
       // See if the asterisk hit the defender.
       d = getPosition(aa.dom.defender);
       if (positionsCollide(a[0], d[0]) && positionsCollide(a[1], d[1])) {
-        aa.completeAttack(aId, true);
+        aa.completeAttack(aIdx, true);
         continue;
       }
 
       // See if the asterisk hit the game over zone.
       goz = getPosition(aa.dom.gameOverZone);
       if (positionsCollide(a[0], goz[0]) && positionsCollide(a[1], goz[1])) {
-        aa.completeAttack(aId, false);
+        aa.completeAttack(aIdx, false);
         aa.quit();
         break;
       }
