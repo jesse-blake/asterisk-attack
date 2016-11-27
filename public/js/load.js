@@ -5,8 +5,8 @@ var asteriskAttack = (function(aa) {
       , width = aa.dom.stars.width()
       , height = aa.dom.stars.height()
       , h
-      , sizes = [.2, .3, .4, .5, .6, .7]
-      , colors = ['#222', '#333', '#444', '#555']
+      , sizes = [.2, .3, .4, .5]
+      , colors = ['#666', '#777', '#888', '#999']
       , stars = '';
 
     function biasedTowardZero(min, max) {
@@ -106,7 +106,7 @@ var asteriskAttack = (function(aa) {
       for (i = 0; i < flashIntervals.length; i++) {
         (function(j) {
           aa.loops.antenas[j] = setInterval(function() {
-            $('#antena' + (j+1)).css({ 'color': 'white' })
+            $('#antena' + (j+1)).css({ 'color': 'fuchsia' })
               .animate({ 'color': '#101010' }, flashDurations[j]);
           }, flashIntervals[j]);
         })(i);
@@ -125,9 +125,9 @@ var asteriskAttack = (function(aa) {
   })();
 
   (function loadCityscape() {
-    var lightsOnColors = ['#444', '#555']
-      , lightsOffColor = '#222'
-      , silhouetteColor = '#333'
+    var lightsOnColors = ['#777', '#888', '#999']
+      , lightsOffColor = '#333'
+      , silhouetteColor = '#777'
       , cityscape = [
         '                                                                                                                                                      ',
         '                                                                                                 |                                                    ',
