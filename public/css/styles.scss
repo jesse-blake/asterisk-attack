@@ -214,6 +214,10 @@ div#zones {
   /* box-sizing: border-box; */
   /* border: solid 1px blue; */
 
+  ::selection {
+    background-color: rgba(0,0,0,0);
+  }
+
   > div.heatray {
     color: deeppink;
     position: absolute;
