@@ -2,7 +2,7 @@ var asteriskAttack = (function(aa) {
 
   aa.detectCollisions = function() {
     var a // asterisk
-      , s // heatbeam
+      , s // heatray
       , d // defender
       , goz // game over zone
       , collision
@@ -29,9 +29,9 @@ var asteriskAttack = (function(aa) {
       a = getPosition(aa.dom.attacking[aIdx]);
       collision = false;
 
-      // See if the asterisk was hit by a heatbeam.
-      for (hIdx in aa.game.heatbeams) {
-        h = getPosition(aa.game.heatbeams[hIdx]);
+      // See if the asterisk was hit by a heatray.
+      for (hIdx in aa.game.heatrays) {
+        h = getPosition(aa.game.heatrays[hIdx]);
 
         if (positionsCollide(a[0], h[0]) && positionsCollide(a[1], h[1])) {
           aa.completeAttack(aIdx, true);

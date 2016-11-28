@@ -57,8 +57,8 @@ var asteriskAttack = (function (aa) {
     // 5
     aa.dom.doc.unbind('keyup');
 
-    for (id in aa.game.heatbeams) {
-      aa.game.heatbeams[id].remove();
+    for (id in aa.game.heatrays) {
+      aa.game.heatrays[id].remove();
     }
 
     for (aIdx in aa.dom.attacking) { 
@@ -68,7 +68,7 @@ var asteriskAttack = (function (aa) {
       aa.dom.asterisks.push(aa.dom.attacking[aIdx]);
     }
 
-    aa.game.heatbeams = {};
+    aa.game.heatrays = {};
     aa.dom.attacking = {};
   }
 

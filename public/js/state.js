@@ -3,7 +3,7 @@ var asteriskAttack = (function(aa) {
   aa.reset = function() {
     aa.stats.prevScore = aa.stats.score;
     aa.stats.score = 0;
-    aa.game.heatbeamCount = 0;
+    aa.game.heatrayCount = 0;
     aa.game.asteriskCount = 0;
     aa.game.asteriskSpeed = 3000;
     aa.game.generationSpeed = 1000;
@@ -55,7 +55,7 @@ var asteriskAttack = (function(aa) {
 
     asterisks: [],
     attacking: {},
-    heatbeams: []
+    heatrays: []
   };
 
   aa.stats = {
@@ -77,8 +77,8 @@ var asteriskAttack = (function(aa) {
   };
 
   aa.game = {
-    heatbeams: {}, // Key: id, value: dom object.
-    heatbeamCount: null,
+    heatrays: {}, // Key: id, value: dom object.
+    heatrayCount: null,
     asterisks: {}, // Key: id, value: dom object.
     asteriskCount: null,
     asteriskSpeed: null,
