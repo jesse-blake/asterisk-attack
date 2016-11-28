@@ -30,8 +30,8 @@ var asteriskAttack = (function(aa) {
       collision = false;
 
       // See if the asterisk was hit by a heatray.
-      for (hIdx in aa.game.heatrays) {
-        h = getPosition(aa.game.heatrays[hIdx]);
+      for (hIdx in aa.dom.defending) {
+        h = getPosition(aa.dom.defending[hIdx]);
 
         if (positionsCollide(a[0], h[0]) && positionsCollide(a[1], h[1])) {
           aa.completeAttack(aIdx, true);

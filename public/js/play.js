@@ -31,7 +31,7 @@ var asteriskAttack = (function (aa) {
     // 5
     aa.dom.doc.keyup(function (e) {
       if (e.keyCode === 32) { // key: space
-        aa.pewPewHeatVision();
+        aa.shootHeatray();
       } else if (e.keyCode === 27) { // key: esc
         aa.quit();
       }

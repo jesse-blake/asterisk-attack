@@ -244,6 +244,22 @@ var asteriskAttack = (function(aa) {
     }
   })();
 
+  (function loadHeatrays() {
+    var i 
+      , heatray
+      , quantity = 10;
+
+      for (i = 0; i < quantity; i++) {
+        heatray = $('<div '
+          + 'class="heatray" '
+          + 'style="top:-150px; left:0;" '
+          + '>|<br>|<br>|<br></div>');
+
+        aa.dom.heatrays.push(heatray);
+        aa.dom.zones.prepend(heatray);
+      }
+  })();
+
   return aa;
 
 })(asteriskAttack);

@@ -54,8 +54,9 @@ var asteriskAttack = (function(aa) {
     defender: $('#defender'),
 
     asterisks: [],
-    attacking: {},
-    heatrays: []
+    attacking: {}, // Asterisks currently in motion.
+    heatrays: [],
+    defending: [] // Heatrays currently in motion.
   };
 
   aa.stats = {

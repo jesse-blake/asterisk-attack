@@ -211,6 +211,12 @@ div#zones {
   /* box-sizing: border-box; */
   /* border: solid 1px blue; */
 
+  > div.heatray {
+    color: deeppink;
+    position: absolute;
+    z-index: 1;
+  }
+
   > div#attack-zone {
     position: relative;
     width: $game-width;
