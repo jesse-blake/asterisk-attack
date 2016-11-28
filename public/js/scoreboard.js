@@ -47,7 +47,7 @@ var asteriskAttack = (function(aa) {
       + (date.getHours() > 11 ? 'PM' : 'AM');
   }
   
-  aa.retrieveScores = function() {
+  function retrieveScores() {
     return storageAvailable()
       ? JSON.parse(localStorage.getItem('scores'))
       : null;
@@ -78,42 +78,48 @@ var asteriskAttack = (function(aa) {
       , line = ''
       , scoreData
       , timestamp
-      , scores = aa.retrieveScores()
-      , colors = ['magenta','#de71de','#ca84ca','#b58ab5','#9f899f','#8d828d','#787578','#646464','#4e4e4e','#393939'];
+      , scores = retrieveScores()
+      //, colors = ['magenta','#de71de','#ca84ca','#b58ab5','#9f899f','#8d828d','#787578','#646464','#4e4e4e','#393939'];
+      , colors = ['#fff','#eee','#ddd','#ccc','#bbb','#aaa','#999','#888','#777','#666'];
 
-    for (i = 0; i < maxNumScores; i++) {
-      // Start with a line of dots.
-      line = '................................................................................................';
+    if (scores) {
+      for (i = 0; i < maxNumScores; i++) {
+        // Start with a line of dots.
+        line = '................................................................................................';
 
-      if (typeof scores[i] !== 'undefined') {
-        scoreData = scores[i][0] + '';
-        timestamp = getScoreTimestamp(scores[i][1]);
+        if (typeof scores[i] !== 'undefined') {
+          scoreData = scores[i][0] + '';
+          timestamp = getScoreTimestamp(scores[i][1]);
+        }
+        else {
+          scoreData = '';
+          timestamp = '*';
+        }
+
+        // Add rank and score (or and asterisk) to line.
+        line = '<span style="color:' + colors[i] + ';">'
+          + '' + (i + 1)
+          + '</span>'
+          + line.slice(('' + (i+1)).length, 4)
+          + '<span style="color:' + colors[i] + ';">'
+          + scoreData
+          + '</span>'
+          + line.slice(4 + scoreData.length, line.length);
+
+        // Add timestamp (or an asterisk) to line.
+        line = line.slice(0, (line.length - timestamp.length - 1))
+          + '<span style="color:' + colors[i] + ';">'
+          + timestamp.replace(/ /g, '&nbsp;')
+          + '</span>';
+
+        data += line + '<br><br>';
       }
-      else {
-        scoreData = '*';
-        timestamp = '*';
-      }
 
-      // Add rank and score (or and asterisk) to line.
-      line = '<span style="color:' + colors[i] + ';">'
-        + '#' + (i + 1)
-        + '</span>' 
-        + line.slice(('#' + (i+1)).length, 20)
-        + '<span style="color:' + colors[i] + ';">'
-        + scoreData
-        + '</span>'
-        + line.slice(20 + scoreData.length, line.length);
-
-      // Add timestamp (or an asterisk) to line.
-      line = line.slice(0, (line.length - timestamp.length - 1))
-        + '<span style="color:' + colors[i] + ';">'
-        + timestamp.replace(/ /g, '&nbsp;')
-        + '</span>';
-
-      data += line + '<br><br>';
+      aa.dom.scoreboard.html(data);
     }
-
-    aa.dom.scoreboard.html(data);
+    else {
+      aa.dom.scoreboard.html('<br><br><br><div style="color:white">No Scores Yet.</div>');
+    }
   }
 
   return aa;
