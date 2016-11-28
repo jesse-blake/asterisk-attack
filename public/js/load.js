@@ -106,7 +106,7 @@ var asteriskAttack = (function(aa) {
       for (i = 0; i < flashIntervals.length; i++) {
         (function(j) {
           aa.loops.antenas[j] = setInterval(function() {
-            $('#antena' + (j+1)).css({ 'color': 'fuchsia' })
+            $('#antena' + (j+1)).css({ 'color': 'white' })
               .animate({ 'color': '#101010' }, flashDurations[j]);
           }, flashIntervals[j]);
         })(i);
@@ -116,7 +116,7 @@ var asteriskAttack = (function(aa) {
     for (i = 0; i < antenas.length; i++) {
       antenas[i] = antenas[i].replace(/ /g, '&nbsp;')
       if (/•/.test(antenas[i])) {
-        antenas[i] = antenas[i].replace(/•/, '<span id="antena' + (++count) + '" style="font-size:0.7em;">•</span>');
+        antenas[i] = antenas[i].replace(/•/, '<span id="antena' + (++count) + '" style="font-size:0.9em;">•</span>');
       }
     }
 
