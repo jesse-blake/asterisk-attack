@@ -63,6 +63,7 @@ div#effects {
   > div#score,
   > div#start-btn,
   > div#game-over,
+  > div#instructions-header,
   > div#instructions,
   > div#instructions-done,
   > div#menu,
@@ -83,7 +84,8 @@ div#effects {
   }
 
   > div#score,
-  > div#scoreboard-header {
+  > div#scoreboard-header,
+  > div#instructions-header {
     top: 209px;
   }
 

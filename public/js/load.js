@@ -80,6 +80,21 @@ var asteriskAttack = (function(aa) {
     );
   })();
 
+
+  (function loadInstructionsHeader() {
+    var header = [
+      '     __       __ __   __    __   ',
+      ' /_// // / /  / / /  /_//  /_//_/',
+      '/ //_//_/_/  / /_/  /  /_ / / _/ '
+    ];
+
+    aa.dom.instructionsHeader.html(''
+      + '<span style="color:deeppink;">' + header[0].replace(/ /g, '&nbsp;') + '</span><br>'
+      + '<span style="color:hotpink;">' + header[1].replace(/ /g, '&nbsp;') + '</span><br>'
+      + '<span style="color:fuchsia;">' + header[2].replace(/ /g, '&nbsp;') + '</span><br>'
+    );
+  })();
+
   (function loadAntenas() {
     var i 
       , count = 0

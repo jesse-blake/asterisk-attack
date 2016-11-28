@@ -41,6 +41,7 @@ var asteriskAttack = (function(aa) {
     scoreboardDone: $('#scoreboard-done'),
     scoreboardDoneBtn: $('#scoreboard-done-btn'),
 
+    instructionsHeader: $('#instructions-header'),
     instructions: $('#instructions'),
     instructionsDone: $('#instructions-done'),
     instructionsDoneBtn: $('#instructions-done-btn'),
