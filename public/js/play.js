@@ -36,6 +36,12 @@ var asteriskAttack = (function (aa) {
         aa.quit();
       }
     });
+    aa.dom.doc.keydown(function (e) {
+      if (e.keyCode === 32) {
+        e.preventDefault();
+        return false;
+      }
+    });
   }
 
   aa.quit = function() {
@@ -56,6 +62,7 @@ var asteriskAttack = (function (aa) {
 
     // 5
     aa.dom.doc.unbind('keyup');
+    aa.dom.doc.unbind('keydown');
 
     for (id in aa.game.heatrays) {
       aa.game.heatrays[id].remove();
