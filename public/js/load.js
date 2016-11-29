@@ -121,8 +121,10 @@ var asteriskAttack = (function(aa) {
       for (i = 0; i < flashIntervals.length; i++) {
         (function(j) {
           aa.loops.antenas[j] = setInterval(function() {
-            $('#antena' + (j+1)).css({ 'color': 'white' })
-              .animate({ 'color': '#101010' }, flashDurations[j]);
+            if (!document.hidden) {
+              $('#antena' + (j+1)).css({ 'color': 'white' })
+                .animate({ 'color': '#101010' }, flashDurations[j]);
+            }
           }, flashIntervals[j]);
         })(i);
       }
@@ -221,15 +223,17 @@ var asteriskAttack = (function(aa) {
         , level  // Random level of the cityscape.
         , color; // The window color.
 
-      level = aa.randomInRange(0, cityscape.length - 1);
+      if (!document.hidden) {
+        level = aa.randomInRange(0, cityscape.length - 1);
 
-      color = (Math.random() > 0.5) // 50% change of using an on color or the off color.
-        ? lightsOffColor
-        : lightsOnColors[aa.randomInRange(0, lightsOnColors.length - 1)];
+        color = (Math.random() > 0.5) // 50% change of using an on color or the off color.
+          ? lightsOffColor
+          : lightsOnColors[aa.randomInRange(0, lightsOnColors.length - 1)];
 
-      changeWindow(level, color);
+        changeWindow(level, color);
 
-      aa.dom.cityscape.html(cityscape.join(''));
+        aa.dom.cityscape.html(cityscape.join(''));
+      }
 
       setTimeout(animateCityscapeWindows, aa.randomInRange(100, 500));
     }
