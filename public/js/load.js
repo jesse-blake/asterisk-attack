@@ -1,24 +1,36 @@
-var asteriskAttack = (function(aa) {
+var asteriskAttack = (function load(aa) {
 
+
+  /*
+   * Randomly generate a starry night sky (lots of bullet characters).
+   */
   (function loadStars() {
     var i
       , width = aa.dom.stars.width()
       , height = aa.dom.stars.height()
-      , h
-      , sizes = [.2, .3, .4, .5]
+      , sizes = [0.2, 0.3, 0.4, 0.5]
       , colors = ['#666', '#777', '#888', '#999']
-      , stars = '';
+      , stars = ''
+      , numStars = 1500;
 
-    function biasedTowardZero(min, max) {
+    /*
+     * Returns a number according to a linear distribution which favors numbers closer to min,
+     * and halves the distributions max about half the time.
+     * @param {number} min The distribution's min value.
+     * @param {number} max The distribution's max value.
+     * @return {number}
+     */ 
+    function biasedTowardMin(min, max) {
+      // Cut the distribution's max in half, half the time.
+      max = (Math.random() > 0.5) ? max : max * 0.5;
       return Math.floor(Math.abs(Math.random() - Math.random()) * (1 + max - min) + min);
     }
 
-    for (i = 0; i < 2000; i++) {
-      h = (Math.random() > 0.5) ? height : height * 0.5;
+    for (i = 0; i < numStars; i++) {
       stars += '<span '
         + 'class="star" '
         + 'style="position:absolute; '
-        + 'top:' + biasedTowardZero(0, h) + 'px; '
+        + 'top:' + biasedTowardMin(0, height) + 'px; '
         + 'left:' + aa.randomInRange(0, width) + 'px; '
         + 'font-size:' + sizes[aa.randomInRange(0, sizes.length - 1)] + 'em; '
         + 'color:' + colors[aa.randomInRange(0, colors.length - 1)] + '; '
@@ -30,6 +42,10 @@ var asteriskAttack = (function(aa) {
     aa.dom.stars.html(stars);
   })();
 
+
+  /*
+   * Hide stars, which are situated behind cityscape buildings, behind opaque divs.
+   */
   (function loadStarlessAreas() {
     var i
       , numAreas = 7
@@ -42,6 +58,10 @@ var asteriskAttack = (function(aa) {
     aa.dom.starlessAreas.html(areas);
   })();
 
+
+  /*
+   * Load the logo ascii art into its div, and color it.
+   */
   (function loadLogo() {
     var i
       , colors = ['yellow', 'yellow', 'gold','orange','orangered','red']
@@ -66,6 +86,10 @@ var asteriskAttack = (function(aa) {
     aa.dom.logo.html(logo)
   })();
 
+
+  /*
+   * Load the top-scores ascii art header into its div, and color it.
+   */
   (function loadScoreboardHeader() {
     var header = [
       ' __ __ __    __   __ __ __ __ __ __',
@@ -81,6 +105,9 @@ var asteriskAttack = (function(aa) {
   })();
 
 
+  /*
+   * Load the how-to-play ascii art header into its div, and color it.
+   */
   (function loadInstructionsHeader() {
     var header = [
       '     __       __ __   __    __   ',
@@ -95,6 +122,10 @@ var asteriskAttack = (function(aa) {
     );
   })();
 
+
+  /*
+   * Load the flashing antena lights (text bullets) into their div, and set the interval for each.
+   */
   (function loadAntenas() {
     var i 
       , count = 0
@@ -113,6 +144,9 @@ var asteriskAttack = (function(aa) {
         '                                                                                                                                      •               '
       ];
 
+    /*
+     * Set the antena flash intervals.
+     */
     function flashAntenas() {
       var i
         , flashIntervals = [1234,2300,1818,2000,1143,1777]
@@ -120,8 +154,8 @@ var asteriskAttack = (function(aa) {
 
       for (i = 0; i < flashIntervals.length; i++) {
         (function(j) {
-          aa.loops.antenas[j] = setInterval(function() {
-            if (!document.hidden) {
+          aa.intervals.antenas[j] = setInterval(function() {
+            if (!document.hidden) { // No need to make a noise if nobody's in the woods to hear it.
               $('#antena' + (j+1)).css({ 'color': 'white' })
                 .animate({ 'color': '#101010' }, flashDurations[j]);
             }
@@ -130,6 +164,7 @@ var asteriskAttack = (function(aa) {
       }
     }
 
+    // Wrap antena flashers in span tags so they can be targeted.
     for (i = 0; i < antenas.length; i++) {
       antenas[i] = antenas[i].replace(/ /g, '&nbsp;')
       if (/•/.test(antenas[i])) {
@@ -141,10 +176,14 @@ var asteriskAttack = (function(aa) {
     flashAntenas();
   })();
 
+
+  /*
+   * Load the cityscape ascii art into its div, and set a timeout for random window lighting (color) changes.
+   */
   (function loadCityscape() {
     var lightsOnColors = ['#777', '#888', '#999']
       , lightsOffColor = '#333'
-      , silhouetteColor = '#777'
+      , silhouetteColor = '#777' // The building outlines.
       , cityscape = [
         '                                                                                                                                                      ',
         '                                                                                                 |                                                    ',
@@ -171,33 +210,37 @@ var asteriskAttack = (function(aa) {
       ];
 
     /*
-     * Changes a random window in a particular level of the cityscape.
-     * @level {Number} An array index representing the level of the cityscape.
-     * @color {String} A CSS color, with a hash sign, 3 digits only.
+     * Changes the color of a randomly selected window on a particular level of the cityscape.
+     * @param {number} level An array index representing the level of the cityscape.
+     * @param {string} color A CSS color, with a hash sign, 3 digits only.
      */
     function changeWindow(level, color) {
       var i
-        , count
-        , selected;
+        , count // The level's number of windows.
+        , selected // A randomly selected window in the level.
+        , pos;
 
       count = cityscape[level].split('•').length - 1;
 
       if (count > 0) {
         selected = aa.randomInRange(1, count);
+        pos = cityscape[level].indexOf('•');
 
-        for (i = 0; i < cityscape[level].length; i++) {
-          if (cityscape[level][i] === '•' && !--selected) {
-            cityscape[level] = cityscape[level].substr(0, i-6)
-              + color
-              + '">•'
-              + cityscape[level].substr(i+1, cityscape[level].length);
-          }
+        while (--selected) {
+          pos = cityscape[level].indexOf('•', pos+1);
         }
+
+        // Set the span tag style attr's css color, beginning 6 characters behind the bullet.
+        // e.g. <span style="color:#777">•
+        cityscape[level] = cityscape[level].substr(0, pos-6)
+          + color
+          + '">•'
+          + cityscape[level].substr(pos+1, cityscape[level].length);
       }
     }
 
     /*
-     * Colors one window with a lights-on color in each level of the cityscape.
+     * Loads the cityscape ascii art into its div, coloring one random window with a lights-on color on each level of the cityscape.
      */
     function setCityscape() {
       var i
@@ -216,17 +259,17 @@ var asteriskAttack = (function(aa) {
     }
 
     /*
-     * Randomly chooses a level, and a window in the level, to recolor.
+     * A function to be given to setTimeout to re-color windows randomly.
      */
     function animateCityscapeWindows() {
       var i
-        , level  // Random level of the cityscape.
-        , color; // The window color.
+        , level // A randomly chosen level of the cityscape.
+        , color; // A randomly chosen window color.
 
-      if (!document.hidden) {
+      if (!document.hidden) { // No need to make a noise if nobody's in the woods to hear it.
         level = aa.randomInRange(0, cityscape.length - 1);
 
-        color = (Math.random() > 0.5) // 50% change of using an on color or the off color.
+        color = (Math.random() > 0.5) // 50 percent chance of lights-on or off.
           ? lightsOffColor
           : lightsOnColors[aa.randomInRange(0, lightsOnColors.length - 1)];
 
@@ -242,27 +285,34 @@ var asteriskAttack = (function(aa) {
     setTimeout(animateCityscapeWindows, aa.randomInRange(200, 500));
   })();
 
+
+  /*
+   * Preload the asterisks to avoid unnecessary dom manipulations.
+   */
   (function loadAsterisks() {
     var i
       , asterisk
       , quantity = 100
-      , colors = ['yellow', 'gold', 'orange', 'orangered', 'red', 'deeppink', 'hotpink', 'fuchsia', 'lightskyblue', 'dodgerblue', 'blue'];
+      , colors = ['yellow','gold','orange','orangered','red','deeppink','hotpink','fuchsia','lightskyblue','dodgerblue','blue', 'yellowgreen','lime'];
 
     for (i = 0; i < quantity; i++) {
-      asterisk = '<div '
+      asterisk = $('<div '
         + 'class="asterisk" '
         + 'style="'
         + 'color:' + colors[aa.randomInRange(0, colors.length - 1)] + '; '
         + 'font-size:' + aa.randomInRange(12, 42) + 'px; '
         + 'left:' + aa.randomInRange(0, aa.dom.attackZone.width() - 20) + 'px; '
-        + '">*</div>'; 
+        + '">*</div>'); 
 
-      asterisk = $(asterisk);
-      aa.dom.asterisks.push(asterisk);
+      aa.dom.asterisksIdle.push(asterisk);
       aa.dom.attackZone.prepend(asterisk);
     }
   })();
 
+
+  /*
+   * Preload the heatrays to avoid unnecessary dom manipulations.
+   */
   (function loadHeatrays() {
     var i 
       , heatray
@@ -274,10 +324,11 @@ var asteriskAttack = (function(aa) {
           + 'style="top:-150px; left:0;" '
           + '>|<br>|<br>|<br></div>');
 
-        aa.dom.heatrays.push(heatray);
+        aa.dom.heatraysIdle.push(heatray);
         aa.dom.zones.prepend(heatray);
       }
   })();
+
 
   return aa;
 

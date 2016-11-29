@@ -1,20 +1,28 @@
-var asteriskAttack = (function(aa) {
+var asteriskAttack = (function defend(aa) {
 
-  aa.shootHeatray = function() {
-    var heatray = aa.dom.heatrays.shift()
+
+  /*
+   * Fire a heatray from (approximately) the defender's eyes.
+   */
+  function shootHeatray() {
+    var heatray = aa.dom.heatraysIdle.shift()
       , pos = aa.dom.defender.offset();
 
-    aa.dom.defending.push(heatray);
+    // Add the heatray to the list of heatrays in motion.
+    aa.dom.heatraysDefending.push(heatray);
 
     heatray
       // Line up heatray with the eyes of the defender.
       .css({ 'top': (pos.top - 45), 'left': (pos.left + (aa.dom.defender.width() / 2)) })
       .show()
       .animate({ top: '-150px' }, 500, 'linear', function() {
-        aa.dom.heatrays.push(aa.dom.defending.shift());
+        // When the heatray's animation is complete, re-queue it for re-use.
+        aa.dom.heatraysIdle.push(aa.dom.heatraysDefending.shift());
       });
   }
 
+
+  aa.shootHeatray = shootHeatray;
   return aa;
 
 })(asteriskAttack);

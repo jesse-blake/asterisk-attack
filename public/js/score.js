@@ -1,43 +1,51 @@
-var asteriskAttack = (function(aa) {
+var asteriskAttack = (function score(aa) {
 
-  aa.updateScore = function() {
-    $('#score').html(buildScore(aa.stats.score));
+  
+  /*
+   * Public facing score updater.
+   */
+  function updateScore() {
+    $('#score').html(buildScore(aa.game.score));
   };
 
-  // Convert game score digits to three-line ascii art representations.
+
+  /*
+   * Convert game score to colored three-line ascii art digits.
+   * @param {number} n The non-negative score to build in ascii art.
+   * @return {string} The score: a string of html to be injected into the page by jquery.
+   */
   function buildScore(n) {
     var i
       , result
-      , started = false
       , digits = []
       , number = ['', '', ''];
 
+    // The 3 parts to each digit: [top, mid, bot].
     var parts = [
-      ['__ ','/ /','/_/'], // 0 (top, mid, bot)
-      [' ','/','/'],          // 1
-      ['__ ','__/','/__'], // ...
-      ['__ ','__/','__/'],
+      ['__ ','/ /','/_/'], // 0
+      [' ','/','/'],       // 1
+      ['__ ','__/','/__'], // 2
+      ['__ ','__/','__/'], // ...
       ['   ','/_/','  /'],
       ['__ ','/_ ','__/'],
       ['__ ','/_ ','/_/'],
       ['__ ','  /','  /'],
       ['__ ','/_/','/_/'],
-      ['__ ','/_/','__/'], // 9
+      ['__ ','/_/','__/'],
     ];
 
-    if (!n) { // Build and return number zero.
-      number[0] = parts[0][0];
-      number[1] = parts[0][1];
-      number[2] = parts[0][2];
-    }
-    else { // Build and return integers > 0;
+    if (n) { // Build numbers > 0.
       while(n > 0) {
         number[0] = number[0] ? parts[n % 10][0] + ' ' + number[0] : parts[n % 10][0];
         number[1] = number[1] ? parts[n % 10][1] + ' ' + number[1] : parts[n % 10][1];
         number[2] = number[2] ? parts[n % 10][2] + ' ' + number[2] : parts[n % 10][2];
         n = parseInt(n / 10);
-        started = true;
       }
+    }
+    else { // Build number 0.
+      number[0] = parts[0][0];
+      number[1] = parts[0][1];
+      number[2] = parts[0][2];
     }
 
     // Add 'SCORE'.
@@ -45,17 +53,17 @@ var asteriskAttack = (function(aa) {
     number[1] = '  /_ /  / //_//_   ' + number[1];
     number[2] = '  __//_ /_// \\/__  ' + number[2]; // Backslash is backslash escaped.
 
-    // Line up the lines correctly.
+    // Pad line ends to line things up.
     number[0] = '  ' + number[0] + '';
     number[1] = ' ' + number[1] + ' ';
     number[2] = '' + number[2] + '  ';
 
-    // Convert spaces to non-breaking space html entities.
+    // Convert spaces to non-breaking spaces.
     for (i = 0; i < 3; i++) {
       number[i] = number[i].replace(/ /g, '&nbsp;');
     }
 
-    // Wrap with html.
+    // Add some color.
     result = '<span style="color:deeppink;">' + number[0] + '</span><br>'
            + '<span style="color:hotpink;">' + number[1] + '</span><br>'
            + '<span style="color:fuchsia;">' + number[2] + '</span><br>';
@@ -63,6 +71,8 @@ var asteriskAttack = (function(aa) {
     return result;
   }
 
+
+  aa.updateScore = updateScore;
   return aa;
   
 })(asteriskAttack);

@@ -1,5 +1,10 @@
-var asteriskAttack = (function(aa) {
+var asteriskAttack = (function scoreboard(aa) {
 
+
+  /*
+   * Test browser for local storage capabilities.
+   * @return {bool} true if capabale, false if not.
+   */
   function storageAvailable() {
     try {
       var storage = window.localStorage
@@ -14,6 +19,11 @@ var asteriskAttack = (function(aa) {
     }
   }
 
+
+  /*
+   * Convert a date number to the game scoreboard's date format.
+   * @param {number} dateNum An integer value representing the number of milliseconds since 1 January 1970...yada yada.
+   */
   function getScoreTimestamp(dateNum) {
     var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
       , months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
@@ -47,19 +57,28 @@ var asteriskAttack = (function(aa) {
       + (date.getHours() > 11 ? 'PM' : 'AM');
   }
   
+
+  /*
+   * Return the locally stored scores, or null.
+   */
   function retrieveScores() {
     return storageAvailable()
       ? JSON.parse(localStorage.getItem('scores'))
       : null;
   }
 
-  aa.updateScores = function() {
+
+  /*
+   * Update the scores in local storage.
+   */
+  aa.updateTopScoresData = function() {
     var scores = null;
 
-    if (aa.stats.score > 0 && storageAvailable()) {
+    if (aa.game.score > 0 && storageAvailable()) {
       scores = JSON.parse(localStorage.getItem('scores')) || [];
 
-      scores.push([aa.stats.score, Date.now()]);
+      // Push the latest score, sort the scores array, then keep only the highest 10.
+      scores.push([aa.game.score, Date.now()]);
       scores = scores.sort(function(a, b) {
         return b[0] - a[0];
       });
@@ -71,7 +90,11 @@ var asteriskAttack = (function(aa) {
     return scores;
   }
 
-  aa.updateScoreboard = function() {
+
+  /*
+   * Update the html in the scoreboard div with latest score data.
+   */
+  function updateScoreboard() {
     var i
       , maxNumScores = 10
       , data = ''
@@ -84,19 +107,19 @@ var asteriskAttack = (function(aa) {
 
     if (scores) {
       for (i = 0; i < maxNumScores; i++) {
-        // Start with a line of dots.
+        // Start with a line of dots!
         line = '................................................................................................';
 
         if (typeof scores[i] !== 'undefined') {
           scoreData = scores[i][0] + '';
           timestamp = getScoreTimestamp(scores[i][1]);
         }
-        else {
+        else { // No score data.
           scoreData = '';
           timestamp = '*';
         }
 
-        // Add rank and score (or and asterisk) to line.
+        // Add rank and score (or an asterisk if no score data) to line.
         line = '<span style="color:' + colors[i] + ';">'
           + '' + (i + 1)
           + '</span>'
@@ -106,7 +129,7 @@ var asteriskAttack = (function(aa) {
           + '</span>'
           + line.slice(4 + scoreData.length, line.length);
 
-        // Add timestamp (or an asterisk) to line.
+        // Add timestamp (an asterisk if no score data) to line.
         line = line.slice(0, (line.length - timestamp.length - 1))
           + '<span style="color:' + colors[i] + ';">'
           + timestamp.replace(/ /g, '&nbsp;')
@@ -122,6 +145,8 @@ var asteriskAttack = (function(aa) {
     }
   }
 
+
+  aa.updateScoreboard = updateScoreboard;
   return aa;
   
 })(asteriskAttack);

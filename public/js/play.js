@@ -1,34 +1,44 @@
-var asteriskAttack = (function (aa) {
+var asteriskAttack = (function play(aa) {
 
-  aa.start = function() {
-    function normalizeDefenderPosition(mousePosX) {
-      var min = aa.sizes.padding
-        , max = aa.dom.window.width() - aa.dom.defender.width() - aa.sizes.padding
-        , pos = mousePosX / aa.dom.window.width(); // Normalize to [0, 1]
 
-      pos = (pos * (max - min)) + min; // Scale to [min, max]
-      return pos;
-    }
+  /*
+   * Normalize the defender's position according to the x-axis position of the mouse.
+   * @return {number} The normalized x position.
+   */
+  function normalizeDefenderPosition(mousePosX) {
+    var min = 15 // A little padding from the screen edge looks better.
+      , max = aa.dom.win.width() - aa.dom.defender.width() - min
+      , pos = mousePosX / aa.dom.win.width(); // Normalize to [0, 1]
 
+    pos = (pos * (max - min)) + min; // Scale to [min, max]
+    return pos;
+  }
+
+
+  /*
+   * Start the game.
+   */
+  function start() {
     aa.reset();
-    ++aa.stats.plays;
 
-    // 1
-    aa.loops.attack = setInterval(aa.attack, aa.game.generationSpeed);
-    setTimeout(aa.loops.collision = setInterval(aa.detectCollisions, 5), aa.game.generationSpeed);
+    // The following numbered tasks correspond symmetrically to those in the quit function.
 
-    // 2
+    // 1. Set game intervals.
+    aa.intervals.attack = setInterval(aa.attack, aa.game.asteriskGenerationSpeed);
+    setTimeout(aa.intervals.collision = setInterval(aa.detectCollisions, 5), aa.game.asteriskGenerationSpeed);
+
+    // 2.
     aa.animateStartGame();
 
-    // 3
+    // 3. Hide the cursor.
     $('html').css('cursor', 'none');
 
-    // 4
+    // 4. Position the defender according to the cursor position.
     aa.dom.doc.mousemove(function(event) {
       aa.dom.defender.css({ left: normalizeDefenderPosition(event.pageX) });
     });
 
-    // 5
+    // 5. Watch for game-relevant key-presses.
     aa.dom.doc.keyup(function (e) {
       if (e.keyCode === 32) { // key: space
         aa.shootHeatray();
@@ -44,41 +54,37 @@ var asteriskAttack = (function (aa) {
     });
   }
 
-  aa.quit = function() {
-    // 1
-    window.clearInterval(aa.loops.attack);
-    window.clearInterval(aa.loops.collision);
 
-    aa.updateScores();
+  /*
+   * End the game.
+   */
+  function quit() {
+    aa.updateTopScoresData();
+    aa.resetAsterisks();
 
-    // 2
+    // The following numbered tasks correspond symmetrically to those in the start function.
+
+    // 1. Clear game intervals.
+    window.clearInterval(aa.intervals.attack);
+    window.clearInterval(aa.intervals.collision);
+
+    // 2.
     aa.animateEndGame();
 
-    // 3
+    // 3. Unhide the cursor.
     $('html').css('cursor', 'auto');
 
-    // 4
+    // 4. Stop positioning the defender.
     aa.dom.doc.unbind('mousemove');
 
-    // 5
+    // 5. Stop watching key-presses.
     aa.dom.doc.unbind('keyup');
     aa.dom.doc.unbind('keydown');
-
-    for (id in aa.game.heatrays) {
-      aa.game.heatrays[id].remove();
-    }
-
-    for (aIdx in aa.dom.attacking) { 
-      aa.dom.attacking[aIdx]
-        .stop()
-        .css({ 'top':'-50px', 'display':'none' });
-      aa.dom.asterisks.push(aa.dom.attacking[aIdx]);
-    }
-
-    aa.game.heatrays = {};
-    aa.dom.attacking = {};
   }
 
+
+  aa.start = start;
+  aa.quit = quit;
   return aa;
 
 })(asteriskAttack); 
@@ -87,7 +93,7 @@ var asteriskAttack = (function (aa) {
 $(document).ready(function() {
 
   (function validateScreenSize() {
-    if (asteriskAttack.dom.window.width() < 1000) {
+    if (asteriskAttack.dom.win.width() < 1000) {
       asteriskAttack.dom.game.css({ 'display':'none' });
       asteriskAttack.dom.screenSizeError.css({ 'display':'inherit' });
 

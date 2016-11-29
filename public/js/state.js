@@ -1,92 +1,91 @@
-var asteriskAttack = (function(aa) {
+var asteriskAttack = (function state(aa) {
 
-  aa.reset = function() {
-    aa.stats.prevScore = aa.stats.score;
-    aa.stats.score = 0;
-    aa.game.heatrayCount = 0;
-    aa.game.asteriskCount = 0;
-    aa.game.asteriskSpeed = 3000;
-    aa.game.generationSpeed = 1000;
+
+  /*
+   * Make ready to play the game anew.
+   */
+  function reset() {
+    aa.game.prevScore = aa.game.score;
+    aa.game.score = 0;
+    aa.game.plays++;
+
+    aa.game.asteriskGenerationSpeed = 1000;
     aa.updateScore();
   };
   
-  aa.dom = {
-    window: $(window),
-    doc: $(document),
-    screenSizeError: $('#screen-size-error'),
 
-    errorMsg: $('#error-msg'),
-    reload: $('#reload-page'),
+  // Pre-referenced dom elements for performance.
+  var dom = {
+    win:                 $(window),
+    doc:                 $(document),
+    screenSizeError:     $('#screen-size-error'),
 
-    stars: $('#stars'),
-    starlessAreas: $('#starless-areas'),
+    errorMsg:            $('#error-msg'),
+    reload:              $('#reload-page'),
 
-    game: $('#game'),
-    effects: $('#effects'),
-    menubar: $('#menubar'),
-    logo: $('#logo'),
-    score: $('#score'),
-    background: $('#background'),
-    antenas: $('#antenas'),
-    cityscape: $('#cityscape'),
-    startBtn: $('#start-btn'),
-    gameOver: $('#game-over'),
+    stars:               $('#stars'),
+    starlessAreas:       $('#starless-areas'),
 
-    menu: $('#menu'),
-    scoreboardLink: $('#scoreboard-link'),
-    instructionsLink: $('#instructions-link'),
+    game:                $('#game'),
+    effects:             $('#effects'),
+    menubar:             $('#menubar'),
+    logo:                $('#logo'),
+    score:               $('#score'),
+    background:          $('#background'),
+    antenas:             $('#antenas'),
+    cityscape:           $('#cityscape'),
+    startBtn:            $('#start-btn'),
+    gameOver:            $('#game-over'),
 
-    scoreboardHeader: $('#scoreboard-header'),
-    scoreboard: $('#scoreboard'),
-    scoreboardDone: $('#scoreboard-done'),
-    scoreboardDoneBtn: $('#scoreboard-done-btn'),
+    menu:                $('#menu'),
+    scoreboardLink:      $('#scoreboard-link'),
+    instructionsLink:    $('#instructions-link'),
 
-    instructionsHeader: $('#instructions-header'),
-    instructions: $('#instructions'),
-    instructionsDone: $('#instructions-done'),
+    quitInstructions:    $('#quit-instructions'),
+
+    scoreboardDone:      $('#scoreboard-done'),
+    scoreboardDoneBtn:   $('#scoreboard-done-btn'),
+    scoreboardHeader:    $('#scoreboard-header'),
+    scoreboard:          $('#scoreboard'),
+
+    instructionsDone:    $('#instructions-done'),
     instructionsDoneBtn: $('#instructions-done-btn'),
+    instructionsHeader:  $('#instructions-header'),
+    instructions:        $('#instructions'),
 
-    quitInstructions: $('#quit-instructions'),
+    zones:               $('#zones'),
+    attackZone:          $('#attack-zone'),
+    gameOverZone:        $('#game-over-zone'),
 
-    zones: $('#zones'),
-    attackZone: $('#attack-zone'),
-    gameOverZone: $('#game-over-zone'),
+    defender:            $('#defender'),
 
-    defender: $('#defender'),
-
-    asterisks: [],
-    attacking: {}, // Asterisks currently in motion.
-    heatrays: [],
-    defending: [] // Heatrays currently in motion.
+    asterisksIdle:       [],
+    asterisksAttacking:  {},
+    attackerKeyCount:    0,  // Not a dom element; oh, well.
+    heatraysIdle:        [],
+    heatraysDefending:   []
   };
 
-  aa.stats = {
-    score: null,
-    prevScore: null,
-    plays: 0
+  var intervals = {
+    screenSizeError:     null,
+    attack:              null,
+    collision:           null,
+    background:          null,
+    antenas:             []
   };
 
-  aa.loops = {
-    screenSizeError: null,
-    attack:          null,
-    collision:       null,
-    background:      null,
-    antenas:         []
+  var game = {
+    score:                   null,
+    prevScore:               null,
+    plays:                   0,
+    asteriskGenerationSpeed: null,
   };
 
-  aa.sizes = {
-    padding: 15
-  };
 
-  aa.game = {
-    heatrays: {}, // Key: id, value: dom object.
-    heatrayCount: null,
-    asterisks: {}, // Key: id, value: dom object.
-    asteriskCount: null,
-    asteriskSpeed: null,
-    generationSpeed: null,
-  };
-
+  aa.reset = reset;
+  aa.dom = dom;
+  aa.intervals = intervals;
+  aa.game = game;
   return aa;
 
 })(asteriskAttack); 
