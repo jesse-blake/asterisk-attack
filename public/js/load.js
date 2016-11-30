@@ -9,7 +9,7 @@ var asteriskAttack = (function load(aa) {
       , width = aa.dom.stars.width()
       , height = aa.dom.stars.height()
       , sizes = [0.2, 0.3, 0.4, 0.5]
-      , colors = ['#666', '#777', '#888', '#999']
+      , colors = ['#777','#888','#999','#aaa']
       , stars = ''
       , numStars = 1500;
 
