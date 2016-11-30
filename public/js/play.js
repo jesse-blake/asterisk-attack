@@ -31,7 +31,7 @@ var asteriskAttack = (function play(aa) {
     aa.animateStartGame();
 
     // 3. Hide the cursor.
-    $('html').css('cursor', 'none');
+    // $('html').css('cursor', 'none');
 
     // 4. Position the defender according to the cursor position.
     aa.dom.doc.mousemove(function(event) {
@@ -72,7 +72,7 @@ var asteriskAttack = (function play(aa) {
     aa.animateEndGame();
 
     // 3. Unhide the cursor.
-    $('html').css('cursor', 'auto');
+    // $('html').css('cursor', 'auto');
 
     // 4. Stop positioning the defender.
     aa.dom.doc.unbind('mousemove');
