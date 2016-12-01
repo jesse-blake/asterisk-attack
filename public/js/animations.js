@@ -12,11 +12,10 @@ var asteriskAttack = (function animations(aa) {
     aa.updateScore();
     setClickHandlers();
 
-    showFromLeft(aa.dom.menubar);
+    showFromLeft(aa.dom.menu);
     showFromRight(aa.dom.logo);
     showFromLeft(aa.dom.score);
     showFromRight(aa.dom.playBtn);
-    showFromLeft(aa.dom.menu);
   };
 
 
@@ -28,8 +27,8 @@ var asteriskAttack = (function animations(aa) {
     updatePlayBtn();
 
     animateDefender(true);
-    hideToRight(aa.dom.playBtn);
     hideToRight(aa.dom.menu);
+    hideToRight(aa.dom.playBtn);
 
     showFromLeft(aa.dom.quitInstructionsMsg);
   };
@@ -47,8 +46,9 @@ var asteriskAttack = (function animations(aa) {
 
     setTimeout(function() {
       hideToRight(aa.dom.gameOverMsg);
-      showFromLeft(aa.dom.playBtn);
+
       showFromLeft(aa.dom.menu);
+      showFromLeft(aa.dom.playBtn);
     }, 1500);
   };
 
@@ -59,9 +59,9 @@ var asteriskAttack = (function animations(aa) {
   function showScoreboard() {
     aa.updateScoreboard();
 
+    hideToRight(aa.dom.menu);
     hideToRight(aa.dom.score);
     hideToRight(aa.dom.playBtn);
-    hideToRight(aa.dom.menu);
     hideToRight(aa.dom.background);
 
     showFromLeft(aa.dom.scoreboardHeader);
@@ -78,9 +78,9 @@ var asteriskAttack = (function animations(aa) {
     hideToRight(aa.dom.scoreboard);
     hideToRight(aa.dom.scoreboardDone);
 
+    showFromLeft(aa.dom.menu);
     showFromLeft(aa.dom.score);
     showFromLeft(aa.dom.playBtn);
-    showFromLeft(aa.dom.menu);
     showFromLeft(aa.dom.background);
   }
 
