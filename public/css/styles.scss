@@ -43,7 +43,7 @@ div#stars {
   }
 }
 
-div#effects {
+div#centering-div {
   position: relative;
   margin: 0 auto;
   width: 1px;
@@ -68,14 +68,14 @@ div#effects {
   > div#score,
   > div#play-btn,
   > div#game-over-msg,
-  > div#instructions-header,
-  > div#instructions,
-  > div#instructions-done,
+  > div#how-to-play-header,
+  > div#how-to-play,
+  > div#how-to-play-done,
   > div#menu,
-  > div#quit-instructions-msg,
-  > div#scoreboard-header,
-  > div#scoreboard,
-  > div#scoreboard-done {
+  > div#how-to-quit-msg,
+  > div#top-scores-header,
+  > div#top-scores,
+  > div#top-scores-done {
     display: none;
     position: absolute;
     width: $game-width;
@@ -89,8 +89,8 @@ div#effects {
   }
 
   > div#score,
-  > div#scoreboard-header,
-  > div#instructions-header {
+  > div#top-scores-header,
+  > div#how-to-play-header {
     top: 209px;
   }
 
@@ -108,9 +108,9 @@ div#effects {
   }
   
   > div#menu,
-  > div#scoreboard-done,
-  > div#instructions-done,
-  > div#quit-instructions-msg {
+  > div#top-scores-done,
+  > div#how-to-play-done,
+  > div#how-to-quit-msg {
     color: yellowgreen;
     z-index: 1005;
     top: 23px; 
@@ -121,13 +121,13 @@ div#effects {
     }
   }
 
-  > div#scoreboard {
+  > div#top-scores {
     color: #333;
     z-index: 1007;
     top: 300px;
   }
 
-  > div#instructions {
+  > div#how-to-play {
     color: #999;
     top: 350px;
   }

@@ -26,7 +26,6 @@ var asteriskAttack = (function state(aa) {
     starlessAreas:       $('#starless-areas'),
 
     game:                $('#game'),
-    effects:             $('#effects'),
     menubar:             $('#menubar'),
     logo:                $('#logo'),
     score:               $('#score'),
@@ -40,20 +39,20 @@ var asteriskAttack = (function state(aa) {
     gameOverMsg:         $('#game-over-msg'),
 
     menu:                $('#menu'),
-    scoreboardLink:      null, // Set in load.js.
-    instructionsLink:    null, // Set in load.js.
+    topScoresLink:       null, // Set in load.js.
+    howToPlayLink:       null, // Set in load.js.
 
-    quitInstructionsMsg: $('#quit-instructions-msg'),
+    howToQuitMsg:        $('#how-to-quit-msg'),
 
-    scoreboardDone:      $('#scoreboard-done'),
-    scoreboardDoneBtn:   null, // Set in load.js.
-    scoreboardHeader:    $('#scoreboard-header'),
-    scoreboard:          $('#scoreboard'),
+    topScoresDone:       $('#top-scores-done'),
+    topScoresDoneBtn:    null, // Set in load.js.
+    topScoresHeader:     $('#top-scores-header'),
+    topScores:           $('#top-scores'),
 
-    instructionsDone:    $('#instructions-done'),
-    instructionsDoneBtn: null, // Set in load.js.
-    instructionsHeader:  $('#instructions-header'),
-    instructions:        $('#instructions'),
+    howToPlayDone:       $('#how-to-play-done'),
+    howToPlayDoneBtn:    null, // Set in load.js.
+    howToPlayHeader:     $('#how-to-play-header'),
+    howToPlay:           $('#how-to-play'),
 
     zones:               $('#zones'),
     attackZone:          $('#attack-zone'),

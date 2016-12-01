@@ -30,7 +30,7 @@ var asteriskAttack = (function animations(aa) {
     hideToRight(aa.dom.menu);
     hideToRight(aa.dom.playBtn);
 
-    showFromLeft(aa.dom.quitInstructionsMsg);
+    showFromLeft(aa.dom.howToQuitMsg);
   };
 
 
@@ -42,7 +42,7 @@ var asteriskAttack = (function animations(aa) {
 
     animateDefender(false);
     showFromLeft(aa.dom.gameOverMsg);
-    hideToRight(aa.dom.quitInstructionsMsg);
+    hideToRight(aa.dom.howToQuitMsg);
 
     setTimeout(function() {
       hideToRight(aa.dom.gameOverMsg);
@@ -54,29 +54,29 @@ var asteriskAttack = (function animations(aa) {
 
 
   /*
-   * Animate the scoreboard 'page' into view.
+   * Animate the top scores 'page' into view.
    */
-  function showScoreboard() {
-    aa.updateScoreboard();
+  function showTopScores() {
+    aa.updateTopScores();
 
     hideToRight(aa.dom.menu);
     hideToRight(aa.dom.score);
     hideToRight(aa.dom.playBtn);
     hideToRight(aa.dom.background);
 
-    showFromLeft(aa.dom.scoreboardHeader);
-    showFromLeft(aa.dom.scoreboard);
-    showFromLeft(aa.dom.scoreboardDone);
+    showFromLeft(aa.dom.topScoresHeader);
+    showFromLeft(aa.dom.topScores);
+    showFromLeft(aa.dom.topScoresDone);
   }
 
 
   /*
-   * Animate the scoreboard 'page' out of view.
+   * Animate the top scores 'page' out of view.
    */
-  function hideScoreboard() {
-    hideToRight(aa.dom.scoreboardHeader);
-    hideToRight(aa.dom.scoreboard);
-    hideToRight(aa.dom.scoreboardDone);
+  function hideTopScores() {
+    hideToRight(aa.dom.topScoresHeader);
+    hideToRight(aa.dom.topScores);
+    hideToRight(aa.dom.topScoresDone);
 
     showFromLeft(aa.dom.menu);
     showFromLeft(aa.dom.score);
@@ -86,27 +86,27 @@ var asteriskAttack = (function animations(aa) {
 
 
   /*
-   * Animate the instructions 'page' into view.
+   * Animate the how-to-play 'page' into view.
    */
-  function showInstructions() {
+  function showHowToPlay() {
     hideToRight(aa.dom.menu);
     hideToRight(aa.dom.score);
     hideToRight(aa.dom.playBtn);
     hideToRight(aa.dom.background);
 
-    showFromLeft(aa.dom.instructionsDone);
-    showFromLeft(aa.dom.instructionsHeader);
-    showFromLeft(aa.dom.instructions);
+    showFromLeft(aa.dom.howToPlayDone);
+    showFromLeft(aa.dom.howToPlayHeader);
+    showFromLeft(aa.dom.howToPlay);
   }
 
 
   /*
-   * Animate the instructions 'page' out of view.
+   * Animate the how-to-play 'page' out of view.
    */
-  function hideInstructions() {
-    hideToRight(aa.dom.instructionsDone);
-    hideToRight(aa.dom.instructionsHeader);
-    hideToRight(aa.dom.instructions);
+  function hideHowToPlay() {
+    hideToRight(aa.dom.howToPlayDone);
+    hideToRight(aa.dom.howToPlayHeader);
+    hideToRight(aa.dom.howToPlay);
 
     showFromLeft(aa.dom.menu);
     showFromLeft(aa.dom.score);
@@ -197,20 +197,20 @@ var asteriskAttack = (function animations(aa) {
       aa.start();
     });
 
-    aa.dom.scoreboardLink.click(function() {
-      showScoreboard(); 
+    aa.dom.topScoresLink.click(function() {
+      showTopScores(); 
     });
 
-    aa.dom.scoreboardDoneBtn.click(function() {
-      hideScoreboard();
+    aa.dom.topScoresDoneBtn.click(function() {
+      hideTopScores();
     });
 
-    aa.dom.instructionsLink.click(function() {
-      showInstructions(); 
+    aa.dom.howToPlayLink.click(function() {
+      showHowToPlay(); 
     });
 
-    aa.dom.instructionsDoneBtn.click(function() {
-      hideInstructions();
+    aa.dom.howToPlayDoneBtn.click(function() {
+      hideHowToPlay();
     });
   }
 

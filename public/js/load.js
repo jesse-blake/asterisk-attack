@@ -90,16 +90,16 @@ var asteriskAttack = (function load(aa) {
 
 
   /*
-   * Load the top-scores ascii art header into its div, and color it.
+   * Load the top scores ascii art header into its div, and color it.
    */
-  (function loadScoreboardHeader() {
+  (function loadTopScoresHeader() {
     var header = [
       ' __ __ __    __   __ __ __ __ __ __',
       ' / / //_/  // /  /_ /  / //_//_ /_ ',
       '/ /_//    //_/  __//_ /_// \\/_ __/ '
     ];
 
-    aa.dom.scoreboardHeader.html(''
+    aa.dom.topScoresHeader.html(''
       + '<span style="color:deeppink;">' + header[0].replace(/ /g, '&nbsp;') + '</span><br>'
       + '<span style="color:hotpink;">' + header[1].replace(/ /g, '&nbsp;') + '</span><br>'
       + '<span style="color:fuchsia;">' + header[2].replace(/ /g, '&nbsp;') + '</span><br>'
@@ -110,14 +110,14 @@ var asteriskAttack = (function load(aa) {
   /*
    * Load the how-to-play ascii art header into its div, and color it.
    */
-  (function loadInstructionsHeader() {
+  (function loadHowToPlayHeader() {
     var header = [
       '     __       __ __   __    __   ',
       ' /_// // / /  / / /  /_//  /_//_/',
       '/ //_//_/_/  / /_/  /  /_ / / _/ '
     ];
 
-    aa.dom.instructionsHeader.html(''
+    aa.dom.howToPlayHeader.html(''
       + '<span style="color:deeppink;">' + header[0].replace(/ /g, '&nbsp;') + '</span><br>'
       + '<span style="color:hotpink;">' + header[1].replace(/ /g, '&nbsp;') + '</span><br>'
       + '<span style="color:fuchsia;">' + header[2].replace(/ /g, '&nbsp;') + '</span><br>'
@@ -352,27 +352,27 @@ var asteriskAttack = (function load(aa) {
 
     aa.dom.gameOverMsg.html('G A M E &nbsp; O V E R');
 
-    aa.dom.menu.html('<a id="instructions-link" href="#">HOW TO PLAY</a>'
+    aa.dom.menu.html('<a id="how-to-play-link" href="#">HOW TO PLAY</a>'
       + '&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;'
-      + '<a id="scoreboard-link" href="#">YOUR TOP SCORES</a>'
+      + '<a id="top-scores-link" href="#">YOUR TOP SCORES</a>'
     );
-    aa.dom.instructionsLink = $('#instructions-link');
-    aa.dom.scoreboardLink = $('#scoreboard-link');
+    aa.dom.howToPlayLink = $('#how-to-play-link');
+    aa.dom.topScoresLink = $('#top-scores-link');
 
-    aa.dom.instructions.html('BLOCK THE ASTERISKS'
+    aa.dom.howToPlay.html('BLOCK THE ASTERISKS'
       + '&nbsp;&nbsp;<span style="color:#555">*</span>&nbsp;&nbsp;'
       + 'PRESS <span style="color:white">SPACEBR</span> FOR HEAT VISION'
       + '&nbsp;&nbsp;<span style="color:#555">*</span>&nbsp;&nbsp;'
       + 'PRESS <span style="color:white">ESC</span> TO QUIT'
     );
 
-    aa.dom.quitInstructionsMsg.html('PRESS ESC TO QUIT');
+    aa.dom.howToQuitMsg.html('PRESS ESC TO QUIT');
 
-    aa.dom.scoreboardDone.html('<a href="#">BACK TO GAME</a>');
-    aa.dom.scoreboardDoneBtn = $('#scoreboard-done > a');
+    aa.dom.topScoresDone.html('<a href="#">BACK TO GAME</a>');
+    aa.dom.topScoresDoneBtn = $('#top-scores-done > a');
 
-    aa.dom.instructionsDone.html('<a href="#">BACK TO GAME</a>');
-    aa.dom.instructionsDoneBtn = $('#instructions-done > a');
+    aa.dom.howToPlayDone.html('<a href="#">BACK TO GAME</a>');
+    aa.dom.howToPlayDoneBtn = $('#how-to-play-done > a');
   })();
 
 

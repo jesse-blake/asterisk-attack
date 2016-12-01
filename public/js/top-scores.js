@@ -1,6 +1,6 @@
 "use strict";
 
-var asteriskAttack = (function scoreboard(aa) {
+var asteriskAttack = (function topScores(aa) {
 
 
   /*
@@ -23,7 +23,7 @@ var asteriskAttack = (function scoreboard(aa) {
 
 
   /*
-   * Convert a date number to the game scoreboard's date format.
+   * Convert a date number to the game's top scores date format.
    * @param {number} dateNum An integer value representing the number of milliseconds since 1 January 1970...yada yada.
    */
   function getScoreTimestamp(dateNum) {
@@ -94,9 +94,9 @@ var asteriskAttack = (function scoreboard(aa) {
 
 
   /*
-   * Update the html in the scoreboard div with latest score data.
+   * Update the html in the top scores div with latest score data.
    */
-  function updateScoreboard() {
+  function updateTopScores() {
     var i
       , maxNumScores = 10
       , data = ''
@@ -140,15 +140,15 @@ var asteriskAttack = (function scoreboard(aa) {
         data += line + '<br><br>';
       }
 
-      aa.dom.scoreboard.html(data);
+      aa.dom.topScores.html(data);
     }
     else {
-      aa.dom.scoreboard.html('<br><br><br><div style="color:white">No Scores Yet.</div>');
+      aa.dom.topScores.html('<br><br><br><div style="color:white">No Scores Yet.</div>');
     }
   }
 
 
-  aa.updateScoreboard = updateScoreboard;
+  aa.updateTopScores = updateTopScores;
   return aa;
   
 })(asteriskAttack);
