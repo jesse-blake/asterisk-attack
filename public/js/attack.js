@@ -1,3 +1,5 @@
+"use strict";
+
 var asteriskAttack = (function attack(aa) {
 
 
@@ -59,6 +61,8 @@ var asteriskAttack = (function attack(aa) {
    * Reset the asterisks after game-over, stopping those still in-motion.
    */
   function resetAsterisks() {
+    var aId;
+
     for (aId in aa.dom.asterisksAttacking) {
       aa.dom.asterisksAttacking[aId]
         .stop()

@@ -1,3 +1,5 @@
+"use strict";
+
 var asteriskAttack = (function collisions(aa) {
 
   /*
@@ -5,7 +7,7 @@ var asteriskAttack = (function collisions(aa) {
    */
   function detectCollisions() {
     var a // asterisk
-      , s // heatray
+      , h // heatray
       , d // defender
       , goz // game over zone
       , collision

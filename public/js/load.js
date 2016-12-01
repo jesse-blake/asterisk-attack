@@ -1,3 +1,5 @@
+"use strict";
+
 var asteriskAttack = (function load(aa) {
 
 

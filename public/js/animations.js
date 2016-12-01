@@ -1,3 +1,5 @@
+"use strict";
+
 var asteriskAttack = (function animations(aa) {
 
   var duration = 300;
