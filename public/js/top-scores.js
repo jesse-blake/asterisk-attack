@@ -9,7 +9,7 @@ var asteriskAttack = (function _topScoresJs(aa) {
   aa.updateTopScoresData = function() {
     var scores = null;
 
-    if (aa.game.score > 0 && _storageAvailable()) {
+    if (aa.game.score > 0 && aa.storageAvailable()) {
       scores = JSON.parse(localStorage.getItem('scores')) || [];
 
       // Push the latest score, sort the scores array, then keep only the highest 10.
@@ -82,25 +82,6 @@ var asteriskAttack = (function _topScoresJs(aa) {
 
 
   /*
-   * Test browser for local storage capabilities.
-   * @return {bool} true if capabale, false if not.
-   */
-  function _storageAvailable() {
-    try {
-      var storage = window.localStorage
-        , x = '__storage_test__';
-
-      storage.setItem(x, x);
-      storage.removeItem(x);
-      return true;
-    }
-    catch(e) {
-      return false;
-    }
-  }
-
-
-  /*
    * Convert a date number to the game's top scores date format.
    * @param {number} dateNum An integer value representing the number of milliseconds since 1 January 1970...yada yada.
    */
@@ -142,7 +123,7 @@ var asteriskAttack = (function _topScoresJs(aa) {
    * Return the locally stored scores, or null.
    */
   function _retrieveScores() {
-    return _storageAvailable()
+    return aa.storageAvailable()
       ? JSON.parse(localStorage.getItem('scores'))
       : null;
   }

@@ -13,6 +13,25 @@ var asteriskAttack = (function _utilsJs(aa) {
   };
 
 
+  /*
+   * Test browser for local storage capabilities.
+   * @return {bool} true if capabale, false if not.
+   */
+  aa.storageAvailable = function() {
+    try {
+      var storage = window.localStorage
+        , x = '__storage_test__';
+
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+
   return aa;
 
 })({});

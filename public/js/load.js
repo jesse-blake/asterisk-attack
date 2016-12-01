@@ -352,10 +352,11 @@ var asteriskAttack = (function _loadJs(aa) {
 
     aa.dom.gameOverMsg.html('G A M E &nbsp; O V E R');
 
-    aa.dom.menu.html('<a id="how-to-play-link" href="#">HOW TO PLAY</a>'
-      + '&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;'
-      + '<a id="top-scores-link" href="#">YOUR TOP SCORES</a>'
-    );
+    aa.storageAvailable()
+      ? aa.dom.menu.html('<a id="how-to-play-link" href="#">HOW TO PLAY</a>'
+          + '&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;'
+          + '<a id="top-scores-link" href="#">YOUR TOP SCORES</a>')
+      : aa.dom.menu.html('<a id="how-to-play-link" href="#">HOW TO PLAY</a>');
 
     aa.dom.howToPlayLink = $('#how-to-play-link');
     aa.dom.howToPlayBackLinkWrapper.html('<a href="#">BACK TO GAME</a>');
