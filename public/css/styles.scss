@@ -65,17 +65,17 @@ div#centering-div {
   }
 
   > div#logo,
-  > div#score,
+  > div#digital-score,
   > div#play-btn,
   > div#game-over-msg,
-  > div#how-to-play-header,
+  > div#digital-how-to-play-headline,
   > div#how-to-play,
-  > div#how-to-play-done,
+  > div#how-to-play-back-link-wrapper,
   > div#menu,
   > div#how-to-quit-msg,
-  > div#top-scores-header,
+  > div#digital-top-scores-headline,
   > div#top-scores,
-  > div#top-scores-done {
+  > div#top-scores-back-link-wrapper {
     display: none;
     position: absolute;
     width: $game-width;
@@ -88,9 +88,9 @@ div#centering-div {
     top: 100px;
   }
 
-  > div#score,
-  > div#top-scores-header,
-  > div#how-to-play-header {
+  > div#digital-score,
+  > div#digital-top-scores-headline,
+  > div#digital-how-to-play-headline {
     top: 209px;
   }
 
@@ -108,8 +108,8 @@ div#centering-div {
   }
   
   > div#menu,
-  > div#top-scores-done,
-  > div#how-to-play-done,
+  > div#top-scores-back-link-wrapper,
+  > div#how-to-play-back-link-wrapper,
   > div#how-to-quit-msg {
     color: yellowgreen;
     z-index: 1005;

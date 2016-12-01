@@ -18,61 +18,66 @@ var asteriskAttack = (function _stateJs(aa) {
 
   // Pre-referenced dom elements for performance.
   aa.dom = {
-    win:                 $(window),
-    doc:                 $(document),
-    screenSizeError:     $('#screen-size-error'),
+    win:                      $(window),
+    doc:                      $(document),
 
-    stars:               $('#stars'),
-    starlessAreas:       $('#starless-areas'),
+    screenSizeError:          $('#screen-size-error'),
 
-    game:                $('#game'),
-    menubar:             $('#menubar'),
-    logo:                $('#logo'),
-    score:               $('#score'),
-    background:          $('#background'),
-    antenas:             $('#antenas'),
-    cityscape:           $('#cityscape'),
+    stars:                    $('#stars'),
 
-    playBtn:             $('#play-btn'),
-    playBtnLink:         null, // Set in load.js.
+    game:                     $('#game'),
 
-    gameOverMsg:         $('#game-over-msg'),
+    logo:                     $('#logo'),
 
-    menu:                $('#menu'),
-    topScoresLink:       null, // Set in load.js.
-    howToPlayLink:       null, // Set in load.js.
+    starlessAreas:            $('#starless-areas'),
+    background:               $('#background'),
+    antenas:                  $('#antenas'),
+    cityscape:                $('#cityscape'),
 
-    howToQuitMsg:        $('#how-to-quit-msg'),
+    playBtn:                  $('#play-btn'),
+    playBtnLink:              null, // Set in load.js.
 
-    topScoresDone:       $('#top-scores-done'),
-    topScoresDoneBtn:    null, // Set in load.js.
-    topScoresHeader:     $('#top-scores-header'),
-    topScores:           $('#top-scores'),
+    gameOverMsg:              $('#game-over-msg'),
 
-    howToPlayDone:       $('#how-to-play-done'),
-    howToPlayDoneBtn:    null, // Set in load.js.
-    howToPlayHeader:     $('#how-to-play-header'),
-    howToPlay:           $('#how-to-play'),
+    menubar:                  $('#menubar'),
+    menu:                     $('#menu'),
 
-    zones:               $('#zones'),
-    attackZone:          $('#attack-zone'),
-    gameOverZone:        $('#game-over-zone'),
+    howToPlayLink:            null, // Set in load.js.
+    howToPlayBackLinkWrapper: $('#how-to-play-back-link-wrapper'),
+    howToPlayBackLink:        null, // Set in load.js.
 
-    defender:            $('#defender'),
+    topScoresLink:            null, // Set in load.js.
+    topScoresBackLinkWrapper: $('#top-scores-back-link-wrapper'),
+    topScoresBackLink:        null, // Set in load.js.
 
-    asterisksIdle:       [],
-    asterisksAttacking:  {},
-    attackerKeyCount:    0,  // Not a dom element; oh, well.
-    heatraysIdle:        [],
-    heatraysDefending:   []
+    howToQuitMsg:             $('#how-to-quit-msg'),
+
+    digitalScore:             $('#digital-score'),
+    digitalTopScoresHeadline: $('#digital-top-scores-headline'),
+    digitalHowToPlayHeadline: $('#digital-how-to-play-headline'),
+
+    topScores:                $('#top-scores'),
+    howToPlay:                $('#how-to-play'),
+
+    zones:                    $('#zones'),
+    attackZone:               $('#attack-zone'),
+    gameOverZone:             $('#game-over-zone'),
+
+    defender:                 $('#defender'),
+
+    asterisksIdle:            [],
+    asterisksAttacking:       {},
+    attackerKeyCount:         0,  // Not a dom element; oh, well.
+    heatraysIdle:             [],
+    heatraysDefending:        []
   };
 
   aa.intervals = {
-    screenSizeError:     null,
-    attack:              null,
-    collision:           null,
-    background:          null,
-    antenas:             []
+    screenSizeError:          null,
+    attack:                   null,
+    collision:                null,
+    background:               null,
+    antenas:                  []
   };
 
   aa.game = {

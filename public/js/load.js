@@ -90,37 +90,37 @@ var asteriskAttack = (function _loadJs(aa) {
 
 
   /*
-   * Load the top scores ascii art header into its div, and color it.
+   * Load the top scores ascii art headline into its div, and color it.
    */
-  (function _loadTopScoresHeader() {
-    var header = [
+  (function _loadDigitalTopScoresHeadline() {
+    var headline = [
       ' __ __ __    __   __ __ __ __ __ __',
       ' / / //_/  // /  /_ /  / //_//_ /_ ',
       '/ /_//    //_/  __//_ /_// \\/_ __/ '
     ];
 
-    aa.dom.topScoresHeader.html(''
-      + '<span style="color:deeppink;">' + header[0].replace(/ /g, '&nbsp;') + '</span><br>'
-      + '<span style="color:hotpink;">' + header[1].replace(/ /g, '&nbsp;') + '</span><br>'
-      + '<span style="color:fuchsia;">' + header[2].replace(/ /g, '&nbsp;') + '</span><br>'
+    aa.dom.digitalTopScoresHeadline.html(''
+      + '<span style="color:deeppink;">' + headline[0].replace(/ /g, '&nbsp;') + '</span><br>'
+      + '<span style="color:hotpink;">' + headline[1].replace(/ /g, '&nbsp;') + '</span><br>'
+      + '<span style="color:fuchsia;">' + headline[2].replace(/ /g, '&nbsp;') + '</span><br>'
     );
   })();
 
 
   /*
-   * Load the how-to-play ascii art header into its div, and color it.
+   * Load the how-to-play ascii art headline into its div, and color it.
    */
-  (function _loadHowToPlayHeader() {
-    var header = [
+  (function _loadDigitalHowToPlayHeadline() {
+    var headline = [
       '     __       __ __   __    __   ',
       ' /_// // / /  / / /  /_//  /_//_/',
       '/ //_//_/_/  / /_/  /  /_ / / _/ '
     ];
 
-    aa.dom.howToPlayHeader.html(''
-      + '<span style="color:deeppink;">' + header[0].replace(/ /g, '&nbsp;') + '</span><br>'
-      + '<span style="color:hotpink;">' + header[1].replace(/ /g, '&nbsp;') + '</span><br>'
-      + '<span style="color:fuchsia;">' + header[2].replace(/ /g, '&nbsp;') + '</span><br>'
+    aa.dom.digitalHowToPlayHeadline.html(''
+      + '<span style="color:deeppink;">' + headline[0].replace(/ /g, '&nbsp;') + '</span><br>'
+      + '<span style="color:hotpink;">' + headline[1].replace(/ /g, '&nbsp;') + '</span><br>'
+      + '<span style="color:fuchsia;">' + headline[2].replace(/ /g, '&nbsp;') + '</span><br>'
     );
   })();
 
@@ -356,8 +356,16 @@ var asteriskAttack = (function _loadJs(aa) {
       + '&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;'
       + '<a id="top-scores-link" href="#">YOUR TOP SCORES</a>'
     );
+
     aa.dom.howToPlayLink = $('#how-to-play-link');
+    aa.dom.howToPlayBackLinkWrapper.html('<a href="#">BACK TO GAME</a>');
+    aa.dom.howToPlayBackLink = $('#how-to-play-back-link-wrapper > a');
+
     aa.dom.topScoresLink = $('#top-scores-link');
+    aa.dom.topScoresBackLinkWrapper.html('<a href="#">BACK TO GAME</a>');
+    aa.dom.topScoresBackLink = $('#top-scores-back-link-wrapper > a');
+
+    aa.dom.howToQuitMsg.html('PRESS ESC TO QUIT');
 
     aa.dom.howToPlay.html('BLOCK THE ASTERISKS'
       + '&nbsp;&nbsp;<span style="color:#555">*</span>&nbsp;&nbsp;'
@@ -365,14 +373,6 @@ var asteriskAttack = (function _loadJs(aa) {
       + '&nbsp;&nbsp;<span style="color:#555">*</span>&nbsp;&nbsp;'
       + 'PRESS <span style="color:white">ESC</span> TO QUIT'
     );
-
-    aa.dom.howToQuitMsg.html('PRESS ESC TO QUIT');
-
-    aa.dom.topScoresDone.html('<a href="#">BACK TO GAME</a>');
-    aa.dom.topScoresDoneBtn = $('#top-scores-done > a');
-
-    aa.dom.howToPlayDone.html('<a href="#">BACK TO GAME</a>');
-    aa.dom.howToPlayDoneBtn = $('#how-to-play-done > a');
   })();
 
 

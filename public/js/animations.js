@@ -14,7 +14,7 @@ var asteriskAttack = (function _animationsJs(aa) {
 
     _showFromLeft(aa.dom.menu);
     _showFromRight(aa.dom.logo);
-    _showFromLeft(aa.dom.score);
+    _showFromLeft(aa.dom.digitalScore);
     _showFromRight(aa.dom.playBtn);
   };
 
@@ -60,13 +60,13 @@ var asteriskAttack = (function _animationsJs(aa) {
     aa.updateTopScores();
 
     _hideToRight(aa.dom.menu);
-    _hideToRight(aa.dom.score);
+    _hideToRight(aa.dom.digitalScore);
     _hideToRight(aa.dom.playBtn);
     _hideToRight(aa.dom.background);
 
-    _showFromLeft(aa.dom.topScoresHeader);
+    _showFromLeft(aa.dom.digitalTopScoresHeadline);
     _showFromLeft(aa.dom.topScores);
-    _showFromLeft(aa.dom.topScoresDone);
+    _showFromLeft(aa.dom.topScoresBackLinkWrapper);
   }
 
 
@@ -74,12 +74,12 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Animate the top scores 'page' out of view.
    */
   function _hideTopScores() {
-    _hideToRight(aa.dom.topScoresHeader);
+    _hideToRight(aa.dom.digitalTopScoresHeadline);
     _hideToRight(aa.dom.topScores);
-    _hideToRight(aa.dom.topScoresDone);
+    _hideToRight(aa.dom.topScoresBackLinkWrapper);
 
     _showFromLeft(aa.dom.menu);
-    _showFromLeft(aa.dom.score);
+    _showFromLeft(aa.dom.digitalScore);
     _showFromLeft(aa.dom.playBtn);
     _showFromLeft(aa.dom.background);
   }
@@ -90,12 +90,12 @@ var asteriskAttack = (function _animationsJs(aa) {
    */
   function _showHowToPlay() {
     _hideToRight(aa.dom.menu);
-    _hideToRight(aa.dom.score);
+    _hideToRight(aa.dom.digitalScore);
     _hideToRight(aa.dom.playBtn);
     _hideToRight(aa.dom.background);
 
-    _showFromLeft(aa.dom.howToPlayDone);
-    _showFromLeft(aa.dom.howToPlayHeader);
+    _showFromLeft(aa.dom.howToPlayBackLinkWrapper);
+    _showFromLeft(aa.dom.digitalHowToPlayHeadline);
     _showFromLeft(aa.dom.howToPlay);
   }
 
@@ -104,12 +104,12 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Animate the how-to-play 'page' out of view.
    */
   function _hideHowToPlay() {
-    _hideToRight(aa.dom.howToPlayDone);
-    _hideToRight(aa.dom.howToPlayHeader);
+    _hideToRight(aa.dom.howToPlayBackLinkWrapper);
+    _hideToRight(aa.dom.digitalHowToPlayHeadline);
     _hideToRight(aa.dom.howToPlay);
 
     _showFromLeft(aa.dom.menu);
-    _showFromLeft(aa.dom.score);
+    _showFromLeft(aa.dom.digitalScore);
     _showFromLeft(aa.dom.playBtn);
     _showFromLeft(aa.dom.background);
   }
@@ -201,7 +201,7 @@ var asteriskAttack = (function _animationsJs(aa) {
       _showTopScores(); 
     });
 
-    aa.dom.topScoresDoneBtn.click(function() {
+    aa.dom.topScoresBackLink.click(function() {
       _hideTopScores();
     });
 
@@ -209,7 +209,7 @@ var asteriskAttack = (function _animationsJs(aa) {
       _showHowToPlay(); 
     });
 
-    aa.dom.howToPlayDoneBtn.click(function() {
+    aa.dom.howToPlayBackLink.click(function() {
       _hideHowToPlay();
     });
   }
@@ -220,7 +220,7 @@ var asteriskAttack = (function _animationsJs(aa) {
    */
   function _resetScore() {
     if (aa.game.prevScore > 0) {
-      aa.dom.score.effect('shake', duration, function() {
+      aa.dom.digitalScore.effect('shake', duration, function() {
         aa.updateScore();
       });
     }

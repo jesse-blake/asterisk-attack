@@ -7,7 +7,7 @@ var asteriskAttack = (function _scoreJs(aa) {
    * Public facing score updater.
    */
   aa.updateScore = function() {
-    $('#score').html(_buildScore(aa.game.score));
+    aa.dom.digitalScore.html(_buildScore(aa.game.score));
   };
 
 
