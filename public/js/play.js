@@ -1,13 +1,13 @@
 "use strict";
 
-var asteriskAttack = (function play(aa) {
+var asteriskAttack = (function _playJs(aa) {
 
 
   /*
    * Normalize the defender's position according to the x-axis position of the mouse.
    * @return {number} The normalized x position.
    */
-  function normalizeDefenderPosition(mousePosX) {
+  function _normalizeDefenderPosition(mousePosX) {
     var min = 15 // A little padding from the screen edge looks better.
       , max = aa.dom.win.width() - aa.dom.defender.width() - min
       , pos = mousePosX / aa.dom.win.width(); // Normalize to [0, 1]
@@ -20,7 +20,7 @@ var asteriskAttack = (function play(aa) {
   /*
    * Start the game.
    */
-  function start() {
+  aa.start = function() {
     aa.reset();
 
     // The following numbered tasks correspond symmetrically to those in the quit function.
@@ -37,7 +37,7 @@ var asteriskAttack = (function play(aa) {
 
     // 4. Position the defender according to the cursor position.
     aa.dom.doc.mousemove(function(event) {
-      aa.dom.defender.css({ left: normalizeDefenderPosition(event.pageX) });
+      aa.dom.defender.css({ left: _normalizeDefenderPosition(event.pageX) });
     });
 
     // 5. Watch for game-relevant key-presses.
@@ -60,7 +60,7 @@ var asteriskAttack = (function play(aa) {
   /*
    * End the game.
    */
-  function quit() {
+  aa.quit = function() {
     aa.updateTopScoresData();
     aa.resetAsterisks();
 
@@ -85,8 +85,6 @@ var asteriskAttack = (function play(aa) {
   }
 
 
-  aa.start = start;
-  aa.quit = quit;
   return aa;
 
 })(asteriskAttack); 
@@ -97,7 +95,7 @@ $(document).ready(function() {
   /*
    * Hide game componenets, and show an error msg and reload link instead.
    */
-  function showScreenSizeError() {
+  function _showScreenSizeError() {
     // TODO Abort game load instead of hiding game components if screen size error.
     asteriskAttack.dom.game.css({ 'display':'none' });
 
@@ -116,7 +114,7 @@ $(document).ready(function() {
 
   (function validateScreenSize() {
     if (asteriskAttack.dom.win.width() < 1000) {
-      showScreenSizeError();
+      _showScreenSizeError();
     }
     else {
       asteriskAttack.animateLoadGame();

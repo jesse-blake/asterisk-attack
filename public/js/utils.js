@@ -1,6 +1,6 @@
 "use strict";
 
-var asteriskAttack = (function utils(aa) {
+var asteriskAttack = (function _utilsJs(aa) {
 
 
   /*
@@ -8,12 +8,11 @@ var asteriskAttack = (function utils(aa) {
    # @param {number} min The range minimum.
    # @param {number} max The range maximum.
    */
-  function randomInRange(min, max) {
+  aa.randomInRange = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
 
-  aa.randomInRange = randomInRange;
   return aa;
 
 })({});

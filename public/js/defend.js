@@ -1,12 +1,12 @@
 "use strict";
 
-var asteriskAttack = (function defend(aa) {
+var asteriskAttack = (function _defendJs(aa) {
 
 
   /*
    * Fire a heatray from (approximately) the defender's eyes.
    */
-  function shootHeatray() {
+  aa.shootHeatray = function() {
     var heatray = aa.dom.heatraysIdle.shift()
       , pos = aa.dom.defender.offset();
 
@@ -24,7 +24,6 @@ var asteriskAttack = (function defend(aa) {
   }
 
 
-  aa.shootHeatray = shootHeatray;
   return aa;
 
 })(asteriskAttack);

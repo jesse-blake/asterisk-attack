@@ -1,22 +1,12 @@
 "use strict";
 
-var asteriskAttack = (function attack(aa) {
-
-
-  /*
-   * Increase the number of asterisks attacking per time interval.
-   */
-  function increaseAttackSpeed() {
-    aa.game.asteriskGenerationSpeed -= 50;
-    window.clearInterval(aa.intervals.attack);
-    aa.intervals.attack = setInterval(attack, aa.game.asteriskGenerationSpeed);
-  }
+var asteriskAttack = (function _attackJs(aa) {
 
 
   /*
    * Send the next attacking asterisk's on its animation from top to bottom.
    */
-  function attack() {
+  aa.attack = function() {
     var asterisk = aa.dom.asterisksIdle.shift()
       , slowestAttack = 3000
       , fastestAttack = 8000
@@ -34,7 +24,7 @@ var asteriskAttack = (function attack(aa) {
   /*
    * Sundry tasks and updates to be performed on completion of an asterisk's attack.
    */
-  function completeAttack(asteriskIdx, attackThwarted) {
+  aa.completeAttack = function(asteriskIdx, attackThwarted) {
     var a = aa.dom.asterisksAttacking[asteriskIdx];
 
     if (attackThwarted) { // The defender defeated the asterisk.
@@ -43,7 +33,7 @@ var asteriskAttack = (function attack(aa) {
     }
 
     if (attackThwarted && aa.game.score % 5 === 0) {
-      increaseAttackSpeed();
+      _increaseAttackSpeed();
     }
     else if (!attackThwarted) { // The game's over.
       aa.dom.background.effect("bounce", {}, 750);
@@ -60,7 +50,7 @@ var asteriskAttack = (function attack(aa) {
   /*
    * Reset the asterisks after game-over, stopping those still in-motion.
    */
-  function resetAsterisks() {
+  aa.resetAsterisks = function() {
     var aId;
 
     for (aId in aa.dom.asterisksAttacking) {
@@ -75,10 +65,16 @@ var asteriskAttack = (function attack(aa) {
   }
 
 
-  aa.increaseAttackSpeed = increaseAttackSpeed;
-  aa.attack = attack;
-  aa.completeAttack = completeAttack;
-  aa.resetAsterisks = resetAsterisks;
+  /*
+   * Increase the number of asterisks attacking per time interval.
+   */
+  function _increaseAttackSpeed() {
+    aa.game.asteriskGenerationSpeed -= 50;
+    window.clearInterval(aa.intervals.attack);
+    aa.intervals.attack = setInterval(aa.attack, aa.game.asteriskGenerationSpeed);
+  }
+
+
   return aa;
 
 })(asteriskAttack);

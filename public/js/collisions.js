@@ -1,11 +1,11 @@
 "use strict";
 
-var asteriskAttack = (function collisions(aa) {
+var asteriskAttack = (function _collisionsJs(aa) {
 
   /*
    * Detect collisions between attacking asterisks and heatrays shot by the defender.
    */
-  function detectCollisions() {
+  aa.detectCollisions = function() {
     var a // asterisk
       , h // heatray
       , d // defender
@@ -18,7 +18,7 @@ var asteriskAttack = (function collisions(aa) {
      * Get the positional coordinates of a dom element.
      * @param {object} element A jquery wrapped dom element.
      */
-    function getPosition(element) {
+    function _getPosition(element) {
       var pos    = element.offset()
         , width  = element.width()
         , height = element.height();
@@ -31,7 +31,7 @@ var asteriskAttack = (function collisions(aa) {
      * @param {number[]} p1 Some top and bottom (or left and right) coordinates.
      * @param {number[]} p2 Other top and bottom (or left and right) coordinates.
      */
-    function positionsCollide(p1, p2) {
+    function _positionsCollide(p1, p2) {
       var x = p1[0] < p2[0] ? p1 : p2
         , y = p1[0] < p2[0] ? p2 : p1;
       
@@ -40,14 +40,14 @@ var asteriskAttack = (function collisions(aa) {
 
     // Check every attacking asterisk for possible collisions.
     for (aIdx in aa.dom.asterisksAttacking) {
-      a = getPosition(aa.dom.asterisksAttacking[aIdx]);
+      a = _getPosition(aa.dom.asterisksAttacking[aIdx]);
       collision = false;
 
       // Check if the asterisk is colliding with a heatray.
       for (hIdx in aa.dom.heatraysDefending) {
-        h = getPosition(aa.dom.heatraysDefending[hIdx]);
+        h = _getPosition(aa.dom.heatraysDefending[hIdx]);
 
-        if (positionsCollide(a[0], h[0]) && positionsCollide(a[1], h[1])) {
+        if (_positionsCollide(a[0], h[0]) && _positionsCollide(a[1], h[1])) {
           aa.completeAttack(aIdx, true);
           collision = true;
           break;
@@ -57,15 +57,15 @@ var asteriskAttack = (function collisions(aa) {
       if (collision) continue; // The asterisk was thwarted by a heatray, so ignore it now.
 
       // Check if the asterisk collided with the defender.
-      d = getPosition(aa.dom.defender);
-      if (positionsCollide(a[0], d[0]) && positionsCollide(a[1], d[1])) {
+      d = _getPosition(aa.dom.defender);
+      if (_positionsCollide(a[0], d[0]) && _positionsCollide(a[1], d[1])) {
         aa.completeAttack(aIdx, true);
         continue;
       }
 
       // Check if the asterisk got past the defender to the game-over zone.
-      goz = getPosition(aa.dom.gameOverZone);
-      if (positionsCollide(a[0], goz[0]) && positionsCollide(a[1], goz[1])) {
+      goz = _getPosition(aa.dom.gameOverZone);
+      if (_positionsCollide(a[0], goz[0]) && _positionsCollide(a[1], goz[1])) {
         aa.completeAttack(aIdx, false);
         aa.quit();
         break;
@@ -74,7 +74,6 @@ var asteriskAttack = (function collisions(aa) {
   }
 
 
-  aa.detectCollisions = detectCollisions;
   return aa;
 
 })(asteriskAttack);

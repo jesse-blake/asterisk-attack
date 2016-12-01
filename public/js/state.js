@@ -1,12 +1,12 @@
 "use strict";
 
-var asteriskAttack = (function state(aa) {
+var asteriskAttack = (function _stateJs(aa) {
 
 
   /*
    * Make ready to play the game anew.
    */
-  function reset() {
+  aa.reset = function() {
     aa.game.prevScore = aa.game.score;
     aa.game.score = 0;
     aa.game.plays++;
@@ -17,7 +17,7 @@ var asteriskAttack = (function state(aa) {
   
 
   // Pre-referenced dom elements for performance.
-  var dom = {
+  aa.dom = {
     win:                 $(window),
     doc:                 $(document),
     screenSizeError:     $('#screen-size-error'),
@@ -67,7 +67,7 @@ var asteriskAttack = (function state(aa) {
     heatraysDefending:   []
   };
 
-  var intervals = {
+  aa.intervals = {
     screenSizeError:     null,
     attack:              null,
     collision:           null,
@@ -75,7 +75,7 @@ var asteriskAttack = (function state(aa) {
     antenas:             []
   };
 
-  var game = {
+  aa.game = {
     score:                   null,
     prevScore:               null,
     plays:                   0,
@@ -83,10 +83,6 @@ var asteriskAttack = (function state(aa) {
   };
 
 
-  aa.reset = reset;
-  aa.dom = dom;
-  aa.intervals = intervals;
-  aa.game = game;
   return aa;
 
 })(asteriskAttack); 

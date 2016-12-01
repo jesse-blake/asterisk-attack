@@ -1,6 +1,6 @@
 "use strict";
 
-var asteriskAttack = (function animations(aa) {
+var asteriskAttack = (function _animationsJs(aa) {
 
   var duration = 300;
 
@@ -8,47 +8,47 @@ var asteriskAttack = (function animations(aa) {
   /*
    * Call once to animate in the game's main elements.
    */
-  function animateLoadGame() {
+  aa.animateLoadGame = function() {
     aa.updateScore();
-    setClickHandlers();
+    _setClickHandlers();
 
-    showFromLeft(aa.dom.menu);
-    showFromRight(aa.dom.logo);
-    showFromLeft(aa.dom.score);
-    showFromRight(aa.dom.playBtn);
+    _showFromLeft(aa.dom.menu);
+    _showFromRight(aa.dom.logo);
+    _showFromLeft(aa.dom.score);
+    _showFromRight(aa.dom.playBtn);
   };
 
 
   /*
    * Call whenever play is clicked to animate the start of a game.
    */
-  function animateStartGame() {
-    resetScore();
-    updatePlayBtn();
+  aa.animateStartGame = function() {
+    _resetScore();
+    _updatePlayBtn();
 
-    animateDefender(true);
-    hideToRight(aa.dom.menu);
-    hideToRight(aa.dom.playBtn);
+    _animateDefender(true);
+    _hideToRight(aa.dom.menu);
+    _hideToRight(aa.dom.playBtn);
 
-    showFromLeft(aa.dom.howToQuitMsg);
+    _showFromLeft(aa.dom.howToQuitMsg);
   };
 
 
   /*
    * Call at game-over time to animate the game-over sequence.
    */
-  function animateEndGame() {
-    updatePlayBtn();
+  aa.animateEndGame = function() {
+    _updatePlayBtn();
 
-    animateDefender(false);
-    showFromLeft(aa.dom.gameOverMsg);
-    hideToRight(aa.dom.howToQuitMsg);
+    _animateDefender(false);
+    _showFromLeft(aa.dom.gameOverMsg);
+    _hideToRight(aa.dom.howToQuitMsg);
 
     setTimeout(function() {
-      hideToRight(aa.dom.gameOverMsg);
+      _hideToRight(aa.dom.gameOverMsg);
 
-      showFromLeft(aa.dom.menu);
-      showFromLeft(aa.dom.playBtn);
+      _showFromLeft(aa.dom.menu);
+      _showFromLeft(aa.dom.playBtn);
     }, 1500);
   };
 
@@ -56,62 +56,62 @@ var asteriskAttack = (function animations(aa) {
   /*
    * Animate the top scores 'page' into view.
    */
-  function showTopScores() {
+  function _showTopScores() {
     aa.updateTopScores();
 
-    hideToRight(aa.dom.menu);
-    hideToRight(aa.dom.score);
-    hideToRight(aa.dom.playBtn);
-    hideToRight(aa.dom.background);
+    _hideToRight(aa.dom.menu);
+    _hideToRight(aa.dom.score);
+    _hideToRight(aa.dom.playBtn);
+    _hideToRight(aa.dom.background);
 
-    showFromLeft(aa.dom.topScoresHeader);
-    showFromLeft(aa.dom.topScores);
-    showFromLeft(aa.dom.topScoresDone);
+    _showFromLeft(aa.dom.topScoresHeader);
+    _showFromLeft(aa.dom.topScores);
+    _showFromLeft(aa.dom.topScoresDone);
   }
 
 
   /*
    * Animate the top scores 'page' out of view.
    */
-  function hideTopScores() {
-    hideToRight(aa.dom.topScoresHeader);
-    hideToRight(aa.dom.topScores);
-    hideToRight(aa.dom.topScoresDone);
+  function _hideTopScores() {
+    _hideToRight(aa.dom.topScoresHeader);
+    _hideToRight(aa.dom.topScores);
+    _hideToRight(aa.dom.topScoresDone);
 
-    showFromLeft(aa.dom.menu);
-    showFromLeft(aa.dom.score);
-    showFromLeft(aa.dom.playBtn);
-    showFromLeft(aa.dom.background);
+    _showFromLeft(aa.dom.menu);
+    _showFromLeft(aa.dom.score);
+    _showFromLeft(aa.dom.playBtn);
+    _showFromLeft(aa.dom.background);
   }
 
 
   /*
    * Animate the how-to-play 'page' into view.
    */
-  function showHowToPlay() {
-    hideToRight(aa.dom.menu);
-    hideToRight(aa.dom.score);
-    hideToRight(aa.dom.playBtn);
-    hideToRight(aa.dom.background);
+  function _showHowToPlay() {
+    _hideToRight(aa.dom.menu);
+    _hideToRight(aa.dom.score);
+    _hideToRight(aa.dom.playBtn);
+    _hideToRight(aa.dom.background);
 
-    showFromLeft(aa.dom.howToPlayDone);
-    showFromLeft(aa.dom.howToPlayHeader);
-    showFromLeft(aa.dom.howToPlay);
+    _showFromLeft(aa.dom.howToPlayDone);
+    _showFromLeft(aa.dom.howToPlayHeader);
+    _showFromLeft(aa.dom.howToPlay);
   }
 
 
   /*
    * Animate the how-to-play 'page' out of view.
    */
-  function hideHowToPlay() {
-    hideToRight(aa.dom.howToPlayDone);
-    hideToRight(aa.dom.howToPlayHeader);
-    hideToRight(aa.dom.howToPlay);
+  function _hideHowToPlay() {
+    _hideToRight(aa.dom.howToPlayDone);
+    _hideToRight(aa.dom.howToPlayHeader);
+    _hideToRight(aa.dom.howToPlay);
 
-    showFromLeft(aa.dom.menu);
-    showFromLeft(aa.dom.score);
-    showFromLeft(aa.dom.playBtn);
-    showFromLeft(aa.dom.background);
+    _showFromLeft(aa.dom.menu);
+    _showFromLeft(aa.dom.score);
+    _showFromLeft(aa.dom.playBtn);
+    _showFromLeft(aa.dom.background);
   }
 
 
@@ -119,7 +119,7 @@ var asteriskAttack = (function animations(aa) {
    * Animate an element into view from the left.
    * @param {object} element A jquery-wrapped dom element.
    */
-  function showFromLeft(element) {
+  function _showFromLeft(element) {
     var startPos = -(element.width() * 2);
 
     element.stop()
@@ -134,7 +134,7 @@ var asteriskAttack = (function animations(aa) {
    * Animate an element into view from the right.
    * @param {object} element A jquery-wrapped dom element.
    */
-  function showFromRight(element) {
+  function _showFromRight(element) {
     var startPos = -(element.width() * 2);
 
     element.stop()
@@ -148,7 +148,7 @@ var asteriskAttack = (function animations(aa) {
    * Animate an element to the left out of view.
    * @param {object} element A jquery-wrapped dom element.
    */
-  function hideToLeft(element) {
+  function _hideToLeft(element) {
     var endPos = -(element.width() * 2);
 
     element
@@ -170,7 +170,7 @@ var asteriskAttack = (function animations(aa) {
    * Animate an element to the right out of view.
    * @param {object} element A jquery-wrapped dom element.
    */
-  function hideToRight(element) {
+  function _hideToRight(element) {
     var endPos = -(element.width() * 2);
 
     element
@@ -192,25 +192,25 @@ var asteriskAttack = (function animations(aa) {
   /*
    * Register click handlers which trigger animations that introduce application states.
    */
-  function setClickHandlers() {
+  function _setClickHandlers() {
     aa.dom.playBtnLink.click(function() {
       aa.start();
     });
 
     aa.dom.topScoresLink.click(function() {
-      showTopScores(); 
+      _showTopScores(); 
     });
 
     aa.dom.topScoresDoneBtn.click(function() {
-      hideTopScores();
+      _hideTopScores();
     });
 
     aa.dom.howToPlayLink.click(function() {
-      showHowToPlay(); 
+      _showHowToPlay(); 
     });
 
     aa.dom.howToPlayDoneBtn.click(function() {
-      hideHowToPlay();
+      _hideHowToPlay();
     });
   }
 
@@ -218,7 +218,7 @@ var asteriskAttack = (function animations(aa) {
   /*
    * Reset the score to zero, and animate the score shaking to indicate it's being reset.
    */
-  function resetScore() {
+  function _resetScore() {
     if (aa.game.prevScore > 0) {
       aa.dom.score.effect('shake', duration, function() {
         aa.updateScore();
@@ -230,7 +230,7 @@ var asteriskAttack = (function animations(aa) {
   /*
    * Change the play button to read 'play again' after the game's been played once.
    */
-  function updatePlayBtn() {
+  function _updatePlayBtn() {
     if (aa.game.plays === 1) {
       aa.dom.playBtn.html('<a href="#">P L A Y&nbsp;&nbsp;&nbsp;A G A I N</a>');
       aa.dom.playBtnLink = $('#play-btn > a');
@@ -246,7 +246,7 @@ var asteriskAttack = (function animations(aa) {
    * Animate the defender in/out from above the screen.
    * @param {bool} show Animate defender in if true; animate defender out if false.
    */
-  function animateDefender(show) {
+  function _animateDefender(show) {
     if (show) {
       aa.dom.defender
         .css({ 'left': (aa.dom.win.width() / 2) - 20, 'top': -50 })
@@ -259,9 +259,6 @@ var asteriskAttack = (function animations(aa) {
   }
 
 
-  aa.animateLoadGame = animateLoadGame;
-  aa.animateStartGame = animateStartGame;
-  aa.animateEndGame = animateEndGame;
   return aa;
 
 })(asteriskAttack);

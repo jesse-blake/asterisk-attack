@@ -1,13 +1,13 @@
 "use strict";
 
-var asteriskAttack = (function score(aa) {
+var asteriskAttack = (function _scoreJs(aa) {
 
   
   /*
    * Public facing score updater.
    */
-  function updateScore() {
-    $('#score').html(buildScore(aa.game.score));
+  aa.updateScore = function() {
+    $('#score').html(_buildScore(aa.game.score));
   };
 
 
@@ -16,7 +16,7 @@ var asteriskAttack = (function score(aa) {
    * @param {number} n The non-negative score to build in ascii art.
    * @return {string} The score: a string of html to be injected into the page by jquery.
    */
-  function buildScore(n) {
+  function _buildScore(n) {
     var i
       , result
       , digits = []
@@ -74,7 +74,6 @@ var asteriskAttack = (function score(aa) {
   }
 
 
-  aa.updateScore = updateScore;
   return aa;
   
 })(asteriskAttack);
