@@ -94,18 +94,29 @@ var asteriskAttack = (function play(aa) {
 
 $(document).ready(function() {
 
+  /*
+   * Hide game componenets, and show an error msg and reload link instead.
+   */
+  function showScreenSizeError() {
+    // TODO Abort game load instead of hiding game components if screen size error.
+    asteriskAttack.dom.game.css({ 'display':'none' });
+
+    asteriskAttack.dom.screenSizeError
+      .html('<div id="error-msg">YOU NEED A BIGGER SCREEN!</div><br><br><a id="reload-page" href=""><small>RETRY</small></a>')
+      .css({ 'display':'inherit' });
+
+    asteriskAttack.intervals.screenSizeError = setInterval(function() {
+      $('#error-msg').effect('shake', {}, 200);
+    }, 2000);
+
+    $('#reload-page').click(function() {
+      location.reload();
+    });
+  }
+
   (function validateScreenSize() {
     if (asteriskAttack.dom.win.width() < 1000) {
-      asteriskAttack.dom.game.css({ 'display':'none' });
-      asteriskAttack.dom.screenSizeError.css({ 'display':'inherit' });
-
-      asteriskAttack.loops.screenSizeError = setInterval(function() {
-        asteriskAttack.dom.errorMsg.effect('shake', {}, 200);
-      }, 2000);
-
-      asteriskAttack.dom.reload.click(function() {
-        location.reload();
-      });
+      showScreenSizeError();
     }
     else {
       asteriskAttack.animateLoadGame();

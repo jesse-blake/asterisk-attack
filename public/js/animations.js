@@ -15,7 +15,7 @@ var asteriskAttack = (function animations(aa) {
     showFromLeft(aa.dom.menubar);
     showFromRight(aa.dom.logo);
     showFromLeft(aa.dom.score);
-    showFromRight(aa.dom.startBtn);
+    showFromRight(aa.dom.playBtn);
     showFromLeft(aa.dom.menu);
   };
 
@@ -25,13 +25,13 @@ var asteriskAttack = (function animations(aa) {
    */
   function animateStartGame() {
     resetScore();
-    updateStartBtn();
+    updatePlayBtn();
 
     animateDefender(true);
-    hideToRight(aa.dom.startBtn);
+    hideToRight(aa.dom.playBtn);
     hideToRight(aa.dom.menu);
 
-    showFromLeft(aa.dom.quitInstructions);
+    showFromLeft(aa.dom.quitInstructionsMsg);
   };
 
 
@@ -39,15 +39,15 @@ var asteriskAttack = (function animations(aa) {
    * Call at game-over time to animate the game-over sequence.
    */
   function animateEndGame() {
-    updateStartBtn();
+    updatePlayBtn();
 
     animateDefender(false);
-    showFromLeft(aa.dom.gameOver);
-    hideToRight(aa.dom.quitInstructions);
+    showFromLeft(aa.dom.gameOverMsg);
+    hideToRight(aa.dom.quitInstructionsMsg);
 
     setTimeout(function() {
-      hideToRight(aa.dom.gameOver);
-      showFromLeft(aa.dom.startBtn);
+      hideToRight(aa.dom.gameOverMsg);
+      showFromLeft(aa.dom.playBtn);
       showFromLeft(aa.dom.menu);
     }, 1500);
   };
@@ -60,7 +60,7 @@ var asteriskAttack = (function animations(aa) {
     aa.updateScoreboard();
 
     hideToRight(aa.dom.score);
-    hideToRight(aa.dom.startBtn);
+    hideToRight(aa.dom.playBtn);
     hideToRight(aa.dom.menu);
     hideToRight(aa.dom.background);
 
@@ -79,7 +79,7 @@ var asteriskAttack = (function animations(aa) {
     hideToRight(aa.dom.scoreboardDone);
 
     showFromLeft(aa.dom.score);
-    showFromLeft(aa.dom.startBtn);
+    showFromLeft(aa.dom.playBtn);
     showFromLeft(aa.dom.menu);
     showFromLeft(aa.dom.background);
   }
@@ -91,7 +91,7 @@ var asteriskAttack = (function animations(aa) {
   function showInstructions() {
     hideToRight(aa.dom.menu);
     hideToRight(aa.dom.score);
-    hideToRight(aa.dom.startBtn);
+    hideToRight(aa.dom.playBtn);
     hideToRight(aa.dom.background);
 
     showFromLeft(aa.dom.instructionsDone);
@@ -110,7 +110,7 @@ var asteriskAttack = (function animations(aa) {
 
     showFromLeft(aa.dom.menu);
     showFromLeft(aa.dom.score);
-    showFromLeft(aa.dom.startBtn);
+    showFromLeft(aa.dom.playBtn);
     showFromLeft(aa.dom.background);
   }
 
@@ -193,7 +193,7 @@ var asteriskAttack = (function animations(aa) {
    * Register click handlers which trigger animations that introduce application states.
    */
   function setClickHandlers() {
-    $('#start-btn a').click(function() {
+    aa.dom.playBtnLink.click(function() {
       aa.start();
     });
 
@@ -201,7 +201,7 @@ var asteriskAttack = (function animations(aa) {
       showScoreboard(); 
     });
 
-    aa.dom.scoreboardDone.click(function() {
+    aa.dom.scoreboardDoneBtn.click(function() {
       hideScoreboard();
     });
 
@@ -209,7 +209,7 @@ var asteriskAttack = (function animations(aa) {
       showInstructions(); 
     });
 
-    aa.dom.instructionsDone.click(function() {
+    aa.dom.instructionsDoneBtn.click(function() {
       hideInstructions();
     });
   }
@@ -230,11 +230,12 @@ var asteriskAttack = (function animations(aa) {
   /*
    * Change the play button to read 'play again' after the game's been played once.
    */
-  function updateStartBtn() {
+  function updatePlayBtn() {
     if (aa.game.plays === 1) {
-      aa.dom.startBtn.html('<a href="#" style="color:white">P L A Y&nbsp;&nbsp;&nbsp;A G A I N</a><br>');
+      aa.dom.playBtn.html('<a href="#">P L A Y&nbsp;&nbsp;&nbsp;A G A I N</a>');
+      aa.dom.playBtnLink = $('#play-btn > a');
 
-      $('#start-btn a').click(function() {
+      aa.dom.playBtnLink.click(function() {
         aa.start();
       });
     }

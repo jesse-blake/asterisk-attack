@@ -22,9 +22,6 @@ var asteriskAttack = (function state(aa) {
     doc:                 $(document),
     screenSizeError:     $('#screen-size-error'),
 
-    errorMsg:            $('#error-msg'),
-    reload:              $('#reload-page'),
-
     stars:               $('#stars'),
     starlessAreas:       $('#starless-areas'),
 
@@ -36,22 +33,25 @@ var asteriskAttack = (function state(aa) {
     background:          $('#background'),
     antenas:             $('#antenas'),
     cityscape:           $('#cityscape'),
-    startBtn:            $('#start-btn'),
-    gameOver:            $('#game-over'),
+
+    playBtn:             $('#play-btn'),
+    playBtnLink:         null, // Set in load.js.
+
+    gameOverMsg:         $('#game-over-msg'),
 
     menu:                $('#menu'),
-    scoreboardLink:      $('#scoreboard-link'),
-    instructionsLink:    $('#instructions-link'),
+    scoreboardLink:      null, // Set in load.js.
+    instructionsLink:    null, // Set in load.js.
 
-    quitInstructions:    $('#quit-instructions'),
+    quitInstructionsMsg: $('#quit-instructions-msg'),
 
     scoreboardDone:      $('#scoreboard-done'),
-    scoreboardDoneBtn:   $('#scoreboard-done-btn'),
+    scoreboardDoneBtn:   null, // Set in load.js.
     scoreboardHeader:    $('#scoreboard-header'),
     scoreboard:          $('#scoreboard'),
 
     instructionsDone:    $('#instructions-done'),
-    instructionsDoneBtn: $('#instructions-done-btn'),
+    instructionsDoneBtn: null, // Set in load.js.
     instructionsHeader:  $('#instructions-header'),
     instructions:        $('#instructions'),
 

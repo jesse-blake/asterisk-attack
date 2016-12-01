@@ -65,13 +65,13 @@ div#effects {
 
   > div#logo,
   > div#score,
-  > div#start-btn,
-  > div#game-over,
+  > div#play-btn,
+  > div#game-over-msg,
   > div#instructions-header,
   > div#instructions,
   > div#instructions-done,
   > div#menu,
-  > div#quit-instructions,
+  > div#quit-instructions-msg,
   > div#scoreboard-header,
   > div#scoreboard,
   > div#scoreboard-done {
@@ -93,7 +93,7 @@ div#effects {
     top: 209px;
   }
 
-  > div#start-btn, div#game-over {
+  > div#play-btn, div#game-over-msg {
     color: white;
     z-index: 1043;
     top: 310px;
@@ -109,7 +109,7 @@ div#effects {
   > div#menu,
   > div#scoreboard-done,
   > div#instructions-done,
-  > div#quit-instructions {
+  > div#quit-instructions-msg {
     color: yellowgreen;
     z-index: 1005;
     top: 23px; 

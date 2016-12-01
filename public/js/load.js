@@ -332,6 +332,50 @@ var asteriskAttack = (function load(aa) {
   })();
 
 
+  /*
+   * Load the defender ascii art.
+   */
+  (function loadDefender() {
+    aa.dom.defender.html('<span style="color:red">&nbsp;,</span><span style="color:tan">o</span><span style="color:blue">/</span><br>'
+      + '<span style="color:red">/</span><span style="color:blue">/(&nbsp;</span><br>'
+      + '<span style="color:red">)</span><span style="color:blue">/&nbsp;&gt;</span><br>'
+    );
+  })();
+
+
+  /*
+   * Load button/link text.
+   */
+  (function loadGameText() {
+    aa.dom.playBtn.html('<a href="#">P L A Y</a>');
+    aa.dom.playBtnLink = $('#play-btn > a');
+
+    aa.dom.gameOverMsg.html('G A M E &nbsp; O V E R');
+
+    aa.dom.menu.html('<a id="instructions-link" href="#">HOW TO PLAY</a>'
+      + '&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;'
+      + '<a id="scoreboard-link" href="#">YOUR TOP SCORES</a>'
+    );
+    aa.dom.instructionsLink = $('#instructions-link');
+    aa.dom.scoreboardLink = $('#scoreboard-link');
+
+    aa.dom.instructions.html('BLOCK THE ASTERISKS'
+      + '&nbsp;&nbsp;<span style="color:#555">*</span>&nbsp;&nbsp;'
+      + 'PRESS <span style="color:white">SPACEBR</span> FOR HEAT VISION'
+      + '&nbsp;&nbsp;<span style="color:#555">*</span>&nbsp;&nbsp;'
+      + 'PRESS <span style="color:white">ESC</span> TO QUIT'
+    );
+
+    aa.dom.quitInstructionsMsg.html('PRESS ESC TO QUIT');
+
+    aa.dom.scoreboardDone.html('<a href="#">BACK TO GAME</a>');
+    aa.dom.scoreboardDoneBtn = $('#scoreboard-done > a');
+
+    aa.dom.instructionsDone.html('<a href="#">BACK TO GAME</a>');
+    aa.dom.instructionsDoneBtn = $('#instructions-done > a');
+  })();
+
+
   return aa;
 
 })(asteriskAttack);
