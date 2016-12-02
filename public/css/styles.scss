@@ -7,10 +7,24 @@ body {
   overflow-x: hidden; // Prevents sidescroll due to negative absolute pos.
 }
 
+div#stars {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 440px;
+  /* box-sizing: border-box; */
+  /* border: solid 1px tomato; */
+
+  > div.star {
+  }
+}
+
 div#screen-size-error {
   display: none;
   position: absolute;
-  z-index: 77;
+  z-index: 200;
   top: 150px;
   left: 0;
   width: 100%;
@@ -29,18 +43,9 @@ div#screen-size-error {
   }
 }
 
-div#stars {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 440px;
-  /* box-sizing: border-box; */
-  /* border: solid 1px tomato; */
-
-  > div.star {
-    z-index: -1;
-  }
+div#game {
+  position: relative; 
+  z-index: 300;
 }
 
 div#centering-div {
@@ -50,9 +55,15 @@ div#centering-div {
   /* box-sizing: border-box; */
   /* border: solid 1px gray; */
 
+  > div#play-btn,
+  > div#menu,
+  > div#top-scores-back-link-wrapper,
+  > div#how-to-play-back-link-wrapper {
+    z-index: 1;
+  }
+
   > div#menubar {
     position: absolute;
-    z-index: 33;
     top: 0;
     left: 0;
     width: $game-width * 10;
@@ -96,7 +107,6 @@ div#centering-div {
 
   > div#play-btn, div#game-over-msg {
     color: white;
-    z-index: 1043;
     top: 310px;
     /* box-sizing: border-box; */
     /* border: solid 1px blue; */
@@ -112,7 +122,6 @@ div#centering-div {
   > div#how-to-play-back-link-wrapper,
   > div#how-to-quit-msg {
     color: yellowgreen;
-    z-index: 1005;
     top: 23px; 
 
     a {
@@ -123,7 +132,6 @@ div#centering-div {
 
   > div#top-scores {
     color: #333;
-    z-index: 1007;
     top: 300px;
   }
 
@@ -226,7 +234,6 @@ div#zones {
   > div.heatray {
     color: deeppink;
     position: absolute;
-    z-index: 1;
   }
 
   > div#attack-zone {
@@ -257,7 +264,6 @@ div#zones {
 
 div#defender {
   position: absolute;
-  z-index: -1;
   top: -50px;
   line-height: 15px;
   /* box-sizing: border-box; */
