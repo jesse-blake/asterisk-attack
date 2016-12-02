@@ -46,6 +46,45 @@ var asteriskAttack = (function _loadJs(aa) {
 
 
   /*
+   * Shoot the shooting star across the sky to and from random locations, at random intervals.
+   */
+  (function _loadShootingStar() {
+    aa.dom.stars.prepend('<div id="shooting-star" style="position:absolute;">•</div>');
+    aa.dom.shootingStar = $('#shooting-star'); 
+
+    function _shootTheShootingStar() {
+      if (!document.hidden) {
+        var startPosTop  = 0
+          , startPosLeft = aa.randomInRange(-300, aa.dom.stars.width() + 300)
+          , endPosTop    = aa.randomInRange(aa.dom.stars.height() - 100, aa.dom.stars.height())
+          , endPosLeft   = aa.randomInRange(143, aa.dom.stars.width() - 143)
+          , duration;
+
+        // Lets not shoot the star straight down, ok?
+        if (endPosLeft < startPosLeft && endPosLeft > startPosLeft - 300) {
+          endPosLeft -= 300;
+        }
+        else if (endPosLeft > startPosLeft && endPosLeft < startPosLeft + 300) {
+          endPosLeft += 300;
+        }
+
+        // Increase duration for longer distances, so star speeds are somewhat uniform.
+        duration = 700 + (Math.abs(startPosLeft - endPosLeft));
+
+        aa.dom.shootingStar
+          .stop()
+          .css({ 'top': startPosTop, 'left': startPosLeft, 'color': 'white' })
+          .animate({ 'top': endPosTop, 'left': endPosLeft, 'color': '#101010' }, { duration: duration, easing: 'linear' });
+      }
+
+      setTimeout(_shootTheShootingStar, aa.randomInRange(3000, 7000));
+    }
+
+    setTimeout(_shootTheShootingStar, 1000);
+  })();
+
+
+  /*
    * Hide stars, which are situated behind cityscape buildings, behind opaque divs.
    */
   (function _loadStarlessAreas() {
@@ -268,7 +307,7 @@ var asteriskAttack = (function _loadJs(aa) {
         , level // A randomly chosen level of the cityscape.
         , color; // A randomly chosen window color.
 
-      if (!document.hidden) { // No need to make a noise if nobody's in the woods to hear it.
+      if (!document.hidden) {
         level = aa.randomInRange(0, cityscape.length - 1);
 
         color = (Math.random() > 0.5) // 50 percent chance of lights-on or off.

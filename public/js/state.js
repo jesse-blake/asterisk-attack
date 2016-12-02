@@ -24,6 +24,7 @@ var asteriskAttack = (function _stateJs(aa) {
     screenSizeError:          $('#screen-size-error'),
 
     stars:                    $('#stars'),
+    shootingStar:             null, // Set in load.js.
 
     game:                     $('#game'),
 
@@ -84,7 +85,7 @@ var asteriskAttack = (function _stateJs(aa) {
     score:                   null,
     prevScore:               null,
     plays:                   0,
-    asteriskGenerationSpeed: null,
+    asteriskGenerationSpeed: null
   };
 
 
