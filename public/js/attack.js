@@ -16,7 +16,7 @@ var asteriskAttack = (function _attackJs(aa) {
     aa.dom.asterisksAttacking[++aa.dom.attackerKeyCount] = asterisk;
 
     asterisk
-      .fadeIn({ queue: false, duration: 'slow' })
+      .show()
       .animate({ top: '585px' }, speed, 'linear');
   }
 

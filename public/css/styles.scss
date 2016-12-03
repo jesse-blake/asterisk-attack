@@ -1,6 +1,6 @@
 $game-width: 900px;
 
-body { 
+body {
   font-family: 'Inconsolata', monospace;
   font-size: 16px;
   background: #101010;
@@ -41,7 +41,7 @@ div#screen-size-error {
 }
 
 div#game {
-  position: relative; 
+  position: relative;
   z-index: 300;
 }
 
@@ -113,13 +113,13 @@ div#centering-div {
       text-decoration: none;
     }
   }
-  
+
   > div#menu,
   > div#top-scores-back-link-wrapper,
   > div#how-to-play-back-link-wrapper,
   > div#how-to-quit-msg {
     color: yellowgreen;
-    top: 23px; 
+    top: 23px;
 
     a {
       color: yellowgreen;
@@ -146,7 +146,7 @@ div#centering-div {
     /* border: solid 1px seagreen; */
 
     > div.starless {
-      position: absolute; 
+      position: absolute;
       bottom: 0;
       background-color: #101010;
       /* box-sizing: border-box; */
@@ -246,8 +246,51 @@ div#zones {
       position: absolute;
       top: -50px;
       /* box-sizing: border-box; */
-      /* border:solid 1px slategray; */ 
+      /* border:solid 1px slategray; */
+
+      @keyframes rotateFwd {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes rotateBwd {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-360deg);
+        }
+      }
+
+      &.rf1 { // i.e. Rotate Forward #1
+        animation: rotateFwd 0.5s linear infinite;
+      }
+      &.rf2 {
+        animation: rotateFwd 1s linear infinite;
+      }
+      &.rf3 {
+        animation: rotateFwd 2s linear infinite;
+      }
+      &.rf4 {
+        animation: rotateFwd 4s linear infinite;
+      }
+      &.rb1 { // i.e. Rotate Backward #1
+        animation: rotateBwd 0.5s linear infinite;
+      }
+      &.rb2 {
+        animation: rotateBwd 1s linear infinite;
+      }
+      &.rb3 {
+        animation: rotateBwd 2s linear infinite;
+      }
+      &.rb4 {
+        animation: rotateBwd 4s linear infinite;
+      }
     }
+
   }
 
   > div#game-over-zone {
