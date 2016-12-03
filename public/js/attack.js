@@ -36,7 +36,12 @@ var asteriskAttack = (function _attackJs(aa) {
       _increaseAttackSpeed();
     }
     else if (!attackThwarted) { // The game's over.
-      aa.dom.background.effect("bounce", {}, 750);
+      aa.dom.shockwaveFlash
+        .css({ 'background-image': 'radial-gradient(circle at ' + a.offset().left + 'px 500px, white 0%, #101010 90%)' })
+        .show()
+        .fadeOut(500);
+      aa.dom.background
+        .effect("bounce", {}, 750);
     }
 
     // Stop the asterisk, re-queue it for re-use, and remove it from the list of attackers.

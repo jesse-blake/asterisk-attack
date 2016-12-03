@@ -66,6 +66,8 @@ var asteriskAttack = (function _stateJs(aa) {
 
     defender:                 $('#defender'),
 
+    shockwaveFlash:           $('#shockwave-flash'),
+
     asterisksIdle:            [],
     asterisksAttacking:       {},
     attackerKeyCount:         0,  // Not a dom element; oh, well.
