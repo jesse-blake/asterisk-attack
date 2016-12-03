@@ -411,7 +411,7 @@ var asteriskAttack = (function _loadJs(aa) {
 
     aa.dom.howToPlay.html('BLOCK THE ASTERISKS'
       + '&nbsp;&nbsp;<span style="color:#555">*</span>&nbsp;&nbsp;'
-      + 'PRESS <span style="color:white">SPACEBR</span> FOR HEAT VISION'
+      + 'PRESS <span style="color:white">SPACEBAR</span> FOR HEAT VISION'
       + '&nbsp;&nbsp;<span style="color:#555">*</span>&nbsp;&nbsp;'
       + 'PRESS <span style="color:white">ESC</span> TO QUIT'
     );
