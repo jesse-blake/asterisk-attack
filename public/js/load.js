@@ -334,16 +334,18 @@ var asteriskAttack = (function _loadJs(aa) {
     var i
       , asterisk
       , quantity = 100
-      , colors = ['yellow','gold','orange','orangered','red','deeppink','hotpink','fuchsia','lightskyblue','dodgerblue','blue', 'yellowgreen','lime']
-      , rotationClasses = ['rf1','rf2','rf3','rf4','rb1','rb2','rb3','rb4'];
+      , fontSize
+      , colors = ['yellow','gold','orange','orangered','red','deeppink','hotpink','fuchsia','lightskyblue','dodgerblue','blue', 'yellowgreen','lime'];
 
     for (i = 0; i < quantity; i++) {
+      fontSize = aa.randomInRange(16, 64);
+
       asterisk = $('<div '
-        + 'class="asterisk '
-        + rotationClasses[aa.randomInRange(0, rotationClasses.length-1)] + '" '
+        + 'class="asterisk" '
         + 'style="'
         + 'color:' + colors[aa.randomInRange(0, colors.length - 1)] + '; '
-        + 'font-size:' + aa.randomInRange(12, 42) + 'px; '
+        + 'font-size:' + fontSize + 'px; '
+        + 'top:-' + fontSize + 'px; '
         + 'left:' + aa.randomInRange(0, aa.dom.attackZone.width() - 20) + 'px; '
         + '">*</div>'); 
 

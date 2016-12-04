@@ -10,12 +10,14 @@ var asteriskAttack = (function _attackJs(aa) {
     var asterisk = aa.dom.asterisksIdle.shift()
       , slowestAttack = 3000
       , fastestAttack = 8000
-      , speed = aa.randomInRange(slowestAttack, fastestAttack);
+      , speed = aa.randomInRange(slowestAttack, fastestAttack)
+      , rotationClasses = ['rf1','rf2','rf3','rb1','rb2','rb3'];
 
     // Add the asterisk to the list of attacking asterisks.
     aa.dom.asterisksAttacking[++aa.dom.attackerKeyCount] = asterisk;
 
     asterisk
+      .addClass(rotationClasses[aa.randomInRange(0, rotationClasses.length-1)])
       .show()
       .animate({ top: '585px' }, speed, 'linear');
   }
@@ -25,7 +27,8 @@ var asteriskAttack = (function _attackJs(aa) {
    * Sundry tasks and updates to be performed on completion of an asterisk's attack.
    */
   aa.completeAttack = function(asteriskIdx, attackThwarted) {
-    var a = aa.dom.asterisksAttacking[asteriskIdx];
+    var a = aa.dom.asterisksAttacking[asteriskIdx]
+      , topPos = a.css('font-size');
 
     if (attackThwarted) { // The defender defeated the asterisk.
       aa.game.score++;
@@ -46,7 +49,8 @@ var asteriskAttack = (function _attackJs(aa) {
 
     // Stop the asterisk, re-queue it for re-use, and remove it from the list of attackers.
     a.stop()
-      .css({ 'top':'50px', 'display':'none' });
+      .removeClass('rf1 rf2 rf3 rb1 rb2 rb3')
+      .css({ 'top': '-' + topPos });
     aa.dom.asterisksIdle.push(a);
     delete aa.dom.asterisksAttacking[asteriskIdx];
   }
@@ -56,12 +60,18 @@ var asteriskAttack = (function _attackJs(aa) {
    * Reset the asterisks after game-over, stopping those still in-motion.
    */
   aa.resetAsterisks = function() {
-    var aId;
+    var aId
+      , a
+      , topPos;
 
     for (aId in aa.dom.asterisksAttacking) {
-      aa.dom.asterisksAttacking[aId]
+      a = aa.dom.asterisksAttacking[aId];
+
+      topPos = a.css('font-size');
+
+      a.removeClass('rf1 rf2 rf3 rb1 rb2 rb3')
         .stop()
-        .css({ 'top':'-50px', 'display':'none' });
+        .css({ 'top': '-' + topPos });
 
       aa.dom.asterisksIdle.push(aa.dom.asterisksAttacking[aId]);
       delete aa.dom.asterisksAttacking[aId];

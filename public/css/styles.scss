@@ -242,9 +242,7 @@ div#zones {
     /* border: 1px solid lime; */
 
     > div.asterisk {
-      display: none;
       position: absolute;
-      top: -50px;
       /* box-sizing: border-box; */
       /* border:solid 1px slategray; */
 
@@ -274,9 +272,6 @@ div#zones {
       &.rf3 {
         animation: rotateFwd 2s linear infinite;
       }
-      &.rf4 {
-        animation: rotateFwd 4s linear infinite;
-      }
       &.rb1 { // i.e. Rotate Backward #1
         animation: rotateBwd 0.5s linear infinite;
       }
@@ -285,9 +280,6 @@ div#zones {
       }
       &.rb3 {
         animation: rotateBwd 2s linear infinite;
-      }
-      &.rb4 {
-        animation: rotateBwd 4s linear infinite;
       }
     }
 
