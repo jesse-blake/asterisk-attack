@@ -44,6 +44,11 @@ var asteriskAttack = (function _animationsJs(aa) {
     _showFromLeft(aa.dom.gameOverMsg);
     _hideToRight(aa.dom.howToQuitMsg);
 
+    // Hide reloading the asterisks computation in the time taken to display the game-over message.
+    setTimeout(function() {
+      aa.loadAsterisks(); 
+    }, 500);
+
     setTimeout(function() {
       _hideToRight(aa.dom.gameOverMsg);
 

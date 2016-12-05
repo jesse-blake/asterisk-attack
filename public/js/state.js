@@ -70,7 +70,7 @@ var asteriskAttack = (function _stateJs(aa) {
 
     asterisksIdle:            [],
     asterisksAttacking:       {},
-    attackerKeyCount:         0,  // Not a dom element; oh, well.
+    attackerCount:            0,  // Not a dom element; oh, well.
     heatraysIdle:             [],
     heatraysDefending:        []
   };

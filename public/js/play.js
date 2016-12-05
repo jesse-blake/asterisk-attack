@@ -29,18 +29,15 @@ var asteriskAttack = (function _playJs(aa) {
     aa.intervals.attack = setInterval(aa.attack, aa.game.asteriskGenerationSpeed);
     setTimeout(aa.intervals.collision = setInterval(aa.detectCollisions, 5), aa.game.asteriskGenerationSpeed);
 
-    // 2.
-    aa.animateStartGame();
-
-    // 3. Hide the cursor.
+    // 2. Hide the cursor.
     // $('html').css('cursor', 'none');
 
-    // 4. Position the defender according to the cursor position.
+    // 3. Position the defender according to the cursor position.
     aa.dom.doc.mousemove(function(event) {
       aa.dom.defender.css({ left: _normalizeDefenderPosition(event.pageX) });
     });
 
-    // 5. Watch for game-relevant key-presses.
+    // 4. Watch for game-relevant key-presses.
     aa.dom.doc.keyup(function (e) {
       if (e.keyCode === 32) { // key: space
         aa.shootHeatray();
@@ -54,6 +51,9 @@ var asteriskAttack = (function _playJs(aa) {
         return false;
       }
     });
+
+    // 5.
+    aa.animateStartGame();
   }
 
 
@@ -70,18 +70,18 @@ var asteriskAttack = (function _playJs(aa) {
     window.clearInterval(aa.intervals.attack);
     window.clearInterval(aa.intervals.collision);
 
-    // 2.
-    aa.animateEndGame();
-
-    // 3. Unhide the cursor.
+    // 2. Unhide the cursor.
     // $('html').css('cursor', 'auto');
 
-    // 4. Stop positioning the defender.
+    // 3. Stop positioning the defender.
     aa.dom.doc.unbind('mousemove');
 
-    // 5. Stop watching key-presses.
+    // 4. Stop watching key-presses.
     aa.dom.doc.unbind('keyup');
     aa.dom.doc.unbind('keydown');
+
+    // 5.
+    aa.animateEndGame();
   }
 
 

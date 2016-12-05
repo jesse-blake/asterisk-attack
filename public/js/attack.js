@@ -14,7 +14,7 @@ var asteriskAttack = (function _attackJs(aa) {
       , rotationClasses = ['rf1','rf2','rf3','rb1','rb2','rb3'];
 
     // Add the asterisk to the list of attacking asterisks.
-    aa.dom.asterisksAttacking[++aa.dom.attackerKeyCount] = asterisk;
+    aa.dom.asterisksAttacking[++aa.dom.attackerCount] = asterisk;
 
     asterisk
       .addClass(rotationClasses[aa.randomInRange(0, rotationClasses.length-1)])
@@ -56,26 +56,19 @@ var asteriskAttack = (function _attackJs(aa) {
 
 
   /*
-   * Reset the asterisks after game-over, stopping those still in-motion.
+   * Reset/renew/rerandomize the asterisk datastructures.
    */
   aa.resetAsterisks = function() {
     var aId
-      , a
-      , topPos;
+      , a;
 
     for (aId in aa.dom.asterisksAttacking) {
-      a = aa.dom.asterisksAttacking[aId];
-
-      topPos = a.css('width');
-
-      a.removeClass('rf1 rf2 rf3 rb1 rb2 rb3')
-        .stop()
-        .css({ 'top': '-' + topPos });
-
-      aa.dom.asterisksIdle.push(aa.dom.asterisksAttacking[aId]);
+      aa.dom.asterisksAttacking[aId].remove();
       delete aa.dom.asterisksAttacking[aId];
     }
-    aa.dom.attackerKeyCount = 0;
+    aa.dom.attackerCount = 0;
+
+    // Reloading asterisks is done in animateEndGame() in animations.js to hide the processing it requires.
   }
 
 
