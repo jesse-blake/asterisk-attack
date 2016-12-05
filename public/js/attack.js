@@ -18,7 +18,6 @@ var asteriskAttack = (function _attackJs(aa) {
 
     asterisk
       .addClass(rotationClasses[aa.randomInRange(0, rotationClasses.length-1)])
-      .show()
       .animate({ top: '585px' }, speed, 'linear');
   }
 
@@ -28,7 +27,7 @@ var asteriskAttack = (function _attackJs(aa) {
    */
   aa.completeAttack = function(asteriskIdx, attackThwarted) {
     var a = aa.dom.asterisksAttacking[asteriskIdx]
-      , topPos = a.css('font-size');
+      , topPos = a.css('width');
 
     if (attackThwarted) { // The defender defeated the asterisk.
       aa.game.score++;
@@ -67,7 +66,7 @@ var asteriskAttack = (function _attackJs(aa) {
     for (aId in aa.dom.asterisksAttacking) {
       a = aa.dom.asterisksAttacking[aId];
 
-      topPos = a.css('font-size');
+      topPos = a.css('width');
 
       a.removeClass('rf1 rf2 rf3 rb1 rb2 rb3')
         .stop()

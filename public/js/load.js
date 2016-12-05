@@ -328,26 +328,33 @@ var asteriskAttack = (function _loadJs(aa) {
 
 
   /*
-   * Preload the asterisks to avoid unnecessary dom manipulations.
+   * Preload the asterisk SVGs to avoid unnecessary dom manipulations.
    */
   (function _loadAsterisks() {
     var i
+      , randIdx
       , asterisk
       , quantity = 100
-      , fontSize
-      , colors = ['yellow','gold','orange','orangered','red','deeppink','hotpink','fuchsia','lightskyblue','dodgerblue','blue', 'yellowgreen','lime'];
+      , colors = ['yellow','gold','orange','orangered','red','deeppink','hotpink','fuchsia','lightskyblue','dodgerblue','blue', 'yellowgreen','lime']
+      // SVGs are the outlined asterisk character from font Incolsolata, exported by Illustrator.
+      , svgs = [
+        [10, '<svg class="asterisk" version="1.1" x="0px" y="0px" width="10px" height="10px"><path d="M4.123,0.05h1.945C6.054,0.145,5.565,4.294,5.565,4.294l3.811-1.729L10,4.03L5.897,5.277l3.025,3.621L7.601,9.928 l-2.59-3.979L2.326,9.95L1.031,8.898l3.12-3.601L0,4.03l0.624-1.56l3.886,1.824L4.123,0.05z"/></svg>'],
+        [20, '<svg class="asterisk" version="1.1" x="0px" y="0px" width="20px" height="20px"><path d="M8.245,0.1h3.89c-0.027,0.19-1.004,8.489-1.004,8.489l7.621-3.458L20,8.061l-8.205,2.494l6.051,7.242l-2.645,2.059 l-5.18-7.957L4.652,19.9l-2.591-2.104l6.239-7.201L0,8.061l1.247-3.12l7.771,3.648L8.245,0.1z"/></svg>'],
+        [30, '<svg class="asterisk" version="1.1" x="0px" y="0px" width="30px" height="30px"><path d="M12.368,0.15h5.834c-0.041,0.286-1.506,12.733-1.506,12.733l11.431-5.187l1.872,4.394l-12.307,3.741l9.076,10.863 l-3.967,3.087l-7.77-11.935L6.979,29.85l-3.886-3.154l9.358-10.802L0,12.091l1.871-4.68l11.657,5.472L12.368,0.15z"/></svg>'],
+        [40, '<svg class="asterisk" version="1.1" x="0px" y="0px" width="40px" height="40px"><path d="M16.49,0.2h7.779c-0.055,0.381-2.008,16.978-2.008,16.978l15.241-6.915l2.496,5.858L23.59,21.109l12.102,14.484 l-5.288,4.116l-10.36-15.913L9.305,39.8l-5.182-4.206l12.478-14.402L0,16.121l2.494-6.24l15.542,7.296L16.49,0.2z"/></svg>'],
+        [50, '<svg class="asterisk" version="1.1" x="0px" y="0px" width="50px" height="50px"><path d="M20.613,0.25h9.724c-0.068,0.478-2.511,21.225-2.511,21.225l19.054-8.646L50,20.153l-20.512,6.235l15.126,18.104 l-6.611,5.146L25.054,29.746L11.631,49.75l-6.477-5.258L20.752,26.49L0,20.153l3.118-7.8l19.429,9.121L20.613,0.25z"/></svg>']
+      ];
 
     for (i = 0; i < quantity; i++) {
-      fontSize = aa.randomInRange(16, 64);
+      randIdx = aa.randomInRange(0, svgs.length-1);
 
-      asterisk = $('<div '
-        + 'class="asterisk" '
-        + 'style="'
-        + 'color:' + colors[aa.randomInRange(0, colors.length - 1)] + '; '
-        + 'font-size:' + fontSize + 'px; '
-        + 'top:-' + fontSize + 'px; '
-        + 'left:' + aa.randomInRange(0, aa.dom.attackZone.width() - 20) + 'px; '
-        + '">*</div>'); 
+      asterisk = svgs[randIdx][1];
+      asterisk = asterisk.replace('svg', 'svg style="'
+        + 'top:-' + svgs[randIdx][0] + 'px; '
+        + 'left:' + aa.randomInRange(0, aa.dom.attackZone.width() - 20) + 'px;"'
+      );
+      asterisk = asterisk.replace('path', 'path fill="' + colors[aa.randomInRange(0, colors.length-1)] + '"');
+      asterisk = $(asterisk);
 
       aa.dom.asterisksIdle.push(asterisk);
       aa.dom.attackZone.prepend(asterisk);
