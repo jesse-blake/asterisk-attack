@@ -8,7 +8,7 @@ var asteriskAttack = (function _animationsJs(aa) {
   /*
    * Call once to animate in the game's main elements.
    */
-  aa.animateLoadGame = function() {
+  aa.animateLoadGame = function animateLoadGame() {
     aa.updateScore();
     _setClickHandlers();
 
@@ -22,7 +22,7 @@ var asteriskAttack = (function _animationsJs(aa) {
   /*
    * Call whenever play is clicked to animate the start of a game.
    */
-  aa.animateStartGame = function() {
+  aa.animateStartGame = function animateStartGame() {
     _resetScore();
     _updatePlayBtn();
 
@@ -37,7 +37,7 @@ var asteriskAttack = (function _animationsJs(aa) {
   /*
    * Call at game-over time to animate the game-over sequence.
    */
-  aa.animateEndGame = function() {
+  aa.animateEndGame = function animateEndGame() {
     _updatePlayBtn();
 
     _animateDefender(false);
@@ -45,11 +45,11 @@ var asteriskAttack = (function _animationsJs(aa) {
     _hideToRight(aa.dom.howToQuitMsg);
 
     // Hide reloading the asterisks computation in the time taken to display the game-over message.
-    setTimeout(function() {
+    setTimeout(function _loadAsterisksTimer() {
       aa.loadAsterisks(); 
     }, 500);
 
-    setTimeout(function() {
+    setTimeout(function endGameOverMsgTimer() {
       _hideToRight(aa.dom.gameOverMsg);
 
       _showFromLeft(aa.dom.menu);
@@ -165,7 +165,7 @@ var asteriskAttack = (function _animationsJs(aa) {
       },{
         duration: duration,
         queue: false,
-        complete: function() {
+        complete: function _onHideToLeftComplete() {
           element.hide();
         }
       });
@@ -187,7 +187,7 @@ var asteriskAttack = (function _animationsJs(aa) {
       },{
         duration: duration,
         queue: false, 
-        complete: function() {
+        complete: function _onHideToRightCompletion() {
           element.hide();
         }
       });
@@ -198,23 +198,23 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Register click handlers which trigger animations that introduce application states.
    */
   function _setClickHandlers() {
-    aa.dom.playBtnLink.click(function() {
+    aa.dom.playBtnLink.click(function _playBtnClick() {
       aa.start();
     });
 
-    aa.dom.topScoresLink.click(function() {
+    aa.dom.topScoresLink.click(function _topScoresClick() {
       _showTopScores(); 
     });
 
-    aa.dom.topScoresBackLink.click(function() {
+    aa.dom.topScoresBackLink.click(function _topScoresBackClick() {
       _hideTopScores();
     });
 
-    aa.dom.howToPlayLink.click(function() {
+    aa.dom.howToPlayLink.click(function _howToPlayClick() {
       _showHowToPlay(); 
     });
 
-    aa.dom.howToPlayBackLink.click(function() {
+    aa.dom.howToPlayBackLink.click(function _howToPlayBackClick() {
       _hideHowToPlay();
     });
   }
@@ -225,7 +225,7 @@ var asteriskAttack = (function _animationsJs(aa) {
    */
   function _resetScore() {
     if (aa.game.prevScore > 0) {
-      aa.dom.digitalScore.effect('shake', duration, function() {
+      aa.dom.digitalScore.effect('shake', duration, function _resetScoreShakeComplete() {
         aa.updateScore();
       });
     }
@@ -240,7 +240,7 @@ var asteriskAttack = (function _animationsJs(aa) {
       aa.dom.playBtn.html('<a href="#">P L A Y&nbsp;&nbsp;&nbsp;A G A I N</a>');
       aa.dom.playBtnLink = $('#play-btn > a');
 
-      aa.dom.playBtnLink.click(function() {
+      aa.dom.playBtnLink.click(function _updatePlayBtnClick() {
         aa.start();
       });
     }

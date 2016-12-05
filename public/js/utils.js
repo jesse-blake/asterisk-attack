@@ -8,7 +8,7 @@ var asteriskAttack = (function _utilsJs(aa) {
    # @param {number} min The range minimum.
    # @param {number} max The range maximum.
    */
-  aa.randomInRange = function(min, max) {
+  aa.randomInRange = function randomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
@@ -17,7 +17,7 @@ var asteriskAttack = (function _utilsJs(aa) {
    * Test browser for local storage capabilities.
    * @return {bool} true if capabale, false if not.
    */
-  aa.storageAvailable = function() {
+  aa.storageAvailable = function storageAvailable() {
     try {
       var storage = window.localStorage
         , x = '__storage_test__';

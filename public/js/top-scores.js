@@ -6,7 +6,7 @@ var asteriskAttack = (function _topScoresJs(aa) {
   /*
    * Update the scores in local storage.
    */
-  aa.updateTopScoresData = function() {
+  aa.updateTopScoresData = function updateTopScoresData() {
     var scores = null;
 
     if (aa.game.score > 0 && aa.storageAvailable()) {
@@ -14,7 +14,7 @@ var asteriskAttack = (function _topScoresJs(aa) {
 
       // Push the latest score, sort the scores array, then keep only the highest 10.
       scores.push([aa.game.score, Date.now()]);
-      scores = scores.sort(function(a, b) {
+      scores = scores.sort(function _sortScores(a, b) {
         return b[0] - a[0];
       });
       scores = scores.slice(0, 10);
@@ -29,7 +29,7 @@ var asteriskAttack = (function _topScoresJs(aa) {
   /*
    * Update the html in the top scores div with latest score data.
    */
-  aa.updateTopScores = function() {
+  aa.updateTopScores = function updateTopScores() {
     var i
       , maxNumScores = 10
       , data = ''

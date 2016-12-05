@@ -6,7 +6,7 @@ var asteriskAttack = (function _stateJs(aa) {
   /*
    * Make ready to play the game anew.
    */
-  aa.reset = function() {
+  aa.reset = function reset() {
     aa.game.prevScore = aa.game.score;
     aa.game.score = 0;
     aa.game.plays++;

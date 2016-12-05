@@ -5,7 +5,7 @@ var asteriskAttack = (function _collisionsJs(aa) {
   /*
    * Detect collisions between attacking asterisks and heatrays shot by the defender.
    */
-  aa.detectCollisions = function() {
+  aa.detectCollisions = function detectCollisions() {
     var a // asterisk
       , h // heatray
       , d // defender

@@ -6,7 +6,7 @@ var asteriskAttack = (function _attackJs(aa) {
   /*
    * Send the next attacking asterisk's on its animation from top to bottom.
    */
-  aa.attack = function() {
+  aa.attack = function _attack() {
     var asterisk = aa.dom.asterisksIdle.shift()
       , slowestAttack = 3000
       , fastestAttack = 8000
@@ -25,7 +25,7 @@ var asteriskAttack = (function _attackJs(aa) {
   /*
    * Sundry tasks and updates to be performed on completion of an asterisk's attack.
    */
-  aa.completeAttack = function(asteriskIdx, attackThwarted) {
+  aa.completeAttack = function _completeAttack(asteriskIdx, attackThwarted) {
     var a = aa.dom.asterisksAttacking[asteriskIdx]
       , topPos = a.css('width');
 
@@ -58,7 +58,7 @@ var asteriskAttack = (function _attackJs(aa) {
   /*
    * Reset/renew/rerandomize the asterisk datastructures.
    */
-  aa.resetAsterisks = function() {
+  aa.resetAsterisks = function _resetAsterisks() {
     var aId
       , a;
 

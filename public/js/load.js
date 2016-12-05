@@ -6,7 +6,7 @@ var asteriskAttack = (function _loadJs(aa) {
   /*
    * Preload the asterisk SVGs to avoid unnecessary dom manipulations.
    */
-  aa.loadAsterisks = function() {
+  aa.loadAsterisks = function _loadAsterisks() {
     var i
       , randIdx
       , asterisk
@@ -306,7 +306,7 @@ var asteriskAttack = (function _loadJs(aa) {
 
       for (i = 0; i < flashIntervals.length; i++) {
         (function _captureIValueForInterval(j) {
-          aa.intervals.antenas[j] = setInterval(function() {
+          aa.intervals.antenas[j] = setInterval(function _setAntenaInterval() {
             if (!document.hidden) { // No need to make a noise if nobody's in the woods to hear it.
               $('#antena' + (j+1)).css({ 'color': 'white' })
                 .animate({ 'color': '#101010' }, flashDurations[j]);

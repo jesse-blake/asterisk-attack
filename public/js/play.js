@@ -20,7 +20,7 @@ var asteriskAttack = (function _playJs(aa) {
   /*
    * Start the game.
    */
-  aa.start = function() {
+  aa.start = function start() {
     aa.reset();
 
     // The following numbered tasks correspond symmetrically to those in the quit function.
@@ -33,7 +33,7 @@ var asteriskAttack = (function _playJs(aa) {
     // $('html').css('cursor', 'none');
 
     // 3. Position the defender according to the cursor position.
-    aa.dom.doc.mousemove(function(event) {
+    aa.dom.doc.mousemove(function _mousemoveDefender(event) {
       aa.dom.defender.css({ left: _normalizeDefenderPosition(event.pageX) });
     });
 
@@ -60,7 +60,7 @@ var asteriskAttack = (function _playJs(aa) {
   /*
    * End the game.
    */
-  aa.quit = function() {
+  aa.quit = function quit() {
     aa.updateTopScoresData();
     aa.resetAsterisks();
 
