@@ -41,7 +41,7 @@ var asteriskAttack = (function _attackJs(aa) {
       aa.dom.shockwaveFlash
         .css({ 'background-image': 'radial-gradient(circle at ' + a.offset().left + 'px 500px, white 0%, #101010 90%)' })
         .show()
-        .fadeOut(500);
+        .fadeOut(100);
       aa.dom.background
         .effect("bounce", {}, 750);
     }
