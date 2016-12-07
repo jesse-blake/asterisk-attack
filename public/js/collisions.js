@@ -1,11 +1,11 @@
 "use strict";
 
-var asteriskAttack = (function _collisionsJs(aa) {
+var asteriskAttack = (function _collisionsJs(app) {
 
   /*
    * Detect collisions between attacking asterisks and heatrays shot by the defender.
    */
-  aa.detectCollisions = function detectCollisions() {
+  app.detectCollisions = function detectCollisions() {
     var a // asterisk
       , h // heatray
       , d // defender
@@ -39,16 +39,16 @@ var asteriskAttack = (function _collisionsJs(aa) {
     }
 
     // Check every attacking asterisk for possible collisions.
-    for (aIdx in aa.dom.asterisksAttacking) {
-      a = _getPosition(aa.dom.asterisksAttacking[aIdx]);
+    for (aIdx in app.dom.asterisksAttacking) {
+      a = _getPosition(app.dom.asterisksAttacking[aIdx]);
       collision = false;
 
       // Check if the asterisk is colliding with a heatray.
-      for (hIdx in aa.dom.heatraysDefending) {
-        h = _getPosition(aa.dom.heatraysDefending[hIdx]);
+      for (hIdx in app.dom.heatraysDefending) {
+        h = _getPosition(app.dom.heatraysDefending[hIdx]);
 
         if (_positionsCollide(a[0], h[0]) && _positionsCollide(a[1], h[1])) {
-          aa.completeAttack(aIdx, true);
+          app.completeAttack(aIdx, true);
           collision = true;
           break;
         }
@@ -57,24 +57,24 @@ var asteriskAttack = (function _collisionsJs(aa) {
       if (collision) continue; // The asterisk was thwarted by a heatray, so ignore it now.
 
       // Check if the asterisk collided with the defender.
-      d = _getPosition(aa.dom.defender);
+      d = _getPosition(app.dom.defender);
       if (_positionsCollide(a[0], d[0]) && _positionsCollide(a[1], d[1])) {
-        aa.completeAttack(aIdx, true);
+        app.completeAttack(aIdx, true);
         continue;
       }
 
       // Check if the asterisk got past the defender to the game-over zone.
-      goz = _getPosition(aa.dom.gameOverZone);
+      goz = _getPosition(app.dom.gameOverZone);
       if (_positionsCollide(a[0], goz[0]) && _positionsCollide(a[1], goz[1])) {
-        aa.completeAttack(aIdx, false);
-        aa.quit();
+        app.completeAttack(aIdx, false);
+        app.quit();
         break;
       }
     }
   }
 
 
-  return aa;
+  return app;
 
 })(asteriskAttack);
 

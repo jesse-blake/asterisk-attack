@@ -1,59 +1,59 @@
 "use strict";
 
-var asteriskAttack = (function _animationsJs(aa) {
+var asteriskAttack = (function _animationsJs(app) {
 
   var duration = 300;
 
 
   /*
-   * Call once to animate in the game's main elements.
+   * Call once to animate the game's main elements into view.
    */
-  aa.animateLoadGame = function animateLoadGame() {
-    aa.updateScore();
+  app.animateLoadGame = function animateLoadGame() {
+    app.updateScore();
     _setClickHandlers();
 
-    _showFromLeft(aa.dom.menu);
-    _showFromRight(aa.dom.logo);
-    _showFromLeft(aa.dom.digitalScore);
-    _showFromRight(aa.dom.playBtn);
+    _showFromLeft(app.dom.menu);
+    _showFromRight(app.dom.logo);
+    _showFromLeft(app.dom.digitalScore);
+    _showFromRight(app.dom.playBtn);
   };
 
 
   /*
    * Call whenever play is clicked to animate the start of a game.
    */
-  aa.animateStartGame = function animateStartGame() {
+  app.animateStartGame = function animateStartGame() {
     _resetScore();
     _updatePlayBtn();
 
     _animateDefender(true);
-    _hideToRight(aa.dom.menu);
-    _hideToRight(aa.dom.playBtn);
+    _hideToRight(app.dom.menu);
+    _hideToRight(app.dom.playBtn);
 
-    _showFromLeft(aa.dom.howToQuitMsg);
+    _showFromLeft(app.dom.howToQuitMsg);
   };
 
 
   /*
    * Call at game-over time to animate the game-over sequence.
    */
-  aa.animateEndGame = function animateEndGame() {
+  app.animateEndGame = function animateEndGame() {
     _updatePlayBtn();
 
     _animateDefender(false);
-    _showFromLeft(aa.dom.gameOverMsg);
-    _hideToRight(aa.dom.howToQuitMsg);
+    _showFromLeft(app.dom.gameOverMsg);
+    _hideToRight(app.dom.howToQuitMsg);
 
     // Hide reloading the asterisks computation in the time taken to display the game-over message.
     setTimeout(function _loadAsterisksTimer() {
-      aa.loadAsterisks(); 
+      app.loadAsterisks(); 
     }, 500);
 
     setTimeout(function endGameOverMsgTimer() {
-      _hideToRight(aa.dom.gameOverMsg);
+      _hideToRight(app.dom.gameOverMsg);
 
-      _showFromLeft(aa.dom.menu);
-      _showFromLeft(aa.dom.playBtn);
+      _showFromLeft(app.dom.menu);
+      _showFromLeft(app.dom.playBtn);
     }, 1500);
   };
 
@@ -62,16 +62,16 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Animate the top scores 'page' into view.
    */
   function _showTopScores() {
-    aa.updateTopScores();
+    app.updateTopScores();
 
-    _hideToRight(aa.dom.menu);
-    _hideToRight(aa.dom.digitalScore);
-    _hideToRight(aa.dom.playBtn);
-    _hideToRight(aa.dom.background);
+    _hideToRight(app.dom.menu);
+    _hideToRight(app.dom.digitalScore);
+    _hideToRight(app.dom.playBtn);
+    _hideToRight(app.dom.background);
 
-    _showFromLeft(aa.dom.digitalTopScoresHeadline);
-    _showFromLeft(aa.dom.topScores);
-    _showFromLeft(aa.dom.topScoresBackLinkWrapper);
+    _showFromLeft(app.dom.digitalTopScoresHeadline);
+    _showFromLeft(app.dom.topScores);
+    _showFromLeft(app.dom.topScoresBackLinkWrapper);
   }
 
 
@@ -79,14 +79,14 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Animate the top scores 'page' out of view.
    */
   function _hideTopScores() {
-    _hideToRight(aa.dom.digitalTopScoresHeadline);
-    _hideToRight(aa.dom.topScores);
-    _hideToRight(aa.dom.topScoresBackLinkWrapper);
+    _hideToRight(app.dom.digitalTopScoresHeadline);
+    _hideToRight(app.dom.topScores);
+    _hideToRight(app.dom.topScoresBackLinkWrapper);
 
-    _showFromLeft(aa.dom.menu);
-    _showFromLeft(aa.dom.digitalScore);
-    _showFromLeft(aa.dom.playBtn);
-    _showFromLeft(aa.dom.background);
+    _showFromLeft(app.dom.menu);
+    _showFromLeft(app.dom.digitalScore);
+    _showFromLeft(app.dom.playBtn);
+    _showFromLeft(app.dom.background);
   }
 
 
@@ -94,14 +94,14 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Animate the how-to-play 'page' into view.
    */
   function _showHowToPlay() {
-    _hideToRight(aa.dom.menu);
-    _hideToRight(aa.dom.digitalScore);
-    _hideToRight(aa.dom.playBtn);
-    _hideToRight(aa.dom.background);
+    _hideToRight(app.dom.menu);
+    _hideToRight(app.dom.digitalScore);
+    _hideToRight(app.dom.playBtn);
+    _hideToRight(app.dom.background);
 
-    _showFromLeft(aa.dom.howToPlayBackLinkWrapper);
-    _showFromLeft(aa.dom.digitalHowToPlayHeadline);
-    _showFromLeft(aa.dom.howToPlay);
+    _showFromLeft(app.dom.howToPlayBackLinkWrapper);
+    _showFromLeft(app.dom.digitalHowToPlayHeadline);
+    _showFromLeft(app.dom.howToPlay);
   }
 
 
@@ -109,14 +109,14 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Animate the how-to-play 'page' out of view.
    */
   function _hideHowToPlay() {
-    _hideToRight(aa.dom.howToPlayBackLinkWrapper);
-    _hideToRight(aa.dom.digitalHowToPlayHeadline);
-    _hideToRight(aa.dom.howToPlay);
+    _hideToRight(app.dom.howToPlayBackLinkWrapper);
+    _hideToRight(app.dom.digitalHowToPlayHeadline);
+    _hideToRight(app.dom.howToPlay);
 
-    _showFromLeft(aa.dom.menu);
-    _showFromLeft(aa.dom.digitalScore);
-    _showFromLeft(aa.dom.playBtn);
-    _showFromLeft(aa.dom.background);
+    _showFromLeft(app.dom.menu);
+    _showFromLeft(app.dom.digitalScore);
+    _showFromLeft(app.dom.playBtn);
+    _showFromLeft(app.dom.background);
   }
 
 
@@ -198,23 +198,23 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Register click handlers which trigger animations that introduce application states.
    */
   function _setClickHandlers() {
-    aa.dom.playBtnLink.click(function _playBtnClick() {
-      aa.start();
+    app.dom.playBtnLink.click(function _playBtnClick() {
+      app.start();
     });
 
-    aa.dom.topScoresLink.click(function _topScoresClick() {
+    app.dom.topScoresLink.click(function _topScoresClick() {
       _showTopScores(); 
     });
 
-    aa.dom.topScoresBackLink.click(function _topScoresBackClick() {
+    app.dom.topScoresBackLink.click(function _topScoresBackClick() {
       _hideTopScores();
     });
 
-    aa.dom.howToPlayLink.click(function _howToPlayClick() {
+    app.dom.howToPlayLink.click(function _howToPlayClick() {
       _showHowToPlay(); 
     });
 
-    aa.dom.howToPlayBackLink.click(function _howToPlayBackClick() {
+    app.dom.howToPlayBackLink.click(function _howToPlayBackClick() {
       _hideHowToPlay();
     });
   }
@@ -224,9 +224,9 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Reset the score to zero, and animate the score shaking to indicate it's being reset.
    */
   function _resetScore() {
-    if (aa.game.prevScore > 0) {
-      aa.dom.digitalScore.effect('shake', duration, function _resetScoreShakeComplete() {
-        aa.updateScore();
+    if (app.game.prevScore > 0) {
+      app.dom.digitalScore.effect('shake', duration, function _resetScoreShakeComplete() {
+        app.updateScore();
       });
     }
   }
@@ -236,12 +236,12 @@ var asteriskAttack = (function _animationsJs(aa) {
    * Change the play button to read 'play again' after the game's been played once.
    */
   function _updatePlayBtn() {
-    if (aa.game.plays === 1) {
-      aa.dom.playBtn.html('<a href="#">P L A Y&nbsp;&nbsp;&nbsp;A G A I N</a>');
-      aa.dom.playBtnLink = $('#play-btn > a');
+    if (app.game.plays === 1) {
+      app.dom.playBtn.html('<a href="#">P L A Y&nbsp;&nbsp;&nbsp;A G A I N</a>');
+      app.dom.playBtnLink = $('#play-btn > a');
 
-      aa.dom.playBtnLink.click(function _updatePlayBtnClick() {
-        aa.start();
+      app.dom.playBtnLink.click(function _updatePlayBtnClick() {
+        app.start();
       });
     }
   }
@@ -253,18 +253,18 @@ var asteriskAttack = (function _animationsJs(aa) {
    */
   function _animateDefender(show) {
     if (show) {
-      aa.dom.defender
-        .css({ 'left': (aa.dom.win.width() / 2) - 20, 'top': -50 })
+      app.dom.defender
+        .css({ 'left': (app.dom.win.width() / 2) - 20, 'top': -50 })
         .animate({ 'top': 475 }, { duration: 400, queue: false });
     }
     else {
-      aa.dom.defender
+      app.dom.defender
         .animate({ 'top': -50 }, { duration: 400, queue: false });
     }
   }
 
 
-  return aa;
+  return app;
 
 })(asteriskAttack);
 

@@ -1,23 +1,23 @@
 "use strict";
 
-var asteriskAttack = (function _attackJs(aa) {
+var asteriskAttack = (function _attackJs(app) {
 
 
   /*
-   * Send the next attacking asterisk's on its animation from top to bottom.
+   * Send the next attacking asterisk on its animation from top to bottom.
    */
-  aa.attack = function _attack() {
-    var asterisk = aa.dom.asterisksIdle.shift()
+  app.attack = function _attack() {
+    var asterisk = app.dom.asterisksIdle.shift()
       , slowestAttack = 3000
       , fastestAttack = 8000
-      , speed = aa.randomInRange(slowestAttack, fastestAttack)
+      , speed = app.randomInRange(slowestAttack, fastestAttack)
       , rotationClasses = ['rf1','rf2','rf3','rb1','rb2','rb3'];
 
     // Add the asterisk to the list of attacking asterisks.
-    aa.dom.asterisksAttacking[++aa.dom.attackerCount] = asterisk;
+    app.dom.asterisksAttacking[++app.dom.attackerCount] = asterisk;
 
     asterisk
-      .addClass(rotationClasses[aa.randomInRange(0, rotationClasses.length-1)])
+      .addClass(rotationClasses[app.randomInRange(0, rotationClasses.length-1)])
       .animate({ top: '585px' }, speed, 'linear');
   }
 
@@ -25,24 +25,24 @@ var asteriskAttack = (function _attackJs(aa) {
   /*
    * Sundry tasks and updates to be performed on completion of an asterisk's attack.
    */
-  aa.completeAttack = function _completeAttack(asteriskIdx, attackThwarted) {
-    var a = aa.dom.asterisksAttacking[asteriskIdx]
+  app.completeAttack = function _completeAttack(asteriskIdx, attackThwarted) {
+    var a = app.dom.asterisksAttacking[asteriskIdx]
       , topPos = a.css('width');
 
     if (attackThwarted) { // The defender defeated the asterisk.
-      aa.game.score++;
-      aa.updateScore();
+      app.game.score++;
+      app.updateScore();
     }
 
-    if (attackThwarted && aa.game.score % 5 === 0) {
+    if (attackThwarted && app.game.score % 5 === 0) {
       _increaseAttackSpeed();
     }
     else if (!attackThwarted) { // The game's over.
-      aa.dom.shockwaveFlash
+      app.dom.shockwaveFlash
         .css({ 'background-image': 'radial-gradient(circle at ' + a.offset().left + 'px 500px, white 0%, #101010 90%)' })
         .show()
         .fadeOut(100);
-      aa.dom.background
+      app.dom.background
         .effect("bounce", {}, 750);
     }
 
@@ -50,23 +50,23 @@ var asteriskAttack = (function _attackJs(aa) {
     a.stop()
       .removeClass('rf1 rf2 rf3 rb1 rb2 rb3')
       .css({ 'top': '-' + topPos });
-    aa.dom.asterisksIdle.push(a);
-    delete aa.dom.asterisksAttacking[asteriskIdx];
+    app.dom.asterisksIdle.push(a);
+    delete app.dom.asterisksAttacking[asteriskIdx];
   }
 
 
   /*
-   * Reset/renew/rerandomize the asterisk datastructures.
+   * Reset/renew/rerandomize the asterisk data structures.
    */
-  aa.resetAsterisks = function _resetAsterisks() {
+  app.resetAsterisks = function _resetAsterisks() {
     var aId
       , a;
 
-    for (aId in aa.dom.asterisksAttacking) {
-      aa.dom.asterisksAttacking[aId].remove();
-      delete aa.dom.asterisksAttacking[aId];
+    for (aId in app.dom.asterisksAttacking) {
+      app.dom.asterisksAttacking[aId].remove();
+      delete app.dom.asterisksAttacking[aId];
     }
-    aa.dom.attackerCount = 0;
+    app.dom.attackerCount = 0;
 
     // Reloading asterisks is done in animateEndGame() in animations.js to hide the processing it requires.
   }
@@ -76,13 +76,13 @@ var asteriskAttack = (function _attackJs(aa) {
    * Increase the number of asterisks attacking per time interval.
    */
   function _increaseAttackSpeed() {
-    aa.game.asteriskGenerationSpeed -= 50;
-    window.clearInterval(aa.intervals.attack);
-    aa.intervals.attack = setInterval(aa.attack, aa.game.asteriskGenerationSpeed);
+    app.game.asteriskGenerationSpeed -= 50;
+    window.clearInterval(app.intervals.attack);
+    app.intervals.attack = setInterval(app.attack, app.game.asteriskGenerationSpeed);
   }
 
 
-  return aa;
+  return app;
 
 })(asteriskAttack);
 

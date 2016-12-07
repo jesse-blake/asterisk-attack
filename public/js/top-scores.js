@@ -1,19 +1,19 @@
 "use strict";
 
-var asteriskAttack = (function _topScoresJs(aa) {
+var asteriskAttack = (function _topScoresJs(app) {
 
 
   /*
    * Update the scores in local storage.
    */
-  aa.updateTopScoresData = function updateTopScoresData() {
+  app.updateTopScoresData = function updateTopScoresData() {
     var scores = null;
 
-    if (aa.game.score > 0 && aa.storageAvailable()) {
+    if (app.game.score > 0 && app.storageAvailable()) {
       scores = JSON.parse(localStorage.getItem('scores')) || [];
 
       // Push the latest score, sort the scores array, then keep only the highest 10.
-      scores.push([aa.game.score, Date.now()]);
+      scores.push([app.game.score, Date.now()]);
       scores = scores.sort(function _sortScores(a, b) {
         return b[0] - a[0];
       });
@@ -29,7 +29,7 @@ var asteriskAttack = (function _topScoresJs(aa) {
   /*
    * Update the html in the top scores div with latest score data.
    */
-  aa.updateTopScores = function updateTopScores() {
+  app.updateTopScores = function updateTopScores() {
     var i
       , maxNumScores = 10
       , data = ''
@@ -73,10 +73,10 @@ var asteriskAttack = (function _topScoresJs(aa) {
         data += line + '<br><br>';
       }
 
-      aa.dom.topScores.html(data);
+      app.dom.topScores.html(data);
     }
     else {
-      aa.dom.topScores.html('<br><br><br><div style="color:white">No Scores Yet.</div>');
+      app.dom.topScores.html('<br><br><br><div style="color:white">No Scores Yet.</div>');
     }
   }
 
@@ -123,13 +123,13 @@ var asteriskAttack = (function _topScoresJs(aa) {
    * Return the locally stored scores, or null.
    */
   function _retrieveScores() {
-    return aa.storageAvailable()
+    return app.storageAvailable()
       ? JSON.parse(localStorage.getItem('scores'))
       : null;
   }
 
 
-  return aa;
+  return app;
   
 })(asteriskAttack);
 

@@ -1,6 +1,6 @@
 "use strict";
 
-var asteriskAttack = (function _playJs(aa) {
+var asteriskAttack = (function _playJs(app) {
 
 
   /*
@@ -9,8 +9,8 @@ var asteriskAttack = (function _playJs(aa) {
    */
   function _normalizeDefenderPosition(mousePosX) {
     var min = 15 // A little padding from the screen edge looks better.
-      , max = aa.dom.win.width() - aa.dom.defender.width() - min
-      , pos = mousePosX / aa.dom.win.width(); // Normalize to [0, 1]
+      , max = app.dom.win.width() - app.dom.defender.width() - min
+      , pos = mousePosX / app.dom.win.width(); // Normalize to [0, 1]
 
     pos = (pos * (max - min)) + min; // Scale to [min, max]
     return pos;
@@ -20,32 +20,32 @@ var asteriskAttack = (function _playJs(aa) {
   /*
    * Start the game.
    */
-  aa.start = function start() {
-    aa.reset();
+  app.start = function start() {
+    app.reset();
 
     // The following numbered tasks correspond symmetrically to those in the quit function.
 
     // 1. Set game intervals.
-    aa.intervals.attack = setInterval(aa.attack, aa.game.asteriskGenerationSpeed);
-    setTimeout(aa.intervals.collision = setInterval(aa.detectCollisions, 5), aa.game.asteriskGenerationSpeed);
+    app.intervals.attack = setInterval(app.attack, app.game.asteriskGenerationSpeed);
+    setTimeout(app.intervals.collision = setInterval(app.detectCollisions, 5), app.game.asteriskGenerationSpeed);
 
     // 2. Hide the cursor.
     // $('html').css('cursor', 'none');
 
     // 3. Position the defender according to the cursor position.
-    aa.dom.doc.mousemove(function _mousemoveDefender(event) {
-      aa.dom.defender.css({ left: _normalizeDefenderPosition(event.pageX) });
+    app.dom.doc.mousemove(function _mousemoveDefender(event) {
+      app.dom.defender.css({ left: _normalizeDefenderPosition(event.pageX) });
     });
 
     // 4. Watch for game-relevant key-presses.
-    aa.dom.doc.keyup(function (e) {
+    app.dom.doc.keyup(function (e) {
       if (e.keyCode === 32) { // key: space
-        aa.shootHeatray();
+        app.shootHeatray();
       } else if (e.keyCode === 27) { // key: esc
-        aa.quit();
+        app.quit();
       }
     });
-    aa.dom.doc.keydown(function (e) {
+    app.dom.doc.keydown(function (e) {
       if (e.keyCode === 32) {
         e.preventDefault();
         return false;
@@ -53,39 +53,39 @@ var asteriskAttack = (function _playJs(aa) {
     });
 
     // 5.
-    aa.animateStartGame();
+    app.animateStartGame();
   }
 
 
   /*
    * End the game.
    */
-  aa.quit = function quit() {
-    aa.updateTopScoresData();
-    aa.resetAsterisks();
+  app.quit = function quit() {
+    app.updateTopScoresData();
+    app.resetAsterisks();
 
     // The following numbered tasks correspond symmetrically to those in the start function.
 
     // 1. Clear game intervals.
-    window.clearInterval(aa.intervals.attack);
-    window.clearInterval(aa.intervals.collision);
+    window.clearInterval(app.intervals.attack);
+    window.clearInterval(app.intervals.collision);
 
     // 2. Unhide the cursor.
     // $('html').css('cursor', 'auto');
 
     // 3. Stop positioning the defender.
-    aa.dom.doc.unbind('mousemove');
+    app.dom.doc.unbind('mousemove');
 
     // 4. Stop watching key-presses.
-    aa.dom.doc.unbind('keyup');
-    aa.dom.doc.unbind('keydown');
+    app.dom.doc.unbind('keyup');
+    app.dom.doc.unbind('keydown');
 
     // 5.
-    aa.animateEndGame();
+    app.animateEndGame();
   }
 
 
-  return aa;
+  return app;
 
 })(asteriskAttack); 
 

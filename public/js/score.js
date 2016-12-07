@@ -1,13 +1,13 @@
 "use strict";
 
-var asteriskAttack = (function _scoreJs(aa) {
+var asteriskAttack = (function _scoreJs(app) {
 
   
   /*
    * Public facing score updater.
    */
-  aa.updateScore = function updateScore() {
-    aa.dom.digitalScore.html(_buildScore(aa.game.score));
+  app.updateScore = function updateScore() {
+    app.dom.digitalScore.html(_buildScore(app.game.score));
   };
 
 
@@ -74,7 +74,7 @@ var asteriskAttack = (function _scoreJs(aa) {
   }
 
 
-  return aa;
+  return app;
   
 })(asteriskAttack);
 
