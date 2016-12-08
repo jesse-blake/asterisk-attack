@@ -38,7 +38,7 @@ var asteriskAttack = (function _attackJs(app) {
       _increaseAttackSpeed();
     }
     else if (!attackThwarted) { // The game's over.
-      app.dom.shockwaveFlash
+      app.dom.gameOverFlashboom
         .css({ 'background-image': 'radial-gradient(circle at ' + a.offset().left + 'px 500px, white 0%, #101010 90%)' })
         .show()
         .fadeOut(100);

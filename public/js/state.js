@@ -66,7 +66,7 @@ var asteriskAttack = (function _stateJs(app) {
 
     defender:                 $('#defender'),
 
-    shockwaveFlash:           $('#shockwave-flash'),
+    gameOverFlashboom:        $('#game-over-flashboom'),
 
     asterisksIdle:            [],
     asterisksAttacking:       {},
