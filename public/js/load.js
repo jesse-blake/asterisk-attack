@@ -11,7 +11,7 @@ var asteriskAttack = (function _loadJs(app) {
       , randIdx
       , asterisk
       , quantity = 100
-      , colors = ['yellow','gold','orange','orangered','red','deeppink','hotpink','fuchsia','lightskyblue','dodgerblue','blue', 'yellowgreen','lime']
+      , colors = ['deepskyblue','dodgerblue','cornflowerblue','steelblue','royalblue','blue','mediumblue','gold']
       // SVGs are the outlined asterisk character from font Incolsolata, exported by Illustrator.
       , svgs = [
         [10, '<svg class="asterisk" version="1.1" x="0px" y="0px" width="10px" height="10px"><path d="M4.123,0.05h1.945C6.054,0.145,5.565,4.294,5.565,4.294l3.811-1.729L10,4.03L5.897,5.277l3.025,3.621L7.601,9.928 l-2.59-3.979L2.326,9.95L1.031,8.898l3.12-3.601L0,4.03l0.624-1.56l3.886,1.824L4.123,0.05z"/></svg>'],
