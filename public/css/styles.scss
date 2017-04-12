@@ -122,8 +122,16 @@ div#centering-div {
     top: 23px;
 
     a {
+      position: relative;
       color: yellowgreen;
       text-decoration: none;
+
+      img {
+        position: absolute;
+        left: 65px;;
+        top: -1px;
+        max-width: 18px;
+      }
     }
   }
 

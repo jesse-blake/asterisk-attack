@@ -100,16 +100,12 @@ $(document).ready(function() {
     asteriskAttack.dom.game.css({ 'display':'none' });
 
     asteriskAttack.dom.screenSizeError
-      .html('<div id="error-msg">YOU NEED A BIGGER SCREEN!</div><br><br><a id="reload-page" href=""><small>RETRY</small></a>')
+      .html('<div id="error-msg">YOU NEED A BIGGER SCREEN!</div>')
       .css({ 'display':'inherit' });
 
     asteriskAttack.intervals.screenSizeError = setInterval(function() {
       $('#error-msg').effect('shake', {}, 200);
     }, 2000);
-
-    $('#reload-page').click(function() {
-      location.reload();
-    });
   }
 
   (function validateScreenSize() {
@@ -121,4 +117,7 @@ $(document).ready(function() {
     }
   })();
 
+  $(window).resize(function() {
+    location.reload(); 
+  });
 });

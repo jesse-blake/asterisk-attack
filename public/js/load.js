@@ -94,7 +94,9 @@ var asteriskAttack = (function _loadJs(app) {
           + '&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;'
           + '<a id="top-scores-link" href="#">YOUR TOP SCORES</a>'
           + '&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;'
-          + '<a href="https://github.com/jesse-blake/asterisk-attack">GITHUB / ABOUT</a>')
+          + '<a href="https://github.com/jesse-blake/asterisk-attack">ABOUT & SOURCE CODE</a>'
+          + '&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;'
+          + '<a href="http://www.littlesystem.com">MADE BY &nbsp;<img src="img/littlesystem-logo.png" alt="Little System Logo"></a>')
       : app.dom.menu.html('<a id="how-to-play-link" href="#">HOW TO PLAY</a>');
 
     app.dom.howToPlayLink = $('#how-to-play-link');
