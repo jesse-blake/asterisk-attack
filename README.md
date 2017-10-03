@@ -4,10 +4,8 @@
 
 # Asterisk Attack
 
-An experiment with Javascript. The idea was to learn JavaScript a bit better by making a game.
+A superhero game and an exercise in Javascript.
 
-After a little while the idea was extended so that the game would be _entirely_ in text; no images whatsoever, nor anything else. But font characters spin wobbly due to the spacing rendered around text; so the game's spinning asterisks are SVGs, not text. Oh, well!
-
-Furthermore, building a game with DOM manipulations ain't too performant. Choose rather to build with SVG or Canvas, or a mix of the two.
+The idea was to build a game _entirely_ in text, without any images, but font characters rotate wobbly due to line heights. So, the asterisks are SVGs. Oh, well. Games in JS should use the Canvas API or SVG anyway, rather than dom manipulations.
 
 Play the game on [www.asteriskattack.com](http://www.asteriskattack.com).
