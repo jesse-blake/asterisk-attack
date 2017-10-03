@@ -1,0 +1,23 @@
+{
+  "name": "asteriskattack.com",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A superhero game in javascript",
+  "main": "public/index.html",
+  "scripts": {
+    "lint": "find ./public/js -name '*.js' | xargs eslint && echo 'js linted ok'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesse-blake/asterisk-attack.git"
+  },
+  "author": "Jesse Blake <jesse@littlesystem.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jesse-blake/asterisk-attack/issues"
+  },
+  "homepage": "https://github.com/jesse-blake/asterisk-attack#readme",
+  "devDependencies": {
+    "eslint": "^4.8.0"
+  }
+}
